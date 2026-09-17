@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smash & Spin Club | Sports Academy & Training Arena</title>
+  <meta name="description" content="Elite sports academy and training arena for Badminton & Table Tennis athletes. Professional coaching, modern court facilities, and competitive tournaments.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/images/favicon.svg">
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dark.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. NAVBAR
+       ========================================================================= -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light py-3">
+        <!-- Brand Logo -->
+        <a class="brand-logo" href="index.html">
+          <div class="brand-icon">
+            <i class="bi bi-trophy-fill"></i>
+          </div>
+          <div class="brand-text">Smash<span>&</span>Spin</div>
+        </a>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMainContent" aria-controls="navbarMainContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="bi bi-list fs-2 text-dark"></i>
+        </button>
+
+        <!-- Navbar Links & Right Controls -->
+        <div class="collapse navbar-collapse" id="navbarMainContent">
+          <!-- Main navigation strictly: Home (dropdown: Home 1, Home 2), About Us, Courts, Blog, Contact Us -->
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Home
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                <li><a class="dropdown-item" href="index.html"><i class="bi bi-grid-fill me-2"></i>Home 1</a></li>
+                <li><a class="dropdown-item active" href="home-2.html"><i class="bi bi-shield-fill-check me-2"></i>Home 2</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="courts.html">Courts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blog.html">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact Us</a>
+            </li>
+          </ul>
+
+          <!-- Right Controls in EXACT order: LTR/RTL Toggle -> Dark/Light Mode -> Login -> Sign Up -->
+          <div class="nav-controls">
+            <!-- 1. LTR / RTL Toggle -->
+            <button type="button" class="control-btn dir-toggle-btn" title="Toggle LTR / RTL" aria-label="Toggle LTR / RTL">
+              <i class="bi bi-arrow-left-right"></i>
+            </button>
+
+            <!-- 2. Dark / Light Mode Toggle -->
+            <button type="button" class="control-btn theme-toggle-btn" title="Toggle Dark / Light Mode" aria-label="Toggle Dark / Light Mode">
+              <i class="bi bi-moon-stars-fill"></i>
+            </button>
+
+            <!-- 3. Login Button -->
+            <a href="login.html" class="btn btn-outline-dark btn-sm nav-auth-btn">
+              <span>Login</span> <i class="bi bi-box-arrow-in-right"></i>
+            </a>
+
+            <!-- 4. Sign Up Button -->
+            <a href="register.html" class="btn btn-primary btn-sm nav-auth-btn">
+              <span>Sign Up</span> <i class="bi bi-person-plus-fill"></i>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       SECTION 1: HERO (CLUB & ACADEMY FOCUS)
+       ========================================================================= -->
+  <section class="hero-wrapper hero-academy">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="section-badge secondary-badge">
+            <i class="bi bi-fire"></i> Elite Sports Academy
+          </div>
+          <h1 class="hero-title">
+            Train. Compete. <br>
+            <span class="text-highlight-orange">Improve.</span>
+          </h1>
+          <p class="hero-subtitle">
+            Join the most competitive badminton and table tennis academy. Master professional footwork, spin techniques, and compete in sanctioned club leagues with certified head coaches.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <button type="button" class="btn btn-secondary btn-lg btn-book-court" data-court-name="Academy Court Alpha" data-sport="Badminton" data-price="28">
+              <i class="bi bi-calendar-check-fill"></i> Book Court
+            </button>
+            <a href="membership.html" class="btn btn-outline-dark btn-lg">
+              <i class="bi bi-people-fill"></i> Join Membership
+            </a>
+          </div>
+
+          <!-- Academy Badges -->
+          <div class="d-flex align-items-center gap-4 mt-4 pt-3 border-top">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-award-fill text-warning fs-3"></i>
+              <div>
+                <div class="fw-bold text-dark">BWF Certified</div>
+                <div class="small text-muted">Official Training Facility</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-patch-check-fill text-primary fs-3"></i>
+              <div>
+                <div class="fw-bold text-dark">ITTF Partner</div>
+                <div class="small text-muted">Championship Rubber & Tables</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="position-relative">
+            <!-- Animated Hero Showcase -->
+            <div class="hero-slider-showcase" id="heroAcademySliderShowcase">
+              <!-- Interactive Slides -->
+              <div class="hero-slides-wrapper">
+                <!-- Slide 1: Train • Pro Badminton Smash -->
+                <div class="hero-slide active" data-index="0" data-sport="Train">
+                  <img src="assets/images/academy-badminton-smash.jpg" alt="Olympic Grade Badminton Jumping Smash Training" class="hero-slide-img" loading="eager">
+                  <div class="hero-slide-overlay">
+                    <span class="hero-slide-tag tag-badminton"><i class="bi bi-lightning-charge-fill"></i> Train • Smash Mechanics</span>
+                    <h4 class="hero-slide-title">Jumping Smash &amp; Speed Agility</h4>
+                    <p class="hero-slide-info">5.0mm BWF Sprung Timber • High-Power Jump Smash Drills with Certified Coaches</p>
+                  </div>
+                </div>
+
+                <!-- Slide 2: Compete • High-Speed Table Tennis Loop & Spin -->
+                <div class="hero-slide" data-index="1" data-sport="Compete">
+                  <img src="assets/images/academy-table-tennis-spin.jpg" alt="Table Tennis High Speed Loop and Spin Training" class="hero-slide-img" loading="lazy">
+                  <div class="hero-slide-overlay">
+                    <span class="hero-slide-tag tag-tt"><i class="bi bi-fire"></i> Compete • Spin &amp; Loop</span>
+                    <h4 class="hero-slide-title">Topspin &amp; Service Mastery Studio</h4>
+                    <p class="hero-slide-info">ITTF Pro Tables • Robot Multi-Ball Spin Drills &amp; Competitive League Preparation</p>
+                  </div>
+                </div>
+
+                <!-- Slide 3: Improve • 1-on-1 Head Coach Footwork -->
+                <div class="hero-slide" data-index="2" data-sport="Improve">
+                  <img src="assets/images/academy-coaching-footwork.jpg" alt="Certified Coach Footwork and Technique Analysis" class="hero-slide-img" loading="lazy">
+                  <div class="hero-slide-overlay">
+                    <span class="hero-slide-tag tag-gear"><i class="bi bi-person-check-fill"></i> Improve • Coaching</span>
+                    <h4 class="hero-slide-title">1-on-1 Footwork &amp; Agility Ladder</h4>
+                    <p class="hero-slide-info">BWF Certified Head Coaches • Frame-by-Frame Video Stroke &amp; Grip Analysis</p>
+                  </div>
+                </div>
+
+                <!-- Slide 4: Championships • Club Leagues & Trophies -->
+                <div class="hero-slide" data-index="3" data-sport="Championships">
+                  <img src="assets/images/academy-championship-arena.jpg" alt="Academy Championship Victory and League Arena" class="hero-slide-img" loading="lazy">
+                  <div class="hero-slide-overlay">
+                    <span class="hero-slide-tag tag-arena"><i class="bi bi-trophy-fill"></i> Championships • Leagues</span>
+                    <h4 class="hero-slide-title">Sanctioned Tournaments &amp; League Cup</h4>
+                    <p class="hero-slide-info">18 Club Trophies in 2026 • Official Ranked Tournaments, Live Gallery &amp; Cash Prizes</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating Live Broadcast Accent -->
+              <div class="hero-shuttlecock-badge" title="Elite Training Center">
+                <div class="pulse-ring"></div>
+                <i class="bi bi-broadcast text-white"></i>
+                <span>Academy Live</span>
+              </div>
+
+              <!-- Slide Navigation Controls -->
+              <div class="hero-slider-nav">
+                <button type="button" class="hero-nav-arrow hero-prev" aria-label="Previous Slide">
+                  <i class="bi bi-chevron-left"></i>
+                </button>
+                <div class="hero-progress-container">
+                  <div class="hero-progress-bar"></div>
+                </div>
+                <button type="button" class="hero-nav-arrow hero-next" aria-label="Next Slide">
+                  <i class="bi bi-chevron-right"></i>
+                </button>
+              </div>
+
+              <!-- Interactive Sport Category Selector Tabs -->
+              <div class="hero-category-tabs">
+                <button type="button" class="hero-tab-pill active" data-slide-to="0">
+                  <span class="tab-emoji">🏸</span>
+                  <span class="tab-label">Train (Smash)</span>
+                </button>
+                <button type="button" class="hero-tab-pill" data-slide-to="1">
+                  <span class="tab-emoji">🏓</span>
+                  <span class="tab-label">Compete (Spin)</span>
+                </button>
+                <button type="button" class="hero-tab-pill" data-slide-to="2">
+                  <span class="tab-emoji">🎯</span>
+                  <span class="tab-label">Improve (Coaching)</span>
+                </button>
+                <button type="button" class="hero-tab-pill" data-slide-to="3">
+                  <span class="tab-emoji">🏆</span>
+                  <span class="tab-label">Trophies (Leagues)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 2: SPORTS CATEGORIES
+       ========================================================================= -->
+  <section class="section-py">
+    <div class="container">
+      <div class="text-center section-title-wrap">
+        <div class="section-badge">
+          <i class="bi bi-grid-fill"></i> Programs & Arenas
+        </div>
+        <h2 class="section-title">Sports & Training Categories</h2>
+        <p class="section-desc mx-auto">
+          Tailored facilities and structured development programs for both singles and doubles athletes.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Category 1: Badminton -->
+        <div class="col-lg-3 col-md-6">
+          <div class="court-card text-center">
+            <div class="court-image-wrapper" style="height: 180px;">
+              <img src="assets/images/court-grand-arena.jpg" alt="Badminton Arena" loading="lazy">
+              <span class="court-badge-sport badge-badminton">Badminton</span>
+            </div>
+            <div class="court-body">
+              <h4 class="fw-bold mb-2">Badminton Arenas</h4>
+              <p class="small text-muted mb-3">8 BWF shock-absorbing courts, tournament nets, and LED anti-glare illumination.</p>
+              <a href="courts.html?sport=Badminton" class="btn btn-outline-primary btn-sm w-100">Explore Courts</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 2: Table Tennis -->
+        <div class="col-lg-3 col-md-6">
+          <div class="court-card text-center">
+            <div class="court-image-wrapper" style="height: 180px;">
+              <img src="assets/images/table-olympic-spin.jpg" alt="Table Tennis Arena" loading="lazy">
+              <span class="court-badge-sport badge-tt">Table Tennis</span>
+            </div>
+            <div class="court-body">
+              <h4 class="fw-bold mb-2">Table Tennis Hall</h4>
+              <p class="small text-muted mb-3">6 ITTF 25mm tournament tables with automatic spin ball feed robots.</p>
+              <a href="courts.html?sport=Table%20Tennis" class="btn btn-outline-primary btn-sm w-100">Explore Tables</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 3: Coaching -->
+        <div class="col-lg-3 col-md-6">
+          <div class="court-card text-center">
+            <div class="court-image-wrapper" style="height: 180px;">
+              <img src="assets/images/table-loop-drive.jpg" alt="Pro Coaching" loading="lazy">
+              <span class="court-badge-sport" style="background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);">Coaching</span>
+            </div>
+            <div class="court-body">
+              <h4 class="fw-bold mb-2">Pro Coaching</h4>
+              <p class="small text-muted mb-3">Private 1-on-1 sessions, junior development academies, and video analytics.</p>
+              <a href="about.html" class="btn btn-outline-primary btn-sm w-100">Meet Coaches</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 4: Tournaments -->
+        <div class="col-lg-3 col-md-6">
+          <div class="court-card text-center">
+            <div class="court-image-wrapper" style="height: 180px;">
+              <img src="assets/images/court-champions-vip.jpg" alt="Tournament Events" loading="lazy">
+              <span class="court-badge-sport" style="background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);">Events</span>
+            </div>
+            <div class="court-body">
+              <h4 class="fw-bold mb-2">Tournament Events</h4>
+              <p class="small text-muted mb-3">Monthly ranked tournaments, corporate leagues, and cash prize open cups.</p>
+              <a href="tournaments.html" class="btn btn-outline-primary btn-sm w-100">View Events</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 3: TODAY'S COURT AVAILABILITY (LIVE STATUS)
+       ========================================================================= -->
+  <section class="section-py bg-light">
+    <div class="container">
+      <div class="row align-items-end mb-4">
+        <div class="col-lg-8">
+          <div class="section-badge">
+            <i class="bi bi-clock-fill"></i> Live Court Status
+          </div>
+          <h2 class="section-title">Today's Available Court Slots</h2>
+          <p class="section-desc">
+            Real-time schedule for today. Click "Book Now" to reserve your slot immediately.
+          </p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a href="courts.html" class="btn btn-outline-dark">
+            Full Schedule <i class="bi bi-calendar3"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="custom-table-container table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Court Name</th>
+              <th>Sport</th>
+              <th>Available Slot</th>
+              <th>Hourly Rate</th>
+              <th>Status</th>
+              <th class="text-end">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="fw-bold"><a href="court-details.html?id=center-court-alpha" class="text-decoration-none text-dark">Center Court Alpha</a></div>
+                <div class="small text-muted">Indoor Synthetic BWF 5mm</div>
+              </td>
+              <td><span class="badge badge-badminton text-white">Badminton</span></td>
+              <td>05:00 PM – 06:00 PM</td>
+              <td class="fw-bold text-primary">$25</td>
+              <td><span class="status-badge status-confirmed"><i class="bi bi-check-circle-fill"></i> Available</span></td>
+              <td class="text-end">
+                <a href="court-details.html?id=center-court-alpha" class="btn btn-outline-dark btn-sm me-1">Details</a>
+                <button type="button" class="btn btn-primary btn-sm btn-book-court" data-court-name="Center Court Alpha" data-sport="Badminton" data-price="25">
+                  Book Now
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="fw-bold"><a href="court-details.html?id=olympic-spin-studio" class="text-decoration-none text-dark">Olympic Spin Studio</a></div>
+                <div class="small text-muted">ITTF Double Fish 25mm</div>
+              </td>
+              <td><span class="badge badge-tt text-white">Table Tennis</span></td>
+              <td>06:00 PM – 07:00 PM</td>
+              <td class="fw-bold text-primary">$18</td>
+              <td><span class="status-badge status-confirmed"><i class="bi bi-check-circle-fill"></i> Available</span></td>
+              <td class="text-end">
+                <a href="court-details.html?id=olympic-spin-studio" class="btn btn-outline-dark btn-sm me-1">Details</a>
+                <button type="button" class="btn btn-primary btn-sm btn-book-court" data-court-name="Olympic Spin Studio" data-sport="Table Tennis" data-price="18">
+                  Book Now
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="fw-bold"><a href="court-details.html?id=champions-vip-court" class="text-decoration-none text-dark">Champions VIP Court</a></div>
+                <div class="small text-muted">Private Studio & Video Replay</div>
+              </td>
+              <td><span class="badge badge-badminton text-white">Badminton</span></td>
+              <td>07:00 PM – 08:00 PM</td>
+              <td class="fw-bold text-primary">$35</td>
+              <td><span class="status-badge status-confirmed"><i class="bi bi-check-circle-fill"></i> Available</span></td>
+              <td class="text-end">
+                <a href="court-details.html?id=champions-vip-court" class="btn btn-outline-dark btn-sm me-1">Details</a>
+                <button type="button" class="btn btn-primary btn-sm btn-book-court" data-court-name="Champions VIP Court" data-sport="Badminton" data-price="35">
+                  Book Now
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="fw-bold"><a href="court-details.html?id=loop-drive-studio" class="text-decoration-none text-dark">Loop & Drive Studio</a></div>
+                <div class="small text-muted">Butterfly 25mm Competition Top</div>
+              </td>
+              <td><span class="badge badge-tt text-white">Table Tennis</span></td>
+              <td>08:00 PM – 09:00 PM</td>
+              <td class="fw-bold text-primary">$18</td>
+              <td><span class="status-badge status-confirmed"><i class="bi bi-check-circle-fill"></i> Available</span></td>
+              <td class="text-end">
+                <a href="court-details.html?id=loop-drive-studio" class="btn btn-outline-dark btn-sm me-1">Details</a>
+                <button type="button" class="btn btn-primary btn-sm btn-book-court" data-court-name="Loop & Drive Studio" data-sport="Table Tennis" data-price="18">
+                  Book Now
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 4: UPCOMING TOURNAMENTS
+       ========================================================================= -->
+  <section class="section-py">
+    <div class="container">
+      <div class="row align-items-end mb-5">
+        <div class="col-lg-8">
+          <div class="section-badge secondary-badge">
+            <i class="bi bi-trophy-fill"></i> Compete & Win
+          </div>
+          <h2 class="section-title">Upcoming Tournaments & Leagues</h2>
+          <p class="section-desc">
+            Register for sanctioned club championships, open singles cups, and doubles leagues with cash rewards and official ranking points.
+          </p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a href="tournaments.html" class="btn btn-outline-dark">
+            All Tournaments <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- Tournament 1 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="tournament-card">
+            <div class="tournament-img-box">
+              <img src="assets/images/court-power-smash.jpg" alt="Badminton Championship" loading="lazy">
+              <div class="tournament-date-badge">
+                <div class="day">28</div>
+                <div class="month">SEP</div>
+              </div>
+            </div>
+            <div class="tournament-body">
+              <span class="badge badge-badminton text-white mb-2 align-self-start">Badminton</span>
+              <h4 class="fw-bold text-dark">Autumn Smash Open 2026</h4>
+              <div class="tournament-meta">
+                <div class="tournament-meta-item"><i class="bi bi-geo-alt-fill"></i> Main Arena • Court 1 to 4</div>
+                <div class="tournament-meta-item"><i class="bi bi-cash-stack"></i> Entry Fee: $35 (Prize: $1,500)</div>
+                <div class="tournament-meta-item"><i class="bi bi-people"></i> Singles & Men's Doubles</div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
+                <span class="status-badge status-confirmed">Registration Open</span>
+                <button type="button" class="btn btn-primary btn-sm btn-register-tournament" data-tournament-name="Autumn Smash Open 2026" data-fee="$35" data-sport="Badminton">
+                  Register Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tournament 2 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="tournament-card">
+            <div class="tournament-img-box">
+              <img src="assets/images/table-olympic-spin.jpg" alt="Table Tennis Championship" loading="lazy">
+              <div class="tournament-date-badge">
+                <div class="day">05</div>
+                <div class="month">OCT</div>
+              </div>
+            </div>
+            <div class="tournament-body">
+              <span class="badge badge-tt text-white mb-2 align-self-start">Table Tennis</span>
+              <h4 class="fw-bold text-dark">TopSpin Masters Cup</h4>
+              <div class="tournament-meta">
+                <div class="tournament-meta-item"><i class="bi bi-geo-alt-fill"></i> TT Championship Hall</div>
+                <div class="tournament-meta-item"><i class="bi bi-cash-stack"></i> Entry Fee: $25 (Prize: $1,000)</div>
+                <div class="tournament-meta-item"><i class="bi bi-people"></i> Open Singles (All Ages)</div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
+                <span class="status-badge status-confirmed">Registration Open</span>
+                <button type="button" class="btn btn-secondary btn-sm btn-register-tournament" data-tournament-name="TopSpin Masters Cup" data-fee="$25" data-sport="Table Tennis">
+                  Register Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tournament 3 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="tournament-card">
+            <div class="tournament-img-box">
+              <img src="assets/images/court-falcon-speed.jpg" alt="Corporate League" loading="lazy">
+              <div class="tournament-date-badge">
+                <div class="day">18</div>
+                <div class="month">OCT</div>
+              </div>
+            </div>
+            <div class="tournament-body">
+              <span class="badge badge-badminton text-white mb-2 align-self-start">Mixed Sports</span>
+              <h4 class="fw-bold text-dark">Corporate Champions Trophy</h4>
+              <div class="tournament-meta">
+                <div class="tournament-meta-item"><i class="bi bi-geo-alt-fill"></i> Grand Arena Complex</div>
+                <div class="tournament-meta-item"><i class="bi bi-cash-stack"></i> Entry Fee: $120 / Team</div>
+                <div class="tournament-meta-item"><i class="bi bi-people"></i> Badminton & TT Dual League</div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
+                <span class="status-badge status-confirmed">12 Spots Left</span>
+                <button type="button" class="btn btn-primary btn-sm btn-register-tournament" data-tournament-name="Corporate Champions Trophy" data-fee="$120" data-sport="Badminton & TT">
+                  Register Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 5: TRAINING & FACILITIES
+       ========================================================================= -->
+  <section class="section-py bg-light">
+    <div class="container">
+      <div class="text-center section-title-wrap">
+        <div class="section-badge">
+          <i class="bi bi-building"></i> World-Class Amenities
+        </div>
+        <h2 class="section-title">Training & Club Facilities</h2>
+        <p class="section-desc mx-auto">
+          Built for peak athletic performance and comfortable player recovery.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <i class="bi bi-person-video3"></i>
+            </div>
+            <h3 class="feature-title">Professional Coaching</h3>
+            <p class="feature-desc">Certified coaches with international competitive background delivering tailored training plans.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <i class="bi bi-bounding-box-circles"></i>
+            </div>
+            <h3 class="feature-title">Modern Courts & Tables</h3>
+            <p class="feature-desc">Engineered cushioning mats preventing joints strain and premium ITTF certified championship tables.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <i class="bi bi-bag-check-fill"></i>
+            </div>
+            <h3 class="feature-title">Pro Equipment & Racket Stringing</h3>
+            <p class="feature-desc">Yonex, Victor, Li-Ning, Butterfly demo gear with electronic same-day stringing service.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <i class="bi bi-door-closed-fill"></i>
+            </div>
+            <h3 class="feature-title">Changing Rooms & Showers</h3>
+            <p class="feature-desc">Individual heated shower stalls, secure electronic RFID lockers, and clean grooming amenities.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <i class="bi bi-p-circle-fill"></i>
+            </div>
+            <h3 class="feature-title">Free Dedicated Parking</h3>
+            <p class="feature-desc">Over 150 well-lit parking slots with EV charging stations right outside the arena entrance.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <i class="bi bi-cup-straw"></i>
+            </div>
+            <h3 class="feature-title">Sports Café & Refreshments</h3>
+            <p class="feature-desc">Fresh smoothies, protein shakes, electrolyte recovery drinks, and healthy post-game snacks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 6: CTA / PLAYER COMMUNITY
+       ========================================================================= -->
+  <section class="section-py">
+    <div class="container">
+      <div class="cta-banner" style="background: linear-gradient(135deg, #0F172A 0%, #FF5A1F 100%);">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <h2 class="cta-title">Join Our Sports Community</h2>
+            <p class="cta-desc">
+              Connect with over 4,500 local players. Find singles sparring partners, doubles teammates, and unlock exclusive academy benefits.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="register.html" class="btn btn-primary btn-lg">
+                <i class="bi bi-person-plus-fill"></i> Become a Member
+              </a>
+              <button type="button" class="btn btn-outline-light btn-lg btn-book-court" data-court-name="Academy Court Alpha" data-sport="Badminton" data-price="28">
+                <i class="bi bi-calendar-check-fill"></i> Book a Court
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-4 d-none d-lg-block text-end">
+            <i class="bi bi-people-fill display-1 text-white opacity-25"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6 footer-brand">
+          <a class="brand-logo" href="index.html">
+            <div class="brand-icon">
+              <i class="bi bi-trophy-fill"></i>
+            </div>
+            <div class="brand-text">Smash<span>&</span>Spin</div>
+          </a>
+          <p class="footer-desc">
+            The premier online court booking destination for Badminton and Table Tennis athletes. Olympic-standard flooring, automated lighting, and tournament hosting.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="social-btn" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="bi bi-chevron-right"></i> Home 1</a></li>
+            <li><a href="home-2.html"><i class="bi bi-chevron-right"></i> Home 2</a></li>
+            <li><a href="about.html"><i class="bi bi-chevron-right"></i> About Us</a></li>
+            <li><a href="courts.html"><i class="bi bi-chevron-right"></i> Our Courts</a></li>
+            <li><a href="membership.html"><i class="bi bi-chevron-right"></i> Memberships</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4 class="footer-title">Sports & Events</h4>
+          <ul class="footer-links">
+            <li><a href="courts.html?sport=Badminton"><i class="bi bi-chevron-right"></i> Badminton Courts</a></li>
+            <li><a href="courts.html?sport=Table%20Tennis"><i class="bi bi-chevron-right"></i> Table Tennis Tables</a></li>
+            <li><a href="tournaments.html"><i class="bi bi-chevron-right"></i> Tournaments & Leagues</a></li>
+            <li><a href="blog.html"><i class="bi bi-chevron-right"></i> Training Tips & News</a></li>
+            <li><a href="dashboard.html"><i class="bi bi-chevron-right"></i> Player Dashboard</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4 class="footer-title">Stay Connected</h4>
+          <p class="small text-muted mb-3">Subscribe for tournament alerts and weekly court discounts.</p>
+          <form class="newsletter-form">
+            <div class="input-group mb-2">
+              <input type="email" class="form-control form-control-sm" placeholder="Your email address" required>
+              <button class="btn btn-primary btn-sm" type="submit">Subscribe</button>
+            </div>
+          </form>
+          <div class="small text-muted mt-3">
+            <i class="bi bi-geo-alt-fill text-primary me-1"></i> 104 Olympic Way, Sports City<br>
+            <i class="bi bi-telephone-fill text-primary me-1"></i> +1 (800) 555-SMASH
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Smash & Spin. All Rights Reserved. Production-Ready HTML Template.</div>
+        <div class="d-flex gap-3">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="court-rules.html">Court Rules</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Reusable Interactive Court Booking Modal -->
+  <div class="modal fade" id="courtBookingModal" tabindex="-1" aria-labelledby="courtBookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title fw-bold" id="courtBookingModalLabel">Court Reservation</h5>
+            <div class="small text-muted">Complete your details to lock your slot</div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-12">
+              <div class="p-3 bg-light rounded-3 d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="fw-bold mb-1" id="modalCourtTitle">Academy Court Alpha</h6>
+                  <span id="modalCourtSport" class="badge badge-badminton text-white">Badminton</span>
+                </div>
+                <div class="text-end">
+                  <div class="fs-5 fw-bold text-primary" id="modalCourtRate">$28/hour</div>
+                  <div class="small text-muted">Indoor • LED Lighting</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-bold small">Booking Date</label>
+              <input type="date" class="form-control" id="modalBookingDate" value="2026-09-16">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-bold small">Duration</label>
+              <select class="form-select" id="bookingDuration">
+                <option value="1">1 Hour</option>
+                <option value="2">2 Hours</option>
+                <option value="3">3 Hours</option>
+              </select>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-bold small">Available Time Slots</label>
+              <div class="d-flex flex-wrap gap-2">
+                <div class="time-slot-pill slot-pill" data-slot="06:00 AM - 07:00 AM">06:00 AM</div>
+                <div class="time-slot-pill slot-pill" data-slot="07:00 AM - 08:00 AM">07:00 AM</div>
+                <div class="time-slot-pill slot-pill disabled" title="Booked">09:00 AM (Booked)</div>
+                <div class="time-slot-pill slot-pill" data-slot="04:00 PM - 05:00 PM">04:00 PM</div>
+                <div class="time-slot-pill slot-pill active" data-slot="06:00 PM - 07:00 PM">06:00 PM</div>
+                <div class="time-slot-pill slot-pill" data-slot="07:00 PM - 08:00 PM">07:00 PM</div>
+                <div class="time-slot-pill slot-pill" data-slot="08:00 PM - 09:00 PM">08:00 PM</div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-bold small">Equipment Rental Add-ons</label>
+              <div class="row g-2">
+                <div class="col-md-6">
+                  <div class="form-check p-2 border rounded-3 bg-light">
+                    <input class="form-check-input ms-0 me-2" type="checkbox" id="addonRackets">
+                    <label class="form-check-label small fw-semibold" for="addonRackets">
+                      Pro Rackets / Paddles (+$5)
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-check p-2 border rounded-3 bg-light">
+                    <input class="form-check-input ms-0 me-2" type="checkbox" id="addonBalls">
+                    <label class="form-check-label small fw-semibold" for="addonBalls">
+                      Tournament Shuttlecocks / Balls (+$4)
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 pt-2 border-top">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <div class="small text-muted">Estimated Total</div>
+                  <div class="h3 fw-bold text-primary mb-0" id="modalTotalPrice">$28.00</div>
+                </div>
+                <div class="small text-success fw-semibold"><i class="bi bi-shield-check"></i> Free cancellation up to 4 hrs prior</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="btnConfirmCourtBooking">
+            <i class="bi bi-credit-card-2-front-fill"></i> Confirm & Pay
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tournament Registration Modal -->
+  <div class="modal fade" id="tournamentRegModal" tabindex="-1" aria-labelledby="tournamentRegModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title fw-bold" id="tournamentRegModalLabel">Tournament Entry</h5>
+            <div class="small text-muted">Register your player profile</div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="tourneyRegForm">
+          <div class="modal-body">
+            <div class="p-3 bg-light rounded-3 mb-3">
+              <h6 class="fw-bold mb-1" id="tourneyModalTitle">Autumn Smash Open 2026</h6>
+              <div class="d-flex justify-content-between align-items-center">
+                <span id="tourneyModalSport" class="badge badge-badminton text-white">Badminton</span>
+                <span class="fw-bold text-primary" id="tourneyModalFee">$35</span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Player Name</label>
+              <input type="text" class="form-control" value="Alex Morgan" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Player Email</label>
+              <input type="email" class="form-control" value="alex.morgan@example.com" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Category</label>
+              <select class="form-select">
+                <option>Men's Singles (Open)</option>
+                <option>Women's Singles (Open)</option>
+                <option>Men's Doubles</option>
+                <option>Mixed Doubles</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit Registration</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS Modules -->
+  <script src="assets/js/theme-direction.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/court-data.js"></script>
+  <script src="assets/js/blog-data.js"></script>
+  <script src="assets/js/booking.js"></script>
+  <script src="assets/js/validation.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

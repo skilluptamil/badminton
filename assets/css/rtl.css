@@ -1,0 +1,239 @@
+/* ==========================================================================
+   SMASH & SPIN - RTL (Right-to-Left) Stylesheet
+   Complete bidirectional mirroring for Arabic & Hebrew layouts
+   ========================================================================== */
+
+[dir="rtl"] {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Base text & headings bidirectional punctuation preservation */
+[dir="rtl"] p,
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6,
+[dir="rtl"] .auth-header p,
+[dir="rtl"] .auth-header h2 {
+  unicode-bidi: plaintext;
+}
+
+[dir="rtl"] .dropdown-menu {
+  text-align: right;
+  right: 0 !important;
+  left: auto !important;
+}
+
+[dir="rtl"] .navbar-nav .dropdown-item:hover,
+[dir="rtl"] .navbar-nav .dropdown-item.active {
+  transform: translateX(-4px);
+}
+
+[dir="rtl"] .footer-links a:hover {
+  transform: translateX(-4px);
+}
+
+@media (min-width: 992px) {
+  [dir="rtl"] .site-footer .row > div:nth-child(3),
+  [dir="rtl"] .site-footer .footer-sports-col {
+    padding-left: var(--bs-gutter-x, 1.5rem) !important;
+    padding-right: 2.2rem !important;
+  }
+}
+
+[dir="rtl"] .breadcrumb-item + .breadcrumb-item::before {
+  float: right;
+  padding-right: 0;
+  padding-left: var(--bs-breadcrumb-item-padding-x);
+}
+
+/* Ensure Page Hero stays centered in RTL mode */
+[dir="rtl"] .page-hero,
+[dir="rtl"] .page-hero h1,
+[dir="rtl"] .page-hero .display-5,
+[dir="rtl"] .page-hero #courtHeroTitle,
+[dir="rtl"] .page-hero #blogHeroTitle {
+  text-align: center !important;
+}
+
+[dir="rtl"] .page-hero .breadcrumb {
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+[dir="rtl"] .page-hero .badge,
+[dir="rtl"] .page-hero .section-badge {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+[dir="rtl"] .hero-floating-card.card-top {
+  left: auto;
+  right: -20px;
+}
+
+[dir="rtl"] .hero-floating-card.card-bottom {
+  right: auto;
+  left: -20px;
+}
+
+[dir="rtl"] .court-badge-sport {
+  left: auto;
+  right: 14px;
+}
+
+[dir="rtl"] .court-badge-status {
+  right: auto;
+  left: 14px;
+}
+
+[dir="rtl"] .tournament-date-badge {
+  left: auto;
+  right: 20px;
+}
+
+[dir="rtl"] .blog-category-badge {
+  left: auto;
+  right: 14px;
+}
+
+/* Buttons & Nav Controls in RTL */
+[dir="rtl"] .nav-controls {
+  flex-direction: row;
+}
+
+[dir="rtl"] .btn,
+[dir="rtl"] .nav-auth-btn {
+  flex-direction: row;
+}
+
+/* Margin utilities mirroring */
+[dir="rtl"] .me-1,
+[dir="rtl"] .me-2,
+[dir="rtl"] .me-3,
+[dir="rtl"] .me-4 {
+  margin-right: 0 !important;
+}
+
+[dir="rtl"] .me-1 { margin-left: 0.25rem !important; }
+[dir="rtl"] .me-2 { margin-left: 0.5rem !important; }
+[dir="rtl"] .me-3 { margin-left: 1rem !important; }
+[dir="rtl"] .me-4 { margin-left: 1.5rem !important; }
+
+[dir="rtl"] .ms-1,
+[dir="rtl"] .ms-2,
+[dir="rtl"] .ms-3,
+[dir="rtl"] .ms-4 {
+  margin-left: 0 !important;
+}
+
+[dir="rtl"] .ms-1 { margin-right: 0.25rem !important; }
+[dir="rtl"] .ms-2 { margin-right: 0.5rem !important; }
+[dir="rtl"] .ms-3 { margin-right: 1rem !important; }
+[dir="rtl"] .ms-4 { margin-right: 1.5rem !important; }
+
+/* Icon mirroring */
+[dir="rtl"] .bi-arrow-right::before {
+  content: "\f12f"; /* bi-arrow-left */
+}
+
+[dir="rtl"] .bi-chevron-right::before {
+  content: "\f284"; /* bi-chevron-left */
+}
+
+[dir="rtl"] .bi-chevron-left::before {
+  content: "\f285"; /* bi-chevron-right */
+}
+
+[dir="rtl"] .toast-notification {
+  right: auto;
+  left: 24px;
+}
+
+[dir="rtl"] .stat-card-widget {
+  text-align: right;
+}
+
+[dir="rtl"] .stat-card-label {
+  justify-content: flex-start;
+}
+
+/* ==========================================================================
+   RTL Form Controls, Input Groups & Auth Cards
+   ========================================================================== */
+[dir="rtl"] .auth-card {
+  text-align: right;
+}
+
+[dir="rtl"] .auth-header {
+  text-align: center;
+}
+
+[dir="rtl"] .form-label {
+  text-align: right;
+  display: block;
+}
+
+[dir="rtl"] .form-check {
+  padding-left: 0;
+  padding-right: 1.6em;
+  text-align: right;
+}
+
+[dir="rtl"] .form-check .form-check-input {
+  float: right;
+  margin-right: -1.6em;
+  margin-left: 0;
+}
+
+[dir="rtl"] .form-check-label {
+  text-align: right;
+}
+
+/* Bidirectional Input Groups */
+[dir="rtl"] .input-group {
+  flex-direction: row;
+}
+
+[dir="rtl"] .input-group > :first-child {
+  border-top-right-radius: var(--radius-md) !important;
+  border-bottom-right-radius: var(--radius-md) !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+[dir="rtl"] .input-group > :last-child {
+  border-top-left-radius: var(--radius-md) !important;
+  border-bottom-left-radius: var(--radius-md) !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+[dir="rtl"] .input-group > :not(:first-child):not(:last-child) {
+  border-radius: 0 !important;
+}
+
+/* Flip border helper classes inside input groups for RTL */
+[dir="rtl"] .input-group .border-start-0 {
+  border-left: 1px solid var(--border-color) !important;
+  border-right: 0 !important;
+}
+
+[dir="rtl"] .input-group .border-end-0 {
+  border-right: 1px solid var(--border-color) !important;
+  border-left: 0 !important;
+}
+
+[dir="rtl"] .input-group .border-start-0.border-end-0 {
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+
+/* Password Toggle Eye in RTL */
+[dir="rtl"] .password-toggle-btn {
+  border-right: 0 !important;
+  border-left: 1px solid var(--border-color) !important;
+}

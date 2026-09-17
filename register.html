@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Player Account | Smash & Spin Arenas</title>
+  <meta name="description" content="Register for a Smash & Spin player account. Instant court reservations, membership discounts, and tournament registrations.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/images/favicon.svg">
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dark.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. NAVBAR
+       ========================================================================= -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light py-3">
+        <a class="brand-logo" href="index.html">
+          <div class="brand-icon"><i class="bi bi-trophy-fill"></i></div>
+          <div class="brand-text">Smash<span>&</span>Spin</div>
+        </a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMainContent" aria-controls="navbarMainContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="bi bi-list fs-2 text-dark"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMainContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Home
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                <li><a class="dropdown-item" href="index.html"><i class="bi bi-grid-fill me-2"></i>Home 1</a></li>
+                <li><a class="dropdown-item" href="home-2.html"><i class="bi bi-shield-fill-check me-2"></i>Home 2</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="courts.html">Courts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blog.html">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact Us</a>
+            </li>
+          </ul>
+
+          <div class="nav-controls">
+            <button type="button" class="control-btn dir-toggle-btn" title="Toggle LTR / RTL" aria-label="Toggle LTR / RTL">
+              <i class="bi bi-arrow-left-right"></i>
+            </button>
+            <button type="button" class="control-btn theme-toggle-btn" title="Toggle Dark / Light Mode" aria-label="Toggle Dark / Light Mode">
+              <i class="bi bi-moon-stars-fill"></i>
+            </button>
+            <a href="login.html" class="btn btn-outline-dark btn-sm nav-auth-btn">
+              <span>Login</span> <i class="bi bi-box-arrow-in-right"></i>
+            </a>
+            <a href="register.html" class="btn btn-primary btn-sm nav-auth-btn">
+              <span>Sign Up</span> <i class="bi bi-person-plus-fill"></i>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       SIGN UP CONTENT
+       ========================================================================= -->
+  <main class="auth-wrapper">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+          <div class="auth-card">
+            <div class="auth-header">
+              <div class="brand-icon mx-auto mb-3" style="width: 50px; height: 50px; font-size: 1.5rem;">
+                <i class="bi bi-trophy-fill"></i>
+              </div>
+              <h2>Create Player Account</h2>
+              <p>Join thousands of athletes booking top Badminton & TT courts.</p>
+            </div>
+
+            <!-- Register Alert -->
+            <div id="registerAlert" class="alert d-none"></div>
+
+            <form id="registerForm" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="regName" class="form-label small fw-bold">Full Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="regName" placeholder="e.g. Alex Morgan" required>
+                  <div class="invalid-feedback">Letters and spaces only (min 2 chars).</div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="regPhone" class="form-label small fw-bold">Phone Number <span class="text-danger">*</span></label>
+                  <input type="tel" class="form-control" id="regPhone" placeholder="+1 (555) 000-0000" required>
+                  <div class="invalid-feedback">Please enter a valid phone number.</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="regEmail" class="form-label small fw-bold">Email Address <span class="text-danger">*</span></label>
+                  <input type="email" class="form-control" id="regEmail" placeholder="player@example.com" required>
+                  <div class="invalid-feedback">Please enter a valid email address.</div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="regPassword" class="form-label small fw-bold">Password <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <input type="password" class="form-control border-end-0" id="regPassword" placeholder="Min 6 chars" required>
+                    <button class="btn btn-outline-light border border-start-0 text-muted password-toggle-btn" type="button" aria-label="Toggle password visibility">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>
+                  <div class="invalid-feedback">Min 6 characters required.</div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="regConfirmPassword" class="form-label small fw-bold">Confirm Password <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <input type="password" class="form-control border-end-0" id="regConfirmPassword" placeholder="Re-enter password" required>
+                    <button class="btn btn-outline-light border border-start-0 text-muted password-toggle-btn" type="button" aria-label="Toggle password visibility">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>
+                  <div class="invalid-feedback">Passwords must match.</div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="regTerms" required>
+                    <label class="form-check-label small text-muted" for="regTerms">
+                      I agree to the <a href="terms.html" class="text-primary">Terms of Service</a> and <a href="privacy-policy.html" class="text-primary">Privacy Policy</a>.
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary btn-lg w-100" id="regSubmitBtn">
+                    <span>Create Account</span> <i class="bi bi-person-check-fill"></i>
+                  </button>
+                </div>
+
+                <div class="col-12 text-center small text-muted mt-3">
+                  Already registered? <a href="login.html" class="fw-bold text-primary">Sign In</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS Modules -->
+  <script src="assets/js/theme-direction.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/blog-data.js"></script>
+  <script src="assets/js/booking.js"></script>
+  <script src="assets/js/validation.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
