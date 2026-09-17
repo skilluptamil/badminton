@@ -340,8 +340,8 @@
                         <div class="fw-bold small text-dark">Invoice #INV-2026-09</div>
                         <div class="text-muted" style="font-size: 0.75rem;">Premium Membership • Sep 01, 2026</div>
                       </div>
-                      <button type="button" class="btn btn-outline-dark btn-sm" onclick="showToast('Receipt #INV-2026-09 downloaded successfully!');">
-                        <i class="bi bi-download"></i> $79.00
+                      <button type="button" class="btn btn-outline-dark btn-sm" onclick="downloadReceiptPdf('INV-2026-09', 'Monthly Premium Membership', 'Club Services', '$79.00', 'Sep 01, 2026')" title="Download PDF Receipt">
+                        <i class="bi bi-download me-1"></i> $79.00
                       </button>
                     </div>
 
@@ -350,8 +350,8 @@
                         <div class="fw-bold small text-dark">Invoice #INV-2026-08</div>
                         <div class="text-muted" style="font-size: 0.75rem;">Autumn Open Entry • Sep 14, 2026</div>
                       </div>
-                      <button type="button" class="btn btn-outline-dark btn-sm" onclick="showToast('Receipt #INV-2026-08 downloaded successfully!');">
-                        <i class="bi bi-download"></i> $35.00
+                      <button type="button" class="btn btn-outline-dark btn-sm" onclick="downloadReceiptPdf('INV-2026-08', 'Autumn Open Tournament Entry', 'Tournament Services', '$35.00', 'Sep 14, 2026')" title="Download PDF Receipt">
+                        <i class="bi bi-download me-1"></i> $35.00
                       </button>
                     </div>
                   </div>
@@ -742,7 +742,7 @@
                   <h4 class="fw-bold mb-1 text-dark">Payment Receipts & Invoices</h4>
                   <p class="text-muted small mb-0">Download official tax invoices and booking receipts for your records.</p>
                 </div>
-                <button class="btn btn-outline-dark btn-sm" onclick="showToast('All 2026 receipts exported to PDF statement!');">
+                <button class="btn btn-outline-dark btn-sm" onclick="downloadAllReceiptsStatementPdf()">
                   <i class="bi bi-file-earmark-arrow-down me-1"></i> Export All (PDF)
                 </button>
               </div>
@@ -1064,9 +1064,16 @@
             <i class="bi bi-check-circle-fill text-success me-1"></i> Payment verified by Smash & Spin Arenas. Includes applicable facility taxes.
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer d-flex justify-content-between align-items-center">
           <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="showToast('Official PDF receipt downloaded!');"><i class="bi bi-download me-1"></i> Download PDF</button>
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-outline-secondary" onclick="printReceiptFromModal()">
+              <i class="bi bi-printer me-1"></i> Print
+            </button>
+            <button type="button" class="btn btn-primary" id="btnModalDownloadPdf" onclick="downloadReceiptFromModal()">
+              <i class="bi bi-download me-1"></i> Download PDF
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1134,6 +1141,8 @@
 
   <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- html2pdf JS for high-resolution PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <!-- Custom JS Modules -->
   <script src="assets/js/theme-direction.js"></script>
   <script src="assets/js/court-data.js"></script>
@@ -1200,6 +1209,329 @@
       const modal = new bootstrap.Modal(document.getElementById('receiptModal'));
       modal.show();
     }
+
+    // =========================================================================
+    // OFFICIAL PDF RECEIPT GENERATOR & EXPORTER
+    // =========================================================================
+    function buildReceiptTemplate(id, court, sport, amount, date, userName, userEmail) {
+      const cleanId = (id || 'INV-001').replace(/^#/, '');
+      const numericAmount = amount || '$25.00';
+      const displayUser = userName || (typeof Auth !== 'undefined' && Auth.getUser()?.name) || 'Alex Morgan';
+      const displayEmail = userEmail || (typeof Auth !== 'undefined' && Auth.getUser()?.email) || 'alex.morgan@email.com';
+      const displayDate = date || new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+
+      return `
+        <div id="pdfInvoiceDoc" style="font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif; padding: 36px 40px; color: #1e293b; background: #ffffff; width: 100%; max-width: 760px; margin: 0 auto; box-sizing: border-box; line-height: 1.5;">
+          <!-- Invoice Header -->
+          <table style="width: 100%; border-bottom: 3px solid #00875A; padding-bottom: 18px; margin-bottom: 24px; border-collapse: collapse;">
+            <tr>
+              <td style="vertical-align: top;">
+                <div style="font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 4px;">
+                  <span style="display: inline-block; background: #00875A; color: #ffffff; border-radius: 6px; width: 30px; height: 30px; line-height: 30px; text-align: center; font-size: 16px; margin-right: 6px;">&#9733;</span>
+                  Smash<span style="color: #FF5A1F;">&amp;</span>Spin
+                </div>
+                <div style="font-size: 11px; color: #64748b; font-weight: 500;">Olympic Badminton &amp; Table Tennis Arena Complex</div>
+                <div style="font-size: 11px; color: #64748b;">100 Olympic Way, Sports District • support@smashspin.com</div>
+              </td>
+              <td style="vertical-align: top; text-align: right;">
+                <div style="display: inline-block; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; margin-bottom: 6px;">
+                  &#10003; PAID &amp; VERIFIED
+                </div>
+                <div style="font-size: 14px; font-weight: 800; color: #0f172a;">TAX INVOICE &amp; RECEIPT</div>
+                <div style="font-size: 12px; color: #00875A; font-weight: 700;">#${cleanId}</div>
+              </td>
+            </tr>
+          </table>
+
+          <!-- Meta Grid -->
+          <table style="width: 100%; margin-bottom: 24px; border-collapse: collapse;">
+            <tr>
+              <td style="width: 50%; vertical-align: top; padding-right: 12px;">
+                <div style="background: #f8fafc; padding: 14px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                  <div style="font-weight: 700; color: #64748b; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; margin-bottom: 6px;">Billed To (Player):</div>
+                  <div style="font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 2px;">${displayUser}</div>
+                  <div style="font-size: 12px; color: #64748b; margin-bottom: 2px;">${displayEmail}</div>
+                  <div style="font-size: 11px; color: #059669; font-weight: 600;">Player Status: Verified Member</div>
+                </div>
+              </td>
+              <td style="width: 50%; vertical-align: top; padding-left: 12px;">
+                <div style="background: #f8fafc; padding: 14px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                  <div style="font-weight: 700; color: #64748b; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; margin-bottom: 6px;">Transaction Details:</div>
+                  <div style="font-size: 12px; color: #334155; margin-bottom: 3px;"><strong style="color: #0f172a;">Date Paid:</strong> ${displayDate}</div>
+                  <div style="font-size: 12px; color: #334155; margin-bottom: 3px;"><strong style="color: #0f172a;">Payment Method:</strong> Visa ending &#8226;&#8226;&#8226;&#8226; 4242</div>
+                  <div style="font-size: 12px; color: #334155;"><strong style="color: #0f172a;">Security Token:</strong> AUTH-TXN-${cleanId}</div>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <!-- Itemized Table -->
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+            <thead>
+              <tr style="background: #0f172a; color: #ffffff;">
+                <th style="padding: 10px 14px; font-size: 12px; text-align: left; font-weight: 600; border-radius: 6px 0 0 0;">Item / Service Description</th>
+                <th style="padding: 10px 14px; font-size: 12px; text-align: left; font-weight: 600;">Sport Category</th>
+                <th style="padding: 10px 14px; font-size: 12px; text-align: center; font-weight: 600;">Qty / Time</th>
+                <th style="padding: 10px 14px; font-size: 12px; text-align: right; font-weight: 600; border-radius: 0 6px 0 0;">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 14px; font-size: 13px;">
+                  <div style="font-weight: 700; color: #0f172a;">${court}</div>
+                  <div style="font-size: 11px; color: #64748b; margin-top: 2px;">BWF &amp; ITTF Tournament Standard Arena Slot</div>
+                </td>
+                <td style="padding: 14px; font-size: 12px; color: #475569;">${sport}</td>
+                <td style="padding: 14px; font-size: 12px; text-align: center; color: #475569;">1 Slot (60 min)</td>
+                <td style="padding: 14px; font-size: 13px; text-align: right; font-weight: 700; color: #0f172a;">${numericAmount}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Total Summary -->
+          <table style="width: 100%; margin-bottom: 28px; border-collapse: collapse;">
+            <tr>
+              <td style="width: 55%; vertical-align: top; padding-right: 20px;">
+                <div style="font-size: 11px; color: #64748b; line-height: 1.6; border-left: 3px solid #00875A; padding-left: 10px;">
+                  <strong style="color: #0f172a;">Important Note:</strong> Show this digital receipt or QR check-in code at the arena front desk upon arrival. Free cancellation is permitted up to 4 hours before reserved slot time.
+                </div>
+              </td>
+              <td style="width: 45%; vertical-align: top;">
+                <div style="background: #f8fafc; padding: 14px 18px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                  <div style="display: flex; justify-content: space-between; font-size: 12px; color: #64748b; margin-bottom: 6px;">
+                    <span>Subtotal:</span>
+                    <span style="color: #0f172a; font-weight: 600;">${numericAmount}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 12px; color: #64748b; margin-bottom: 6px;">
+                    <span>Facility Lighting &amp; AC Fee:</span>
+                    <span style="color: #059669; font-weight: 600;">Included ($0.00)</span>
+                  </div>
+                  <div style="border-top: 2px solid #cbd5e1; padding-top: 8px; margin-top: 4px; display: flex; justify-content: space-between; font-size: 16px; font-weight: 800; color: #00875A;">
+                    <span>Total Paid:</span>
+                    <span>${numericAmount}</span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <!-- Footer Stamp -->
+          <table style="width: 100%; border-top: 1px dashed #cbd5e1; padding-top: 14px; font-size: 10px; color: #64748b; border-collapse: collapse;">
+            <tr>
+              <td style="vertical-align: middle;">
+                <div style="font-weight: 700; color: #475569; margin-bottom: 2px;">SMASH &amp; SPIN SPORTS ARENAS • OFFICIAL RECEIPT</div>
+                <div>Automated computer-generated receipt. System Timestamp: ${new Date().toISOString()}</div>
+              </td>
+              <td style="vertical-align: middle; text-align: right;">
+                <div style="display: inline-block; border: 1px solid #cbd5e1; background: #ffffff; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 9px; color: #00875A; font-weight: 700;">
+                  VERIFIED-TXN-OK
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      `;
+    }
+
+    function printReceiptWindow(receiptHtml) {
+      const printWin = window.open('', '_blank', 'width=820,height=900');
+      if (printWin) {
+        printWin.document.write(`
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Smash & Spin - Official Payment Receipt</title>
+            <meta charset="utf-8">
+            <style>
+              body { margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+              @media print {
+                body { padding: 0; }
+                @page { margin: 10mm; }
+              }
+            </style>
+          </head>
+          <body>
+            ${receiptHtml}
+            <script>
+              window.onload = function() {
+                setTimeout(function() {
+                  window.print();
+                }, 300);
+              };
+            <\/script>
+          </body>
+          </html>
+        `);
+        printWin.document.close();
+      }
+    }
+
+    function downloadReceiptPdf(id, court, sport, amount, date) {
+      const cleanId = (id || 'INV-001').replace(/^#/, '');
+      const userName = (typeof Auth !== 'undefined' && Auth.getUser()?.name) || 'Alex Morgan';
+      const userEmail = (typeof Auth !== 'undefined' && Auth.getUser()?.email) || 'alex.morgan@email.com';
+
+      const receiptHtml = buildReceiptTemplate(cleanId, court, sport, amount, date, userName, userEmail);
+
+      const element = document.createElement('div');
+      element.style.position = 'fixed';
+      element.style.top = '-9999px';
+      element.style.left = '-9999px';
+      element.style.width = '760px';
+      element.innerHTML = receiptHtml;
+      document.body.appendChild(element);
+
+      const filename = `Smash_Spin_Receipt_${cleanId}.pdf`;
+
+      if (typeof html2pdf !== 'undefined') {
+        const opt = {
+          margin:       [8, 8, 8, 8],
+          filename:     filename,
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { scale: 2, useCORS: true, letterRendering: true, logging: false },
+          jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element.firstElementChild).save().then(() => {
+          document.body.removeChild(element);
+          if (typeof showToast === 'function') {
+            showToast(`Official PDF receipt #${cleanId} downloaded successfully!`);
+          }
+        }).catch(err => {
+          console.warn('html2pdf fallback triggering:', err);
+          document.body.removeChild(element);
+          printReceiptWindow(receiptHtml);
+        });
+      } else {
+        document.body.removeChild(element);
+        printReceiptWindow(receiptHtml);
+      }
+    }
+    window.downloadReceiptPdf = downloadReceiptPdf;
+
+    function downloadReceiptFromModal() {
+      const id = document.getElementById('recInvoiceId')?.textContent || 'INV-92841';
+      const court = document.getElementById('recCourt')?.textContent || 'Center Court Alpha';
+      const sport = document.getElementById('recSport')?.textContent || 'Badminton';
+      const amount = document.getElementById('recAmount')?.textContent || '$25.00';
+      const date = document.getElementById('recDate')?.textContent || 'Sep 16, 2026';
+
+      const btn = document.getElementById('btnModalDownloadPdf');
+      if (btn) {
+        const originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> Generating PDF...';
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+        }, 2200);
+      }
+
+      downloadReceiptPdf(id, court, sport, amount, date);
+    }
+    window.downloadReceiptFromModal = downloadReceiptFromModal;
+
+    function printReceiptFromModal() {
+      const id = document.getElementById('recInvoiceId')?.textContent || 'INV-92841';
+      const court = document.getElementById('recCourt')?.textContent || 'Center Court Alpha';
+      const sport = document.getElementById('recSport')?.textContent || 'Badminton';
+      const amount = document.getElementById('recAmount')?.textContent || '$25.00';
+      const date = document.getElementById('recDate')?.textContent || 'Sep 16, 2026';
+      const userName = (typeof Auth !== 'undefined' && Auth.getUser()?.name) || 'Alex Morgan';
+      const userEmail = (typeof Auth !== 'undefined' && Auth.getUser()?.email) || 'alex.morgan@email.com';
+
+      const html = buildReceiptTemplate(id, court, sport, amount, date, userName, userEmail);
+      printReceiptWindow(html);
+    }
+    window.printReceiptFromModal = printReceiptFromModal;
+
+    function downloadAllReceiptsStatementPdf() {
+      const userName = (typeof Auth !== 'undefined' && Auth.getUser()?.name) || 'Alex Morgan';
+      const userEmail = (typeof Auth !== 'undefined' && Auth.getUser()?.email) || 'alex.morgan@email.com';
+
+      const statementHtml = `
+        <div id="pdfStatementDoc" style="font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif; padding: 36px 40px; color: #1e293b; background: #ffffff; width: 100%; max-width: 760px; margin: 0 auto; box-sizing: border-box; line-height: 1.5;">
+          <table style="width: 100%; border-bottom: 3px solid #00875A; padding-bottom: 18px; margin-bottom: 24px; border-collapse: collapse;">
+            <tr>
+              <td style="vertical-align: top;">
+                <div style="font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 4px;">
+                  <span style="display: inline-block; background: #00875A; color: #ffffff; border-radius: 6px; width: 30px; height: 30px; line-height: 30px; text-align: center; font-size: 16px; margin-right: 6px;">&#9733;</span>
+                  Smash<span style="color: #FF5A1F;">&amp;</span>Spin
+                </div>
+                <div style="font-size: 11px; color: #64748b;">Annual Payment &amp; Reservation Statement (2026)</div>
+              </td>
+              <td style="vertical-align: top; text-align: right;">
+                <div style="display: inline-block; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; margin-bottom: 6px;">
+                  &#10003; ACCOUNT IN GOOD STANDING
+                </div>
+                <div style="font-size: 12px; color: #64748b; font-weight: 600;">Statement Date: ${new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</div>
+              </td>
+            </tr>
+          </table>
+
+          <div style="background: #f8fafc; padding: 14px 16px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 24px;">
+            <div style="font-size: 14px; font-weight: 700; color: #0f172a;">${userName} (${userEmail})</div>
+            <div style="font-size: 12px; color: #64748b;">Total Invoices: 4 • Total Amount Settled: $157.00 • Member Status: Verified</div>
+          </div>
+
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 12px;">
+            <thead>
+              <tr style="background: #0f172a; color: #ffffff;">
+                <th style="padding: 10px 12px; text-align: left; border-radius: 6px 0 0 0;">Invoice ID</th>
+                <th style="padding: 10px 12px; text-align: left;">Description</th>
+                <th style="padding: 10px 12px; text-align: center;">Date</th>
+                <th style="padding: 10px 12px; text-align: right; border-radius: 0 6px 0 0;">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px 12px; font-weight: 700;">#INV-2026-09</td><td style="padding: 10px 12px;">Premium Membership Monthly Fee</td><td style="padding: 10px 12px; text-align: center;">Sep 01, 2026</td><td style="padding: 10px 12px; text-align: right; font-weight: 700;">$79.00</td></tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px 12px; font-weight: 700;">#INV-2026-08</td><td style="padding: 10px 12px;">Court Reservation #BK-92841 (Center Court Alpha)</td><td style="padding: 10px 12px; text-align: center;">Sep 16, 2026</td><td style="padding: 10px 12px; text-align: right; font-weight: 700;">$25.00</td></tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px 12px; font-weight: 700;">#INV-2026-07</td><td style="padding: 10px 12px;">Autumn Smash Open Tournament Entry Fee</td><td style="padding: 10px 12px; text-align: center;">Sep 14, 2026</td><td style="padding: 10px 12px; text-align: right; font-weight: 700;">$35.00</td></tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px 12px; font-weight: 700;">#INV-2026-06</td><td style="padding: 10px 12px;">Court Reservation #BK-83190 (Olympic Spin Studio)</td><td style="padding: 10px 12px; text-align: center;">Sep 12, 2026</td><td style="padding: 10px 12px; text-align: right; font-weight: 700;">$18.00</td></tr>
+            </tbody>
+          </table>
+
+          <div style="background: #f8fafc; padding: 14px 18px; border-radius: 8px; border: 1px solid #e2e8f0; text-align: right; font-size: 16px; font-weight: 800; color: #00875A; margin-bottom: 24px;">
+            Total Settled (2026): $157.00
+          </div>
+
+          <div style="border-top: 1px dashed #cbd5e1; padding-top: 14px; font-size: 10px; color: #64748b;">
+            Official statement issued by Smash &amp; Spin Sports Arenas. Certified Tax Compliant.
+          </div>
+        </div>
+      `;
+
+      const element = document.createElement('div');
+      element.style.position = 'fixed';
+      element.style.top = '-9999px';
+      element.style.left = '-9999px';
+      element.style.width = '760px';
+      element.innerHTML = statementHtml;
+      document.body.appendChild(element);
+
+      if (typeof html2pdf !== 'undefined') {
+        const opt = {
+          margin:       [8, 8, 8, 8],
+          filename:     'Smash_Spin_Annual_Statement_2026.pdf',
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { scale: 2, useCORS: true, letterRendering: true, logging: false },
+          jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element.firstElementChild).save().then(() => {
+          document.body.removeChild(element);
+          if (typeof showToast === 'function') {
+            showToast('All 2026 receipts exported to PDF statement!');
+          }
+        }).catch(err => {
+          document.body.removeChild(element);
+          printReceiptWindow(statementHtml);
+        });
+      } else {
+        document.body.removeChild(element);
+        printReceiptWindow(statementHtml);
+      }
+    }
+    window.downloadAllReceiptsStatementPdf = downloadAllReceiptsStatementPdf;
 
     let cancelTargetId = null;
     function openCancelModal(id, court, time) {

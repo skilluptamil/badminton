@@ -108,19 +108,24 @@
     <div class="container">
       <div class="bg-white p-4 rounded-4 shadow-sm border">
         <div class="row g-3 align-items-center mb-3">
-          <div class="col-md-auto">
+          <div class="col-md-auto d-flex align-items-center gap-2 flex-wrap">
             <span class="fw-bold me-2"><i class="bi bi-funnel-fill text-primary"></i> Sport Filter:</span>
-            <div class="btn-group" role="group">
+            <div class="btn-group" role="group" aria-label="Sport Filter">
               <button type="button" class="btn btn-primary btn-sm active" data-filter-sport="all">All Arenas</button>
               <button type="button" class="btn btn-outline-dark btn-sm" data-filter-sport="badminton">Badminton</button>
               <button type="button" class="btn btn-outline-dark btn-sm" data-filter-sport="table-tennis">Table Tennis</button>
             </div>
           </div>
+          <div class="col-md text-md-end">
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="btnResetFilters" title="Reset all filters">
+              <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Filters
+            </button>
+          </div>
         </div>
 
         <form id="courtFilterForm" class="row g-3 align-items-end">
           <div class="col-lg-3 col-md-6">
-            <label class="form-label small fw-bold">Court Type</label>
+            <label class="form-label small fw-bold" for="filterCourtType">Court Type</label>
             <select class="form-select form-select-sm" id="filterCourtType">
               <option value="all">All (Indoor / VIP / Synthetic)</option>
               <option value="indoor">Indoor Synthetic Mats</option>
@@ -130,12 +135,12 @@
           </div>
 
           <div class="col-lg-3 col-md-6">
-            <label class="form-label small fw-bold">Date</label>
+            <label class="form-label small fw-bold" for="filterDate">Date</label>
             <input type="date" class="form-control form-control-sm" id="filterDate" value="2026-09-16">
           </div>
 
           <div class="col-lg-3 col-md-6">
-            <label class="form-label small fw-bold">Time Window</label>
+            <label class="form-label small fw-bold" for="filterTimeSlot">Time Window</label>
             <select class="form-select form-select-sm" id="filterTimeSlot">
               <option value="all">Any Available Slot</option>
               <option value="morning">Morning (6 AM - 12 PM)</option>
@@ -145,8 +150,8 @@
           </div>
 
           <div class="col-lg-3 col-md-6">
-            <button type="button" class="btn btn-primary btn-sm w-100 py-2" onclick="showToast('Filtered courts updated!')">
-              <i class="bi bi-search"></i> Apply Filter
+            <button type="submit" id="btnApplyCourtFilter" class="btn btn-primary btn-sm w-100 py-2">
+              <i class="bi bi-search me-1"></i> Apply Filter
             </button>
           </div>
         </form>
@@ -159,9 +164,18 @@
        ========================================================================= -->
   <section class="section-py" id="courtGridSection">
     <div class="container">
-      <div class="row g-4">
+      <!-- Live Filter Status & Results Header -->
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-4 pb-2 border-bottom">
+        <div class="d-flex align-items-center gap-2">
+          <h4 class="mb-0 fw-bold fs-5">Available Arenas</h4>
+          <span id="courtResultCount" class="badge bg-primary-subtle text-primary fw-bold px-3 py-2 rounded-pill">6 Arenas</span>
+        </div>
+        <div id="activeFilterTags" class="d-flex align-items-center gap-2 flex-wrap"></div>
+      </div>
+
+      <div class="row g-4" id="courtCardGrid">
         <!-- Court 1: Badminton Court 1 -->
-        <div class="col-lg-4 col-md-6 court-filter-item" data-sport="badminton">
+        <div class="col-lg-4 col-md-6 court-filter-item" data-sport="badminton" data-court-type="indoor synthetic" data-time-slot="morning afternoon evening">
           <div class="court-card">
             <div class="court-image-wrapper">
               <a href="court-details.html?id=center-court-alpha" class="d-block w-100 h-100">
@@ -193,7 +207,7 @@
         </div>
 
         <!-- Court 2: Table Tennis Arena 1 -->
-        <div class="col-lg-4 col-md-6 court-filter-item" data-sport="table-tennis">
+        <div class="col-lg-4 col-md-6 court-filter-item" data-sport="table-tennis" data-court-type="indoor training" data-time-slot="morning afternoon evening">
           <div class="court-card">
             <div class="court-image-wrapper">
               <a href="court-details.html?id=olympic-spin-studio" class="d-block w-100 h-100">
@@ -225,7 +239,7 @@
         </div>
 
         <!-- Court 3: VIP Glass Badminton Court -->
-        <div class="col-lg-4 col-md-6 court-filter-item" data-sport="badminton">
+        <div class="col-lg-4 col-md-6 court-filter-item" data-sport="badminton" data-court-type="vip indoor" data-time-slot="morning afternoon evening">
           <div class="court-card">
             <div class="court-image-wrapper">
               <a href="court-details.html?id=champions-vip-court" class="d-block w-100 h-100">
@@ -257,7 +271,7 @@
         </div>
 
         <!-- Court 4: Badminton Court 2 -->
-        <div class="col-lg-4 col-md-6 court-filter-item" data-sport="badminton">
+        <div class="col-lg-4 col-md-6 court-filter-item" data-sport="badminton" data-court-type="indoor synthetic" data-time-slot="morning afternoon evening">
           <div class="court-card">
             <div class="court-image-wrapper">
               <a href="court-details.html?id=power-smash-arena" class="d-block w-100 h-100">
@@ -289,7 +303,7 @@
         </div>
 
         <!-- Court 5: Table Tennis Training Table 2 -->
-        <div class="col-lg-4 col-md-6 court-filter-item" data-sport="table-tennis">
+        <div class="col-lg-4 col-md-6 court-filter-item" data-sport="table-tennis" data-court-type="training indoor" data-time-slot="morning afternoon evening">
           <div class="court-card">
             <div class="court-image-wrapper">
               <a href="court-details.html?id=loop-drive-studio" class="d-block w-100 h-100">
@@ -321,7 +335,7 @@
         </div>
 
         <!-- Court 6: Badminton Court 3 -->
-        <div class="col-lg-4 col-md-6 court-filter-item" data-sport="badminton">
+        <div class="col-lg-4 col-md-6 court-filter-item" data-sport="badminton" data-court-type="training synthetic indoor" data-time-slot="morning afternoon evening">
           <div class="court-card">
             <div class="court-image-wrapper">
               <a href="court-details.html?id=falcon-speed-court" class="d-block w-100 h-100">
@@ -349,6 +363,22 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- Empty Filter State (Shows when no courts match criteria) -->
+        <div id="noCourtsFoundState" class="col-12 text-center py-5 d-none">
+          <div class="p-5 bg-light rounded-4 border">
+            <div class="mb-3 text-muted">
+              <i class="bi bi-funnel fs-1 text-primary"></i>
+            </div>
+            <h3 class="fw-bold mb-2">No Arenas Match Your Filter</h3>
+            <p class="text-muted mb-4 max-w-500 mx-auto">
+              No courts are available for the selected sport, court type, or time window combination. Try clearing some filters to view all available slots.
+            </p>
+            <button type="button" class="btn btn-primary btn-sm px-4 py-2" id="btnEmptyStateReset">
+              <i class="bi bi-arrow-counterclockwise me-1"></i> Reset All Filters
+            </button>
           </div>
         </div>
       </div>

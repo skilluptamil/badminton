@@ -8,16 +8,35 @@
   direction: rtl;
 }
 
-/* Base text & headings bidirectional punctuation preservation */
+/* Base text, headings, badges & spans bidirectional punctuation preservation */
 [dir="rtl"] p,
+[dir="rtl"] span,
+[dir="rtl"] a,
 [dir="rtl"] h1,
 [dir="rtl"] h2,
 [dir="rtl"] h3,
 [dir="rtl"] h4,
 [dir="rtl"] h5,
 [dir="rtl"] h6,
+[dir="rtl"] li,
+[dir="rtl"] label,
+[dir="rtl"] div,
+[dir="rtl"] button,
+[dir="rtl"] .hero-title,
+[dir="rtl"] .hero-title span,
+[dir="rtl"] .text-highlight,
+[dir="rtl"] .text-highlight-orange,
+[dir="rtl"] .hero-subtitle,
+[dir="rtl"] .section-title,
+[dir="rtl"] .section-desc,
 [dir="rtl"] .auth-header p,
 [dir="rtl"] .auth-header h2 {
+  unicode-bidi: plaintext;
+}
+
+[dir="rtl"] .hero-title span.text-highlight,
+[dir="rtl"] .hero-title span.text-highlight-orange {
+  display: inline-block;
   unicode-bidi: plaintext;
 }
 

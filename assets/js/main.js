@@ -4,15 +4,21 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Sticky Navbar shadow
-  const header = document.querySelector('.site-header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      header?.classList.add('scrolled');
-    } else {
-      header?.classList.remove('scrolled');
-    }
-  });
+  // 1. Sticky Navbar shadow & dynamic scrolled state
+  const headers = document.querySelectorAll('.site-header, .dashboard-top-navbar');
+  const updateHeaderSticky = () => {
+    const isScrolled = window.scrollY > 15;
+    headers.forEach(h => {
+      if (isScrolled) {
+        h.classList.add('scrolled');
+      } else {
+        h.classList.remove('scrolled');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', updateHeaderSticky, { passive: true });
+  updateHeaderSticky();
 
   // 2. Pricing Plan Switcher (Monthly / Annual)
   const billingMonthlyBtn = document.getElementById('btnBillingMonthly');

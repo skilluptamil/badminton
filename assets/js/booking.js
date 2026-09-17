@@ -211,28 +211,158 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 4. Interactive Courts Live Filter (on courts.html)
+  const courtFilterForm = document.getElementById('courtFilterForm');
   const filterSportBtns = document.querySelectorAll('[data-filter-sport]');
-  filterSportBtns.forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      filterSportBtns.forEach(b => b.classList.remove('active', 'btn-primary'));
-      filterSportBtns.forEach(b => b.classList.add('btn-outline-dark'));
-      this.classList.remove('btn-outline-dark');
-      this.classList.add('active', 'btn-primary');
+  const courtTypeSelect = document.getElementById('filterCourtType');
+  const filterDateInput = document.getElementById('filterDate');
+  const timeSlotSelect = document.getElementById('filterTimeSlot');
+  const courtItems = document.querySelectorAll('.court-filter-item');
+  const courtResultCount = document.getElementById('courtResultCount');
+  const activeFilterTags = document.getElementById('activeFilterTags');
+  const noCourtsFoundState = document.getElementById('noCourtsFoundState');
+  const btnResetFilters = document.getElementById('btnResetFilters');
+  const btnEmptyStateReset = document.getElementById('btnEmptyStateReset');
 
-      const filterVal = this.getAttribute('data-filter-sport');
-      const courtItems = document.querySelectorAll('.court-filter-item');
+  if (courtFilterForm || courtItems.length > 0) {
+    let currentSport = 'all';
+
+    // Check URL parameters for pre-selected filter (e.g. ?sport=table-tennis or ?sport=badminton)
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramSport = urlParams.get('sport');
+    const paramType = urlParams.get('type');
+    if (paramSport) {
+      currentSport = paramSport.toLowerCase();
+      filterSportBtns.forEach(b => {
+        const sportAttr = b.getAttribute('data-filter-sport');
+        if (sportAttr === currentSport) {
+          b.classList.add('active', 'btn-primary');
+          b.classList.remove('btn-outline-dark');
+        } else {
+          b.classList.remove('active', 'btn-primary');
+          b.classList.add('btn-outline-dark');
+        }
+      });
+    }
+    if (paramType && courtTypeSelect) {
+      courtTypeSelect.value = paramType;
+    }
+
+    function applyCourtFilters(shouldScroll = false) {
+      const selectedType = courtTypeSelect ? courtTypeSelect.value : 'all';
+      const selectedTime = timeSlotSelect ? timeSlotSelect.value : 'all';
+      let visibleCount = 0;
 
       courtItems.forEach(item => {
-        const itemSport = item.getAttribute('data-sport');
-        if (filterVal === 'all' || itemSport === filterVal) {
+        const itemSport = item.getAttribute('data-sport') || '';
+        const itemType = item.getAttribute('data-court-type') || '';
+        const itemTime = item.getAttribute('data-time-slot') || 'morning afternoon evening';
+
+        const matchSport = (currentSport === 'all' || itemSport === currentSport);
+        const matchType = (selectedType === 'all' || itemType.includes(selectedType));
+        const matchTime = (selectedTime === 'all' || itemTime.includes(selectedTime));
+
+        if (matchSport && matchType && matchTime) {
+          item.classList.remove('d-none');
           item.style.display = 'block';
+          item.style.animation = 'fadeInDown 0.3s ease-out';
+          visibleCount++;
         } else {
+          item.classList.add('d-none');
           item.style.display = 'none';
         }
       });
+
+      // Update count badge
+      if (courtResultCount) {
+        courtResultCount.textContent = `${visibleCount} ${visibleCount === 1 ? 'Arena' : 'Arenas'}`;
+      }
+
+      // Show/Hide Empty State
+      if (noCourtsFoundState) {
+        if (visibleCount === 0) {
+          noCourtsFoundState.classList.remove('d-none');
+        } else {
+          noCourtsFoundState.classList.add('d-none');
+        }
+      }
+
+      // Update active filter tags
+      if (activeFilterTags) {
+        activeFilterTags.innerHTML = '';
+        if (currentSport !== 'all') {
+          const sportLabel = currentSport === 'badminton' ? 'Badminton' : 'Table Tennis';
+          activeFilterTags.innerHTML += `<span class="badge bg-light text-dark border"><i class="bi bi-tag-fill text-primary me-1"></i>${sportLabel}</span>`;
+        }
+        if (selectedType !== 'all') {
+          const typeText = courtTypeSelect.options[courtTypeSelect.selectedIndex]?.text || selectedType;
+          activeFilterTags.innerHTML += `<span class="badge bg-light text-dark border"><i class="bi bi-layers-fill text-primary me-1"></i>${typeText}</span>`;
+        }
+        if (selectedTime !== 'all') {
+          const timeText = timeSlotSelect.options[timeSlotSelect.selectedIndex]?.text || selectedTime;
+          activeFilterTags.innerHTML += `<span class="badge bg-light text-dark border"><i class="bi bi-clock-fill text-primary me-1"></i>${timeText}</span>`;
+        }
+      }
+
+      if (shouldScroll) {
+        const gridEl = document.getElementById('courtGridSection');
+        if (gridEl) {
+          gridEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    // Sport Pill Buttons Click
+    filterSportBtns.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        filterSportBtns.forEach(b => b.classList.remove('active', 'btn-primary'));
+        filterSportBtns.forEach(b => b.classList.add('btn-outline-dark'));
+        this.classList.remove('btn-outline-dark');
+        this.classList.add('active', 'btn-primary');
+        currentSport = this.getAttribute('data-filter-sport') || 'all';
+        applyCourtFilters(false);
+      });
     });
-  });
+
+    // Form submit or "Apply Filter" click
+    if (courtFilterForm) {
+      courtFilterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        applyCourtFilters(true);
+      });
+    }
+
+    // Live filtering on dropdown change as well
+    if (courtTypeSelect) {
+      courtTypeSelect.addEventListener('change', () => applyCourtFilters(false));
+    }
+    if (timeSlotSelect) {
+      timeSlotSelect.addEventListener('change', () => applyCourtFilters(false));
+    }
+
+    // Reset Filters
+    function resetAllCourtFilters() {
+      currentSport = 'all';
+      filterSportBtns.forEach(b => {
+        if (b.getAttribute('data-filter-sport') === 'all') {
+          b.classList.add('active', 'btn-primary');
+          b.classList.remove('btn-outline-dark');
+        } else {
+          b.classList.remove('active', 'btn-primary');
+          b.classList.add('btn-outline-dark');
+        }
+      });
+      if (courtTypeSelect) courtTypeSelect.value = 'all';
+      if (timeSlotSelect) timeSlotSelect.value = 'all';
+      applyCourtFilters(false);
+    }
+
+    if (btnResetFilters) btnResetFilters.addEventListener('click', resetAllCourtFilters);
+    if (btnEmptyStateReset) btnEmptyStateReset.addEventListener('click', resetAllCourtFilters);
+
+    // Initial filter run
+    applyCourtFilters(false);
+  }
 
   // 5. Dashboard Tab Switcher
   const dashNavLinks = document.querySelectorAll('.dashboard-nav-item');
