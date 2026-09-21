@@ -22,72 +22,37 @@
 </head>
 <body>
 
-  <!-- =========================================================================
-       1. NAVBAR
-       ========================================================================= -->
-  <header class="site-header">
-    <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-light py-3">
-        <a class="brand-logo" href="index.html">
-          <div class="brand-icon"><i class="bi bi-trophy-fill"></i></div>
-          <div class="brand-text">Smash<span>&</span>Spin</div>
-        </a>
-
-        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMainContent" aria-controls="navbarMainContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="bi bi-list fs-2 text-dark"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarMainContent">
-          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Home
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="homeDropdown">
-                <li><a class="dropdown-item" href="index.html"><i class="bi bi-grid-fill me-2"></i>Home 1</a></li>
-                <li><a class="dropdown-item" href="home-2.html"><i class="bi bi-shield-fill-check me-2"></i>Home 2</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="courts.html">Courts</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="blog.html">Blog</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact Us</a>
-            </li>
-          </ul>
-
-          <div class="nav-controls">
-            <button type="button" class="control-btn dir-toggle-btn" title="Toggle LTR / RTL" aria-label="Toggle LTR / RTL">
-              <i class="bi bi-arrow-left-right"></i>
-            </button>
-            <button type="button" class="control-btn theme-toggle-btn" title="Toggle Dark / Light Mode" aria-label="Toggle Dark / Light Mode">
-              <i class="bi bi-moon-stars-fill"></i>
-            </button>
-            <a href="login.html" class="btn btn-outline-dark btn-sm nav-auth-btn">
-              <span>Login</span> <i class="bi bi-box-arrow-in-right"></i>
-            </a>
-            <a href="register.html" class="btn btn-primary btn-sm nav-auth-btn">
-              <span>Sign Up</span> <i class="bi bi-person-plus-fill"></i>
-            </a>
-          </div>
-        </div>
-      </nav>
+  <!-- Top Floating Controls -->
+  <div class="position-fixed top-0 start-0 end-0 p-3 z-3 d-flex justify-content-between align-items-center pe-none">
+    <a href="index.html" class="control-btn shadow-sm pe-auto" title="Back to Home" aria-label="Back to Home">
+      <i class="bi bi-arrow-left"></i>
+    </a>
+    <div class="d-flex gap-2 pe-auto">
+      <button type="button" class="control-btn dir-toggle-btn shadow-sm" title="Toggle LTR / RTL" aria-label="Toggle LTR / RTL">
+        <i class="bi bi-arrow-left-right"></i>
+      </button>
+      <button type="button" class="control-btn theme-toggle-btn shadow-sm" title="Toggle Dark / Light Mode" aria-label="Toggle Dark / Light Mode">
+        <i class="bi bi-moon-stars-fill"></i>
+      </button>
     </div>
-  </header>
+  </div>
 
   <!-- =========================================================================
        SIGN UP CONTENT
        ========================================================================= -->
-  <main class="auth-wrapper">
+  <main class="auth-wrapper min-vh-100 d-flex align-items-center justify-content-center py-5">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+
+          <!-- Brand Logo -->
+          <div class="text-center mb-4">
+            <a class="brand-logo justify-content-center d-inline-flex" href="index.html">
+              <div class="brand-icon"><i class="bi bi-trophy-fill"></i></div>
+              <div class="brand-text">Smash<span>&</span>Spin</div>
+            </a>
+          </div>
+
           <div class="auth-card">
             <div class="auth-header">
               <div class="brand-icon mx-auto mb-3" style="width: 50px; height: 50px; font-size: 1.5rem;">

@@ -1035,16 +1035,42 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 0.8rem;
-  color: #fff;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #00875A 0%, #00B377 100%) !important;
   z-index: 2;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
 }
 
 .badge-badminton,
 .badge-tt,
+.badge-table-tennis,
+.badge-training,
+.badge-amenities,
+.badge-parking,
+.badge-lounge,
+.badge-cafe,
+.badge-coaching,
+.badge-events,
+.badge-junior,
+.badge-junior-cup,
+.court-badge-sport.badge-badminton,
 .court-badge-sport.badge-tt,
-.court-badge-sport.badge-badminton {
-  background: linear-gradient(135deg, var(--primary) 0%, #00B377 100%) !important;
+.court-badge-sport.badge-table-tennis,
+.court-badge-sport.badge-training,
+.court-badge-sport.badge-amenities,
+.court-badge-sport.badge-parking,
+.court-badge-sport.badge-lounge,
+.court-badge-sport.badge-cafe,
+.court-badge-sport.badge-coaching,
+.court-badge-sport.badge-events,
+.court-badge-sport.badge-junior,
+.court-badge-sport.badge-junior-cup {
+  background: linear-gradient(135deg, #00875A 0%, #00B377 100%) !important;
   color: #ffffff !important;
 }
 
@@ -2133,6 +2159,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   gap: 10px;
 }
 
+.site-footer .social-links a,
 .site-footer .social-btn {
   width: 38px;
   height: 38px;
@@ -2143,9 +2170,11 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   align-items: center;
   justify-content: center;
   font-size: 1.1rem;
+  text-decoration: none;
   transition: var(--transition-fast);
 }
 
+.site-footer .social-links a:hover,
 .site-footer .social-btn:hover {
   background: var(--primary);
   color: #FFFFFF;

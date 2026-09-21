@@ -1005,11 +1005,13 @@
   color: #94A3B8 !important;
 }
 
+[data-theme="dark"] .site-footer .social-links a,
 [data-theme="dark"] .site-footer .social-btn {
   background: rgba(255, 255, 255, 0.06);
   color: #FFFFFF !important;
 }
 
+[data-theme="dark"] .site-footer .social-links a:hover,
 [data-theme="dark"] .site-footer .social-btn:hover {
   background: var(--primary);
   color: #0B0F19 !important;
