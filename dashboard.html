@@ -221,12 +221,12 @@
             <!-- Overview Metric Cards (5 distinct cards) -->
             <div class="row g-3 mb-4">
               <!-- 1. Upcoming Bookings -->
-              <div class="col-xl-4 col-md-6">
+              <div class="col-xl-4 col-md-6 col-12">
                 <div class="stat-card-widget" style="cursor: pointer;" onclick="switchToTab('bookings')" title="Click to view active bookings">
                   <div class="stat-info-wrap">
                     <div class="stat-card-label">Upcoming Bookings</div>
                     <div class="stat-card-value text-dark" id="metricUpcomingSlots">2 Slots</div>
-                    <div class="small text-muted mt-1">Active reservations</div>
+                    <div class="stat-card-desc">Active reservations</div>
                   </div>
                   <div class="stat-widget-icon stat-icon-green">
                     <i class="bi bi-calendar-event"></i>
@@ -235,12 +235,12 @@
               </div>
 
               <!-- 2. Total Bookings -->
-              <div class="col-xl-4 col-md-6">
+              <div class="col-xl-4 col-md-6 col-12">
                 <div class="stat-card-widget" style="cursor: pointer;" onclick="switchToTab('booking-history')" title="Click to view full booking history">
                   <div class="stat-info-wrap">
                     <div class="stat-card-label">Total Bookings</div>
                     <div class="stat-card-value text-dark" id="metricTotalBookings">5 Bookings</div>
-                    <div class="small text-muted mt-1">Lifetime court sessions</div>
+                    <div class="stat-card-desc">Lifetime court sessions</div>
                   </div>
                   <div class="stat-widget-icon stat-icon-blue">
                     <i class="bi bi-check2-circle"></i>
@@ -249,12 +249,12 @@
               </div>
 
               <!-- 3. Active Membership -->
-              <div class="col-xl-4 col-md-6">
+              <div class="col-xl-4 col-md-6 col-12">
                 <div class="stat-card-widget" style="cursor: pointer;" onclick="switchToTab('membership')" title="Click to view membership details">
                   <div class="stat-info-wrap">
                     <div class="stat-card-label">Active Membership</div>
                     <div class="stat-card-value text-primary" id="metricMembershipPlan">Premium</div>
-                    <div class="small text-muted mt-1">Renews Oct 01, 2026</div>
+                    <div class="stat-card-desc">Renews Oct 01, 2026</div>
                   </div>
                   <div class="stat-widget-icon stat-icon-purple">
                     <i class="bi bi-gem"></i>
@@ -263,12 +263,12 @@
               </div>
 
               <!-- 4. Tournament Registrations -->
-              <div class="col-xl-6 col-md-6">
+              <div class="col-xl-6 col-md-6 col-12">
                 <div class="stat-card-widget" style="cursor: pointer;" onclick="switchToTab('tournaments')" title="Click to view tournament registrations">
                   <div class="stat-info-wrap">
                     <div class="stat-card-label">Tournament Registrations</div>
                     <div class="stat-card-value text-secondary" id="metricTourneyCount">1 Active</div>
-                    <div class="small text-muted mt-1">Autumn Smash Open (Seed #4)</div>
+                    <div class="stat-card-desc">Autumn Smash Open (Seed #4)</div>
                   </div>
                   <div class="stat-widget-icon stat-icon-orange">
                     <i class="bi bi-trophy"></i>
@@ -277,12 +277,12 @@
               </div>
 
               <!-- 5. Total Payments -->
-              <div class="col-xl-6 col-md-12">
+              <div class="col-xl-6 col-md-12 col-12">
                 <div class="stat-card-widget" style="cursor: pointer;" onclick="switchToTab('receipts')" title="Click to view receipts">
                   <div class="stat-info-wrap">
                     <div class="stat-card-label">Total Payments</div>
                     <div class="stat-card-value text-dark" id="metricTotalPayments">$315.00</div>
-                    <div class="small text-muted mt-1">All invoices verified & settled</div>
+                    <div class="stat-card-desc">All invoices verified & settled</div>
                   </div>
                   <div class="stat-widget-icon stat-icon-teal">
                     <i class="bi bi-credit-card-2-front"></i>
@@ -436,12 +436,12 @@
 
             <!-- Customer Cards Grid -->
             <div class="row g-3 mb-4">
-              <div class="col-xl-3 col-6">
+              <div class="col-xl-3 col-md-6 col-12">
                 <div class="stat-card-widget">
                   <div class="stat-info-wrap">
-                    <div class="stat-card-label">Loyalty SmashPoints</div>
+                    <div class="stat-card-label">Loyalty Points</div>
                     <div class="stat-card-value text-primary">1,250 Pts</div>
-                    <div class="small text-muted mt-1">Gold Tier Status</div>
+                    <div class="stat-card-desc">Gold Tier Status</div>
                   </div>
                   <div class="stat-widget-icon stat-icon-orange">
                     <i class="bi bi-stars"></i>
@@ -449,12 +449,12 @@
                 </div>
               </div>
 
-              <div class="col-xl-3 col-6">
+              <div class="col-xl-3 col-md-6 col-12">
                 <div class="stat-card-widget">
                   <div class="stat-info-wrap">
                     <div class="stat-card-label">Active Guest Passes</div>
                     <div class="stat-card-value text-dark">2 Passes</div>
-                    <div class="small text-muted mt-1">Ready for check-in</div>
+                    <div class="stat-card-desc">Ready for check-in</div>
                   </div>
                   <div class="stat-widget-icon stat-icon-green">
                     <i class="bi bi-pass-fill"></i>
@@ -462,12 +462,12 @@
                 </div>
               </div>
 
-              <div class="col-xl-3 col-6">
+              <div class="col-xl-3 col-md-6 col-12">
                 <div class="stat-card-widget">
                   <div class="stat-info-wrap">
                     <div class="stat-card-label">Locker Assigned</div>
                     <div class="stat-card-value text-dark">#L-18</div>
-                    <div class="small text-muted mt-1">VIP Changing Lounge</div>
+                    <div class="stat-card-desc">VIP Changing Lounge</div>
                   </div>
                   <div class="stat-widget-icon stat-icon-blue">
                     <i class="bi bi-door-closed"></i>
@@ -475,12 +475,12 @@
                 </div>
               </div>
 
-              <div class="col-xl-3 col-6">
+              <div class="col-xl-3 col-md-6 col-12">
                 <div class="stat-card-widget">
                   <div class="stat-info-wrap">
                     <div class="stat-card-label">Customer Lifetime Spend</div>
                     <div class="stat-card-value text-dark">$315.00</div>
-                    <div class="small text-muted mt-1">Verified Invoices</div>
+                    <div class="stat-card-desc">Verified Invoices</div>
                   </div>
                   <div class="stat-widget-icon stat-icon-teal">
                     <i class="bi bi-wallet2"></i>
