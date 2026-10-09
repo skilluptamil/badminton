@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Player Dashboard | Smash & Spin Arenas</title>
-  <meta name="description" content="Manage your court reservations, active membership plans, tournament entries, and download payment receipts in your Smash & Spin player dashboard.">
+  <title>Player & Customer Dashboard | Smash & Spin Arenas</title>
+  <meta name="description" content="Manage your court reservations, active membership plans, tournament registrations, customer loyalty rewards, and download payment receipts in your Smash & Spin dashboard.">
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
@@ -19,115 +19,179 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/dark.css">
   <link rel="stylesheet" href="assets/css/rtl.css">
-
-  <!-- Authentication & Route Protection Guard -->
-  <script src="assets/js/auth.js"></script>
-  <script>
-    // Synchronous authentication guard: redirect immediately if unauthenticated
-    if (!Auth.isAuthenticated()) {
-      window.location.replace('login.html?redirect=dashboard.html&auth_required=1');
-    }
-  </script>
 </head>
 <body>
 
   <!-- =========================================================================
-       DASHBOARD COMPACT HEADER (Clean, distraction-free header)
+       1. MAIN SITE NAVBAR (Standardized Across All Pages)
+       Order: Home -> About Us -> Courts -> Blog -> Contact Us -> Dashboard (Dropdown Button) -> Controls
        ========================================================================= -->
-  <header class="dashboard-top-navbar py-3">
+  <header class="site-header">
     <div class="container">
-      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-        <!-- Brand & Active Page Heading -->
-        <div class="d-flex align-items-center gap-3">
-          <a class="brand-logo mb-0 text-decoration-none" href="index.html">
-            <div class="brand-icon"><i class="bi bi-trophy-fill"></i></div>
-            <div class="brand-text">Smash<span>&</span>Spin</div>
-          </a>
-          <div class="vr d-none d-sm-block my-1 text-muted opacity-25"></div>
-          <div class="d-flex align-items-center gap-2">
-            <span class="badge bg-primary-subtle text-primary fw-bold px-3 py-2 rounded-pill">
-              <i class="bi bi-person-badge-fill me-1"></i> Player Dashboard
-            </span>
-            <span id="activeTabIndicator" class="text-muted small fw-semibold d-none d-md-inline">/ Overview</span>
+      <nav class="navbar navbar-expand-lg navbar-light py-3">
+        <!-- Brand Logo -->
+        <a class="brand-logo" href="index.html">
+          <div class="brand-icon">
+            <i class="bi bi-trophy-fill"></i>
           </div>
-        </div>
+          <div class="brand-text">Smash<span>&</span>Spin</div>
+        </a>
 
-        <!-- Controls: Public Site, LTR/RTL, Dark Mode, Profile Dropdown -->
-        <div class="d-flex align-items-center gap-2">
-          <a href="index.html" class="btn btn-outline-dark btn-sm me-1" title="View Public Website">
-            <i class="bi bi-globe me-1"></i> <span class="d-none d-sm-inline">Public Site</span>
-          </a>
-          <button type="button" class="control-btn dir-toggle-btn" title="Toggle LTR / RTL" aria-label="Toggle LTR / RTL">
-            <i class="bi bi-arrow-left-right"></i>
-          </button>
-          <button type="button" class="control-btn theme-toggle-btn" title="Toggle Dark / Light Mode" aria-label="Toggle Dark / Light Mode">
-            <i class="bi bi-moon-stars-fill"></i>
-          </button>
-          <div class="dropdown">
-            <button class="btn btn-primary btn-sm px-2 px-sm-3 dropdown-toggle d-flex align-items-center gap-2" type="button" id="userMenuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Alex" class="rounded-circle" style="width: 22px; height: 22px; object-fit: cover;">
-              <span id="headerUserName" class="d-none d-sm-inline">Alex Morgan</span>
+        <!-- Mobile Hamburger Toggle -->
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMainContent" aria-controls="navbarMainContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="bi bi-list fs-2 text-dark"></i>
+        </button>
+
+        <!-- Navbar Links & Right Controls -->
+        <div class="collapse navbar-collapse" id="navbarMainContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Home
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                <li><a class="dropdown-item" href="index.html"><i class="bi bi-grid-fill me-2"></i>Home 1</a></li>
+                <li><a class="dropdown-item" href="home-2.html"><i class="bi bi-shield-fill-check me-2"></i>Home 2</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="courts.html">Courts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blog.html">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact Us</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle nav-dashboard-btn active" href="dashboard.html" id="dashboardDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dashboard
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dashboardDropdown">
+                <li><a class="dropdown-item py-2" href="dashboard.html#user-dashboard" onclick="switchDashboardMode('user');"><i class="bi bi-person-fill me-2 text-primary"></i>User Dashboard</a></li>
+                <li><a class="dropdown-item py-2" href="dashboard.html#customer-dashboard" onclick="switchDashboardMode('customer');"><i class="bi bi-person-badge-fill me-2 text-success"></i>Customer Dashboard</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- Right Controls: LTR/RTL Toggle -> Dark/Light Mode -> Book a Court Primary CTA -->
+          <div class="nav-controls">
+            <!-- 1. LTR / RTL Toggle -->
+            <button type="button" class="control-btn dir-toggle-btn" title="Toggle LTR / RTL" aria-label="Toggle LTR / RTL">
+              <i class="bi bi-arrow-left-right"></i>
             </button>
-            <ul class="dropdown-menu dropdown-menu-end shadow-sm border" aria-labelledby="userMenuDropdown">
-              <li><h6 class="dropdown-header">Signed in as <strong class="text-primary" id="dropdownUserLabel">Alex Morgan</strong></h6></li>
-              <li><a class="dropdown-item dashboard-nav-item" href="#overview" data-dash-target="overview"><i class="bi bi-grid-1x2-fill me-2 text-primary"></i>Overview</a></li>
-              <li><a class="dropdown-item dashboard-nav-item" href="#book-court" data-dash-target="book-court"><i class="bi bi-calendar-plus-fill me-2 text-success"></i>Book Court</a></li>
-              <li><a class="dropdown-item dashboard-nav-item" href="#my-bookings" data-dash-target="bookings"><i class="bi bi-calendar-check-fill me-2 text-info"></i>My Bookings</a></li>
-              <li><a class="dropdown-item dashboard-nav-item" href="#profile" data-dash-target="profile"><i class="bi bi-gear-fill me-2 text-secondary"></i>Profile Settings</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item text-danger" href="login.html"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a></li>
-            </ul>
+
+            <!-- 2. Dark / Light Mode Toggle -->
+            <button type="button" class="control-btn theme-toggle-btn" title="Toggle Dark / Light Mode" aria-label="Toggle Dark / Light Mode">
+              <i class="bi bi-moon-stars-fill"></i>
+            </button>
+
+            <!-- 3. Primary CTA Button -->
+            <a href="courts.html" class="btn btn-primary btn-sm nav-cta-btn">
+              <i class="bi bi-calendar-check-fill me-1"></i><span>Book a Court</span>
+            </a>
           </div>
         </div>
-      </div>
+      </nav>
     </div>
   </header>
 
   <!-- =========================================================================
-       DASHBOARD MAIN CONTAINER
+       2. DASHBOARD SUB-BAR & ROLE MODE SWITCHER (User Dashboard <-> Customer Dashboard)
+       ========================================================================= -->
+  <div class="bg-surface border-bottom py-2">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+        <!-- Breadcrumb & Status -->
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge bg-primary-subtle text-primary fw-bold px-3 py-2 rounded-pill" id="dashboardPortalBadge">
+            <i class="bi bi-speedometer2 me-1"></i> Player Dashboard
+          </span>
+          <span id="activeTabIndicator" class="text-muted small fw-semibold">/ Overview</span>
+        </div>
+
+        <!-- Mode Switcher Buttons: User Dashboard | Customer Dashboard -->
+        <div class="d-flex align-items-center gap-2">
+          <div class="btn-group p-1 bg-light rounded-pill border" role="group" id="dashboardRoleSwitcher">
+            <button type="button" class="btn btn-sm rounded-pill fw-bold px-3 btn-dash-mode active" id="btnModeUser" onclick="switchDashboardMode('user')">
+              <i class="bi bi-person-fill me-1"></i> User Dashboard
+            </button>
+            <button type="button" class="btn btn-sm rounded-pill fw-bold px-3 btn-dash-mode text-dark" id="btnModeCustomer" onclick="switchDashboardMode('customer')">
+              <i class="bi bi-person-badge-fill me-1"></i> Customer Dashboard
+            </button>
+          </div>
+
+          <!-- Mobile Sidebar Toggle -->
+          <button class="btn btn-outline-primary btn-sm d-lg-none d-flex align-items-center gap-1" type="button" data-bs-toggle="collapse" data-bs-target="#dashboardSidebarCollapse" aria-expanded="false" aria-controls="dashboardSidebarCollapse">
+            <i class="bi bi-layout-sidebar-inset"></i> <span class="d-none d-sm-inline">Menu</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       3. DASHBOARD MAIN CONTAINER
        ========================================================================= -->
   <main class="dashboard-wrapper">
     <div class="container">
       <div class="row g-4">
-        <!-- Sidebar Navigation -->
+        
+        <!-- Sidebar Navigation (Responsive: collapsible on mobile, sticky on desktop) -->
         <aside class="col-lg-3">
-          <div class="dashboard-sidebar">
-            <div class="dashboard-user-box">
-              <img id="sidebarUserAvatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Alex Morgan" class="user-avatar-lg">
-              <h5 class="fw-bold mb-0 text-dark" id="sidebarUserName">Alex Morgan</h5>
-              <div class="badge badge-badminton text-white mt-1">Premium Member</div>
-              <div class="small text-muted mt-1" id="sidebarPlayerId">Player ID: #SSP-84920</div>
-            </div>
+          <div class="collapse d-lg-block" id="dashboardSidebarCollapse">
+            <div class="dashboard-sidebar">
+              <!-- Profile Card -->
+              <div class="dashboard-user-box">
+                <img id="sidebarUserAvatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="user-avatar-lg">
+                <h5 class="fw-bold mb-0 text-dark" id="sidebarUserName">Alex Morgan</h5>
+                <div class="badge badge-badminton text-white mt-1" id="sidebarUserTier">Premium Member</div>
+                <div class="small text-muted mt-1" id="sidebarPlayerId">Player ID: #SSP-84920</div>
+              </div>
 
-            <nav class="dashboard-menu">
-              <a href="#overview" class="dashboard-menu-link dashboard-nav-item active" data-dash-target="overview">
-                <i class="bi bi-grid-1x2-fill"></i> Overview
-              </a>
-              <a href="#book-court" class="dashboard-menu-link dashboard-nav-item" data-dash-target="book-court">
-                <i class="bi bi-calendar-plus-fill"></i> Book a Court
-              </a>
-              <a href="#my-bookings" class="dashboard-menu-link dashboard-nav-item" data-dash-target="bookings">
-                <i class="bi bi-calendar-check-fill"></i> My Bookings
-                <span class="badge bg-primary ms-auto" id="sidebarBookingBadge">2</span>
-              </a>
-              <a href="#membership" class="dashboard-menu-link dashboard-nav-item" data-dash-target="membership">
-                <i class="bi bi-gem"></i> Membership
-              </a>
-              <a href="#tournaments" class="dashboard-menu-link dashboard-nav-item" data-dash-target="tournaments">
-                <i class="bi bi-trophy-fill"></i> Tournaments
-                <span class="badge bg-warning text-dark ms-auto">1 Active</span>
-              </a>
-              <a href="#receipts" class="dashboard-menu-link dashboard-nav-item" data-dash-target="receipts">
-                <i class="bi bi-receipt"></i> Payment Receipts
-              </a>
-              <a href="#profile" class="dashboard-menu-link dashboard-nav-item" data-dash-target="profile">
-                <i class="bi bi-person-lines-fill"></i> Profile Settings
-              </a>
-              <hr class="my-2 text-muted opacity-25">
-              <a href="login.html" class="dashboard-menu-link logout">
-                <i class="bi bi-box-arrow-right"></i> Logout
-              </a>
-            </nav>
+              <!-- Sidebar Navigation Links -->
+              <nav class="dashboard-menu">
+                <a href="#overview" class="dashboard-menu-link dashboard-nav-item active" data-dash-target="overview">
+                  <i class="bi bi-grid-1x2-fill"></i> <span id="navLabelOverview">Overview</span>
+                </a>
+                <a href="#book-court" class="dashboard-menu-link dashboard-nav-item" data-dash-target="book-court">
+                  <i class="bi bi-calendar-plus-fill"></i> Book a Court
+                </a>
+                <a href="#my-bookings" class="dashboard-menu-link dashboard-nav-item" data-dash-target="bookings">
+                  <i class="bi bi-calendar-check-fill"></i> <span id="navLabelBookings">My Court Bookings</span>
+                  <span class="badge bg-primary ms-auto" id="sidebarBookingBadge">2</span>
+                </a>
+                <a href="#membership" class="dashboard-menu-link dashboard-nav-item" data-dash-target="membership">
+                  <i class="bi bi-gem"></i> <span id="navLabelMembership">Membership Status</span>
+                </a>
+                <a href="#tournaments" class="dashboard-menu-link dashboard-nav-item" data-dash-target="tournaments">
+                  <i class="bi bi-trophy-fill"></i> <span id="navLabelTournaments">Tournaments</span>
+                  <span class="badge bg-warning text-dark ms-auto" id="sidebarTourneyBadge">1 Active</span>
+                </a>
+                <a href="#customer-rewards" class="dashboard-menu-link dashboard-nav-item d-none" id="navLinkCustomerRewards" data-dash-target="customer-rewards">
+                  <i class="bi bi-stars"></i> Customer Rewards
+                </a>
+                <a href="#customer-support" class="dashboard-menu-link dashboard-nav-item d-none" id="navLinkCustomerSupport" data-dash-target="customer-support">
+                  <i class="bi bi-headset"></i> Support Helpdesk
+                </a>
+                <a href="#booking-history" class="dashboard-menu-link dashboard-nav-item" data-dash-target="booking-history">
+                  <i class="bi bi-clock-history"></i> Booking History
+                </a>
+                <a href="#receipts" class="dashboard-menu-link dashboard-nav-item" data-dash-target="receipts">
+                  <i class="bi bi-receipt"></i> Payment Receipts
+                </a>
+                <a href="#profile" class="dashboard-menu-link dashboard-nav-item" data-dash-target="profile">
+                  <i class="bi bi-person-lines-fill"></i> Profile / Settings
+                </a>
+                <hr class="my-2 text-muted opacity-25">
+                <a href="login.html" class="dashboard-menu-link logout" id="btnLogoutTrigger">
+                  <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+              </nav>
+            </div>
           </div>
         </aside>
 
@@ -135,27 +199,34 @@
         <div class="col-lg-9">
           
           <!-- =================================================================
-               TAB 1: OVERVIEW
+               TAB 1: USER DASHBOARD OVERVIEW
                ================================================================= -->
           <div id="dash-tab-overview" class="dashboard-tab-content">
-            <!-- Section 1: Welcome Header -->
+            <!-- Welcome Header -->
             <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3 p-4 bg-white rounded-4 border shadow-sm">
               <div>
                 <h3 class="fw-bold text-dark mb-1">Welcome back, <span id="welcomeUserName">Alex</span>! 👋</h3>
-                <div class="text-muted">You have 1 upcoming court session scheduled for today at 06:00 PM.</div>
+                <div class="text-muted" id="welcomeUserSub">You have 1 upcoming court session scheduled for today at 06:00 PM.</div>
               </div>
-              <button type="button" class="btn btn-primary" onclick="switchToTab('book-court')">
-                <i class="bi bi-plus-circle-fill me-1"></i> Quick Book Court
-              </button>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-outline-dark" onclick="switchDashboardMode(currentDashboardMode === 'user' ? 'customer' : 'user')">
+                  <i class="bi bi-arrow-repeat me-1"></i> <span id="btnSwitchModeQuick">Customer View</span>
+                </button>
+                <button type="button" class="btn btn-primary" onclick="switchToTab('book-court')">
+                  <i class="bi bi-plus-circle-fill me-1"></i> Book a Court
+                </button>
+              </div>
             </div>
 
-            <!-- Section 2: Summary Metrics Cards -->
-            <div class="row g-3 mb-4 align-items-stretch">
-              <div class="col-lg-3 col-6 d-flex">
-                <div class="stat-card-widget w-100" style="cursor: pointer;" onclick="switchToTab('bookings')" title="Click to view all bookings">
+            <!-- Overview Metric Cards (5 distinct cards) -->
+            <div class="row g-3 mb-4">
+              <!-- 1. Upcoming Bookings -->
+              <div class="col-xl-4 col-md-6">
+                <div class="stat-card-widget" style="cursor: pointer;" onclick="switchToTab('bookings')" title="Click to view active bookings">
                   <div class="stat-info-wrap">
-                    <div class="stat-card-label text-muted">Upcoming Bookings</div>
+                    <div class="stat-card-label">Upcoming Bookings</div>
                     <div class="stat-card-value text-dark" id="metricUpcomingSlots">2 Slots</div>
+                    <div class="small text-muted mt-1">Active reservations</div>
                   </div>
                   <div class="stat-widget-icon stat-icon-green">
                     <i class="bi bi-calendar-event"></i>
@@ -163,23 +234,41 @@
                 </div>
               </div>
 
-              <div class="col-lg-3 col-6 d-flex">
-                <div class="stat-card-widget w-100" style="cursor: pointer;" onclick="switchToTab('membership')" title="Click to view membership details">
+              <!-- 2. Total Bookings -->
+              <div class="col-xl-4 col-md-6">
+                <div class="stat-card-widget" style="cursor: pointer;" onclick="switchToTab('booking-history')" title="Click to view full booking history">
                   <div class="stat-info-wrap">
-                    <div class="stat-card-label text-muted">Membership Plan</div>
-                    <div class="stat-card-value text-primary">Premium</div>
+                    <div class="stat-card-label">Total Bookings</div>
+                    <div class="stat-card-value text-dark" id="metricTotalBookings">5 Bookings</div>
+                    <div class="small text-muted mt-1">Lifetime court sessions</div>
                   </div>
                   <div class="stat-widget-icon stat-icon-blue">
+                    <i class="bi bi-check2-circle"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Active Membership -->
+              <div class="col-xl-4 col-md-6">
+                <div class="stat-card-widget" style="cursor: pointer;" onclick="switchToTab('membership')" title="Click to view membership details">
+                  <div class="stat-info-wrap">
+                    <div class="stat-card-label">Active Membership</div>
+                    <div class="stat-card-value text-primary" id="metricMembershipPlan">Premium</div>
+                    <div class="small text-muted mt-1">Renews Oct 01, 2026</div>
+                  </div>
+                  <div class="stat-widget-icon stat-icon-purple">
                     <i class="bi bi-gem"></i>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-3 col-6 d-flex">
-                <div class="stat-card-widget w-100" style="cursor: pointer;" onclick="switchToTab('tournaments')" title="Click to view tournaments">
+              <!-- 4. Tournament Registrations -->
+              <div class="col-xl-6 col-md-6">
+                <div class="stat-card-widget" style="cursor: pointer;" onclick="switchToTab('tournaments')" title="Click to view tournament registrations">
                   <div class="stat-info-wrap">
-                    <div class="stat-card-label text-muted">Active Tournaments</div>
-                    <div class="stat-card-value text-secondary">1 Active</div>
+                    <div class="stat-card-label">Tournament Registrations</div>
+                    <div class="stat-card-value text-secondary" id="metricTourneyCount">1 Active</div>
+                    <div class="small text-muted mt-1">Autumn Smash Open (Seed #4)</div>
                   </div>
                   <div class="stat-widget-icon stat-icon-orange">
                     <i class="bi bi-trophy"></i>
@@ -187,53 +276,55 @@
                 </div>
               </div>
 
-              <div class="col-lg-3 col-6 d-flex">
-                <div class="stat-card-widget w-100" style="cursor: pointer;" onclick="switchToTab('receipts')" title="Click to view receipts">
+              <!-- 5. Total Payments -->
+              <div class="col-xl-6 col-md-12">
+                <div class="stat-card-widget" style="cursor: pointer;" onclick="switchToTab('receipts')" title="Click to view receipts">
                   <div class="stat-info-wrap">
-                    <div class="stat-card-label text-muted">Total Payments</div>
-                    <div class="stat-card-value text-dark">$315.00</div>
+                    <div class="stat-card-label">Total Payments</div>
+                    <div class="stat-card-value text-dark" id="metricTotalPayments">$315.00</div>
+                    <div class="small text-muted mt-1">All invoices verified & settled</div>
                   </div>
-                  <div class="stat-widget-icon stat-icon-purple">
+                  <div class="stat-widget-icon stat-icon-teal">
                     <i class="bi bi-credit-card-2-front"></i>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Section 3: Next Scheduled Match Card -->
+            <!-- Next Scheduled Match Card -->
             <div class="card p-4 rounded-4 border shadow-sm mb-4" id="nextMatchCard">
-              <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                 <h5 class="fw-bold mb-0 text-dark"><i class="bi bi-clock-history text-primary me-2"></i>Next Scheduled Match</h5>
                 <span class="status-badge status-confirmed" id="nextMatchStatus">Confirmed</span>
               </div>
               <div class="p-3 bg-light rounded-3 border d-flex flex-wrap align-items-center justify-content-between gap-3">
                 <div class="d-flex align-items-center gap-3">
-                  <div class="brand-icon bg-primary text-white" style="width: 50px; height: 50px;">
+                  <div class="brand-icon bg-primary text-white" style="width: 48px; height: 48px;">
                     <i class="bi bi-dribbble"></i>
                   </div>
                   <div>
-                    <h5 class="fw-bold mb-0 text-dark" id="nextMatchCourt">Center Court Alpha</h5>
-                    <div class="small text-muted">Badminton • Indoor BWF Synthetic Mat #01</div>
-                    <div class="fw-semibold text-primary small mt-1" id="nextMatchTime">Today, Sep 16 • 06:00 PM – 07:00 PM</div>
+                    <h5 class="fw-bold mb-0 text-dark" id="nextMatchCourt">Grand Arena – Court 1</h5>
+                    <div class="small text-muted">Badminton • BWF Olympic Synthetic Mat #01</div>
+                    <div class="fw-semibold text-primary small mt-1" id="nextMatchTime">Today • 06:00 PM – 07:00 PM</div>
                   </div>
                 </div>
                 <div class="d-flex gap-2">
-                  <button type="button" class="btn btn-outline-dark btn-sm" onclick="openQrModal('BK-92841', 'Center Court Alpha', 'Badminton', 'Today • 06:00 PM', 'Gate Access: #B-04')">
-                    <i class="bi bi-qr-code me-1"></i> Show QR Check-in
+                  <button type="button" class="btn btn-outline-dark btn-sm" onclick="openQrModal('BK-92841', 'Grand Arena – Court 1', 'Badminton', 'Today • 06:00 PM', 'Gate Access: #B-04')">
+                    <i class="bi bi-qr-code me-1"></i> Check-in Pass
                   </button>
-                  <button type="button" class="btn btn-outline-danger btn-sm" id="btnCancelNextSlot" onclick="openCancelModal('BK-92841', 'Center Court Alpha', 'Today • 06:00 PM')">
+                  <button type="button" class="btn btn-outline-danger btn-sm" id="btnCancelNextSlot" onclick="openCancelModal('BK-92841', 'Grand Arena – Court 1', 'Today • 06:00 PM')">
                     Cancel Slot
                   </button>
                 </div>
               </div>
             </div>
 
-            <!-- Section 4: Recent Bookings Table -->
+            <!-- Recent Activity Table -->
             <div class="custom-table-container mb-4">
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="fw-bold mb-0 text-dark">Recent Court Bookings</h5>
-                <button type="button" class="btn btn-link btn-sm text-primary fw-semibold p-0 text-decoration-none" onclick="switchToTab('book-court')">
-                  Book New Court <i class="bi bi-arrow-right"></i>
+                <h5 class="fw-bold mb-0 text-dark">Recent Activity & Bookings</h5>
+                <button type="button" class="btn btn-link btn-sm text-primary fw-semibold p-0 text-decoration-none" onclick="switchToTab('bookings')">
+                  View All <i class="bi bi-arrow-right"></i>
                 </button>
               </div>
               <div class="table-responsive">
@@ -243,83 +334,42 @@
                       <th>Booking ID</th>
                       <th>Court & Sport</th>
                       <th>Date & Slot</th>
-                      <th>Price</th>
+                      <th>Amount</th>
                       <th>Status</th>
                       <th class="text-end">Actions</th>
                     </tr>
                   </thead>
                   <tbody id="overviewBookingsTbody">
-                    <tr id="row-bk-92841">
-                      <td class="fw-bold">#BK-92841</td>
-                      <td>
-                        <div class="fw-semibold text-dark">Center Court Alpha</div>
-                        <div class="small text-muted">Badminton</div>
-                      </td>
-                      <td>Sep 16, 2026 • 06:00 PM</td>
-                      <td class="fw-bold text-dark">$25.00</td>
-                      <td><span class="status-badge status-confirmed">Confirmed</span></td>
-                      <td class="text-end">
-                        <div class="btn-group btn-group-sm">
-                          <button type="button" class="btn btn-outline-dark" onclick="openQrModal('BK-92841', 'Center Court Alpha', 'Badminton', 'Sep 16, 2026 • 06:00 PM', 'Gate #B-04')" title="QR Check-in"><i class="bi bi-qr-code"></i></button>
-                          <button type="button" class="btn btn-outline-dark" onclick="openReceiptModal('BK-92841', 'Center Court Alpha', 'Badminton', '$25.00', 'Sep 16, 2026')" title="Receipt"><i class="bi bi-receipt"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr id="row-bk-83190">
-                      <td class="fw-bold">#BK-83190</td>
-                      <td>
-                        <div class="fw-semibold text-dark">Olympic Spin Studio</div>
-                        <div class="small text-muted">Table Tennis</div>
-                      </td>
-                      <td>Sep 12, 2026 • 05:00 PM</td>
-                      <td class="fw-bold text-dark">$18.00</td>
-                      <td><span class="status-badge status-completed">Completed</span></td>
-                      <td class="text-end">
-                        <button type="button" class="btn btn-outline-dark btn-sm" onclick="openReceiptModal('BK-83190', 'Olympic Spin Studio', 'Table Tennis', '$18.00', 'Sep 12, 2026')">Receipt</button>
-                      </td>
-                    </tr>
-                    <tr id="row-bk-78902">
-                      <td class="fw-bold">#BK-78902</td>
-                      <td>
-                        <div class="fw-semibold text-dark">Champions VIP Court</div>
-                        <div class="small text-muted">Badminton</div>
-                      </td>
-                      <td>Sep 05, 2026 • 07:00 PM</td>
-                      <td class="fw-bold text-dark">$35.00</td>
-                      <td><span class="status-badge status-completed">Completed</span></td>
-                      <td class="text-end">
-                        <button type="button" class="btn btn-outline-dark btn-sm" onclick="openReceiptModal('BK-78902', 'Champions VIP Court', 'Badminton', '$35.00', 'Sep 05, 2026')">Receipt</button>
-                      </td>
-                    </tr>
+                    <!-- Populated dynamically via JS -->
                   </tbody>
                 </table>
               </div>
             </div>
 
-            <!-- Section 5: Membership & Recent Invoices -->
+            <!-- Side-by-side Overview Cards: Membership & Invoices -->
             <div class="row g-4">
               <div class="col-lg-6">
                 <div class="card p-4 rounded-4 border shadow-sm h-100">
                   <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="fw-bold mb-0 text-dark">Active Membership</h5>
-                    <span class="badge badge-badminton text-white">Premium Plan</span>
+                    <span class="badge badge-badminton text-white" id="ovMembershipBadge">Premium Plan</span>
                   </div>
-                  <p class="text-muted small mb-3">Renews on Oct 01, 2026 ($79.00/month via Auto-Renew).</p>
+                  <p class="text-muted small mb-3">Renews on Oct 01, 2026 ($79.00/mo via Auto-Renew on Visa ending 4242).</p>
                   
                   <div class="mb-3">
                     <div class="d-flex justify-content-between small fw-bold mb-1">
-                      <span>Monthly Court Hours Used:</span>
-                      <span class="text-primary">8 of 15 Hours (7 Remaining)</span>
+                      <span>Monthly Court Hours:</span>
+                      <span class="text-primary">8 of 15 Hours Used (7 Left)</span>
                     </div>
                     <div class="progress" style="height: 8px;">
-                      <div class="progress-bar bg-primary" role="progressbar" style="width: 53%;" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar bg-primary" role="progressbar" style="width: 53%;"></div>
                     </div>
                   </div>
 
                   <div class="p-3 bg-light rounded-3 border small mb-3">
-                    <div class="mb-1"><i class="bi bi-check-circle-fill text-success me-1"></i> 25% Discount on additional hours</div>
-                    <div class="mb-1"><i class="bi bi-check-circle-fill text-success me-1"></i> Free Racket & Ball rentals included</div>
-                    <div><i class="bi bi-check-circle-fill text-success me-1"></i> 1 Free Tournament entry available</div>
+                    <div class="mb-1"><i class="bi bi-check-circle-fill text-success me-1"></i> 25% Discount on all additional hours</div>
+                    <div class="mb-1"><i class="bi bi-check-circle-fill text-success me-1"></i> Free Racket & Shuttlecock rentals</div>
+                    <div><i class="bi bi-check-circle-fill text-success me-1"></i> 1 Free Tournament entry included</div>
                   </div>
 
                   <button type="button" class="btn btn-outline-primary btn-sm w-100" onclick="switchToTab('membership')">
@@ -340,7 +390,7 @@
                         <div class="fw-bold small text-dark">Invoice #INV-2026-09</div>
                         <div class="text-muted" style="font-size: 0.75rem;">Premium Membership • Sep 01, 2026</div>
                       </div>
-                      <button type="button" class="btn btn-outline-dark btn-sm" onclick="downloadReceiptPdf('INV-2026-09', 'Monthly Premium Membership', 'Club Services', '$79.00', 'Sep 01, 2026')" title="Download PDF Receipt">
+                      <button type="button" class="btn btn-outline-dark btn-sm" onclick="openReceiptModal('INV-2026-09', 'Monthly Premium Membership', 'Club Membership', '$79.00', 'Sep 01, 2026')">
                         <i class="bi bi-download me-1"></i> $79.00
                       </button>
                     </div>
@@ -348,10 +398,10 @@
                     <div class="p-2 border rounded-3 d-flex justify-content-between align-items-center">
                       <div>
                         <div class="fw-bold small text-dark">Invoice #INV-2026-08</div>
-                        <div class="text-muted" style="font-size: 0.75rem;">Autumn Open Entry • Sep 14, 2026</div>
+                        <div class="text-muted" style="font-size: 0.75rem;">Court Reservation #BK-92841 • Sep 25, 2026</div>
                       </div>
-                      <button type="button" class="btn btn-outline-dark btn-sm" onclick="downloadReceiptPdf('INV-2026-08', 'Autumn Open Tournament Entry', 'Tournament Services', '$35.00', 'Sep 14, 2026')" title="Download PDF Receipt">
-                        <i class="bi bi-download me-1"></i> $35.00
+                      <button type="button" class="btn btn-outline-dark btn-sm" onclick="openReceiptModal('INV-2026-08', 'Grand Arena – Court 1', 'Badminton', '$25.00', 'Sep 25, 2026')">
+                        <i class="bi bi-download me-1"></i> $25.00
                       </button>
                     </div>
                   </div>
@@ -364,74 +414,220 @@
           </div>
 
           <!-- =================================================================
-               TAB 2: BOOK A COURT (IN-DASHBOARD BOOKING ENGINE)
+               TAB: CUSTOMER DASHBOARD SPECIFIC OVERVIEW
+               ================================================================= -->
+          <div id="dash-tab-customer-overview" class="dashboard-tab-content d-none">
+            <!-- Customer Welcome Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3 p-4 bg-white rounded-4 border shadow-sm">
+              <div>
+                <div class="badge bg-success text-white mb-2"><i class="bi bi-shield-check me-1"></i> Verified VIP Customer</div>
+                <h3 class="fw-bold text-dark mb-1">Customer Portal: <span id="customerWelcomeName">Alex Morgan</span></h3>
+                <div class="text-muted">Customer ID: <strong>#CUST-84920</strong> • Priority Booking & Dedicated Arena Concierge</div>
+              </div>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-outline-primary" onclick="switchToTab('customer-support')">
+                  <i class="bi bi-headset me-1"></i> Support Desk
+                </button>
+                <button type="button" class="btn btn-primary" onclick="switchToTab('book-court')">
+                  <i class="bi bi-calendar-plus-fill me-1"></i> Instant Booking
+                </button>
+              </div>
+            </div>
+
+            <!-- Customer Cards Grid -->
+            <div class="row g-3 mb-4">
+              <div class="col-xl-3 col-6">
+                <div class="stat-card-widget">
+                  <div class="stat-info-wrap">
+                    <div class="stat-card-label">Loyalty SmashPoints</div>
+                    <div class="stat-card-value text-primary">1,250 Pts</div>
+                    <div class="small text-muted mt-1">Gold Tier Status</div>
+                  </div>
+                  <div class="stat-widget-icon stat-icon-orange">
+                    <i class="bi bi-stars"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-3 col-6">
+                <div class="stat-card-widget">
+                  <div class="stat-info-wrap">
+                    <div class="stat-card-label">Active Guest Passes</div>
+                    <div class="stat-card-value text-dark">2 Passes</div>
+                    <div class="small text-muted mt-1">Ready for check-in</div>
+                  </div>
+                  <div class="stat-widget-icon stat-icon-green">
+                    <i class="bi bi-pass-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-3 col-6">
+                <div class="stat-card-widget">
+                  <div class="stat-info-wrap">
+                    <div class="stat-card-label">Locker Assigned</div>
+                    <div class="stat-card-value text-dark">#L-18</div>
+                    <div class="small text-muted mt-1">VIP Changing Lounge</div>
+                  </div>
+                  <div class="stat-widget-icon stat-icon-blue">
+                    <i class="bi bi-door-closed"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-3 col-6">
+                <div class="stat-card-widget">
+                  <div class="stat-info-wrap">
+                    <div class="stat-card-label">Customer Lifetime Spend</div>
+                    <div class="stat-card-value text-dark">$315.00</div>
+                    <div class="small text-muted mt-1">Verified Invoices</div>
+                  </div>
+                  <div class="stat-widget-icon stat-icon-teal">
+                    <i class="bi bi-wallet2"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Customer Loyalty & Rewards Feature Card -->
+            <div class="loyalty-progress-card mb-4 shadow-sm">
+              <div class="row align-items-center g-3">
+                <div class="col-md-8">
+                  <div class="badge bg-warning text-dark fw-bold mb-2"><i class="bi bi-trophy-fill me-1"></i> SmashPoints Rewards Program</div>
+                  <h4 class="fw-bold text-white mb-2">You have 1,250 SmashPoints available</h4>
+                  <p class="text-white-50 small mb-3">Earn 10 points for every $1 spent on court bookings and equipment rentals. Redeem for free court hours or pro gear.</p>
+                  <div class="progress bg-dark mb-2" style="height: 10px;">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 62%;"></div>
+                  </div>
+                  <div class="small text-white-50">62% to Platinum VIP Tier (750 points remaining)</div>
+                </div>
+                <div class="col-md-4 text-md-end">
+                  <button type="button" class="btn btn-warning fw-bold" onclick="showToast('Voucher code #SMASH-FREE-HR generated! Applied to your next court booking.');">
+                    <i class="bi bi-gift-fill me-1"></i> Redeem 500 Pts ($15 Off)
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Customer Active Passes & Locker Access -->
+            <div class="row g-4 mb-4">
+              <div class="col-md-6">
+                <div class="card p-4 rounded-4 border shadow-sm h-100">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0 text-dark">Digital Customer Passes</h5>
+                    <span class="badge bg-success-subtle text-success">Active</span>
+                  </div>
+                  <div class="p-3 bg-light rounded-3 border mb-3">
+                    <div class="fw-bold text-dark mb-1">Gate Turnstile FastPass</div>
+                    <div class="small text-muted mb-2">Access Code: <strong>#PASS-84920</strong> (Scan at Entrance)</div>
+                    <button class="btn btn-sm btn-outline-dark" onclick="openQrModal('PASS-84920', 'Turnstile Gate All-Access', 'Pass', 'Active 2026', 'Access: VIP-01')">
+                      <i class="bi bi-qr-code me-1"></i> View Turnstile QR
+                    </button>
+                  </div>
+                  <div class="p-3 bg-light rounded-3 border">
+                    <div class="fw-bold text-dark mb-1">Equipment Rental Allowance</div>
+                    <div class="small text-muted mb-2">2x Yonex Astroxx Rackets + Stiga TT Paddles included on all visits.</div>
+                    <span class="badge bg-primary text-white">Included with Premium</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card p-4 rounded-4 border shadow-sm h-100">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0 text-dark">Customer Support Desk</h5>
+                    <span class="badge bg-primary-subtle text-primary">24/7 Concierge</span>
+                  </div>
+                  <p class="text-muted small mb-3">Need court rescheduling, racket stringing, or coaching support? Submit an instant ticket.</p>
+                  <div class="d-flex flex-column gap-2 mb-3">
+                    <button class="btn btn-outline-dark btn-sm text-start" onclick="switchToTab('customer-support')">
+                      <i class="bi bi-tools text-primary me-2"></i> Request Racket Restringing Service
+                    </button>
+                    <button class="btn btn-outline-dark btn-sm text-start" onclick="switchToTab('customer-support')">
+                      <i class="bi bi-person-video3 text-success me-2"></i> Book Private Coaching Session
+                    </button>
+                    <button class="btn btn-outline-dark btn-sm text-start" onclick="switchToTab('customer-support')">
+                      <i class="bi bi-chat-dots text-info me-2"></i> General Customer Inquiry
+                    </button>
+                  </div>
+                  <button class="btn btn-primary btn-sm w-100 mt-auto" onclick="switchToTab('customer-support')">
+                    Open Support Helpdesk <i class="bi bi-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =================================================================
+               TAB 2: BOOK A COURT (COURT BOOKING ENGINE)
                ================================================================= -->
           <div id="dash-tab-book-court" class="dashboard-tab-content d-none">
             <div class="card p-4 rounded-4 border shadow-sm mb-4">
               <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                 <div>
-                  <h4 class="fw-bold mb-1 text-dark">Reserve a Court</h4>
-                  <p class="text-muted small mb-0">Select your preferred sport, court arena, time slot, and equipment options.</p>
+                  <h4 class="fw-bold mb-1 text-dark">Book a Court</h4>
+                  <p class="text-muted small mb-0">Select your sport, court arena, date, slot time, and reserve instantly.</p>
                 </div>
+                <!-- Sport Filters -->
                 <div class="d-flex gap-2">
-                  <button type="button" class="btn btn-sm btn-primary dash-sport-filter active" data-sport="all">All Courts</button>
+                  <button type="button" class="btn btn-sm btn-primary dash-sport-filter active" data-sport="all">All Arenas</button>
                   <button type="button" class="btn btn-sm btn-outline-dark dash-sport-filter" data-sport="badminton">Badminton</button>
                   <button type="button" class="btn btn-sm btn-outline-dark dash-sport-filter" data-sport="table tennis">Table Tennis</button>
                 </div>
               </div>
 
-              <!-- Step 1: Select Court Grid -->
-              <label class="form-label fw-bold small text-dark mb-2">1. Choose Court / Table</label>
+              <!-- Step 1: Court Selection Grid -->
+              <label class="form-label fw-bold small text-dark mb-2">1. Select Court or Table Arena</label>
               <div class="row g-3 mb-4" id="dashCourtSelectGrid">
-                <!-- Court Card 1 -->
+                <!-- Court 1 -->
                 <div class="col-md-6 dash-court-item" data-sport="badminton">
                   <div class="dashboard-court-select-card selected" data-court-name="Grand Arena – Court 1" data-court-sport="Badminton" data-court-rate="25">
-                    <img src="assets/images/court-grand-arena.jpg" alt="Grand Arena" class="rounded-3" style="width: 80px; height: 60px; object-fit: cover;">
+                    <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=300&q=80" alt="Grand Arena" class="rounded-3" style="width: 80px; height: 60px; object-fit: cover;">
                     <div class="flex-grow-1">
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="fw-bold text-dark">Grand Arena – Court 1</div>
                         <span class="badge badge-badminton text-white">Badminton</span>
                       </div>
-                      <div class="small text-muted">BWF Synthetic Mat • Auto-Lighting</div>
+                      <div class="small text-muted">BWF Synthetic Mat • Anti-Glare LED</div>
                       <div class="fw-bold text-primary small mt-1">$25.00 <span class="text-muted fw-normal">/ hr</span></div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Court Card 2 -->
+                <!-- Court 2 -->
                 <div class="col-md-6 dash-court-item" data-sport="badminton">
                   <div class="dashboard-court-select-card" data-court-name="Champions VIP Court" data-court-sport="Badminton" data-court-rate="35">
-                    <img src="assets/images/court-champions-vip.jpg" alt="VIP Court" class="rounded-3" style="width: 80px; height: 60px; object-fit: cover;">
+                    <img src="https://images.unsplash.com/photo-1521537634581-0dced2fee2ef?auto=format&fit=crop&w=300&q=80" alt="VIP Court" class="rounded-3" style="width: 80px; height: 60px; object-fit: cover;">
                     <div class="flex-grow-1">
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="fw-bold text-dark">Champions VIP Court</div>
                         <span class="badge badge-badminton text-white">Badminton</span>
                       </div>
-                      <div class="small text-muted">Private Lounge • Video Playback</div>
+                      <div class="small text-muted">Private Lounge • Instant Video Replay</div>
                       <div class="fw-bold text-primary small mt-1">$35.00 <span class="text-muted fw-normal">/ hr</span></div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Court Card 3 -->
+                <!-- Court 3 -->
                 <div class="col-md-6 dash-court-item" data-sport="badminton">
                   <div class="dashboard-court-select-card" data-court-name="Falcon Speed Court" data-court-sport="Badminton" data-court-rate="20">
-                    <img src="assets/images/court-falcon-speed.jpg" alt="Falcon Speed" class="rounded-3" style="width: 80px; height: 60px; object-fit: cover;">
+                    <img src="https://images.unsplash.com/photo-1613918108466-292b78a8ef95?auto=format&fit=crop&w=300&q=80" alt="Falcon Speed" class="rounded-3" style="width: 80px; height: 60px; object-fit: cover;">
                     <div class="flex-grow-1">
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="fw-bold text-dark">Falcon Speed Court</div>
                         <span class="badge badge-badminton text-white">Badminton</span>
                       </div>
-                      <div class="small text-muted">High Shock Absorption Flooring</div>
+                      <div class="small text-muted">Shock Absorbing Cushion Base</div>
                       <div class="fw-bold text-primary small mt-1">$20.00 <span class="text-muted fw-normal">/ hr</span></div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Court Card 4 -->
+                <!-- Court 4 -->
                 <div class="col-md-6 dash-court-item" data-sport="table tennis">
                   <div class="dashboard-court-select-card" data-court-name="Olympic Spin Studio" data-court-sport="Table Tennis" data-court-rate="18">
-                    <img src="assets/images/table-olympic-spin.jpg" alt="Olympic Spin" class="rounded-3" style="width: 80px; height: 60px; object-fit: cover;">
+                    <img src="https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=300&q=80" alt="Olympic Spin" class="rounded-3" style="width: 80px; height: 60px; object-fit: cover;">
                     <div class="flex-grow-1">
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="fw-bold text-dark">Olympic Spin Studio</div>
@@ -442,19 +638,49 @@
                     </div>
                   </div>
                 </div>
+
+                <!-- Court 5 -->
+                <div class="col-md-6 dash-court-item" data-sport="table tennis">
+                  <div class="dashboard-court-select-card" data-court-name="Smash Elite Table 1" data-court-sport="Table Tennis" data-court-rate="16">
+                    <img src="https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?auto=format&fit=crop&w=300&q=80" alt="Smash Elite" class="rounded-3" style="width: 80px; height: 60px; object-fit: cover;">
+                    <div class="flex-grow-1">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="fw-bold text-dark">Smash Elite Table 1</div>
+                        <span class="badge badge-tt text-white">Table Tennis</span>
+                      </div>
+                      <div class="small text-muted">Pro Enclosure • Spin Robot Support</div>
+                      <div class="fw-bold text-primary small mt-1">$16.00 <span class="text-muted fw-normal">/ hr</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Court 6 -->
+                <div class="col-md-6 dash-court-item" data-sport="badminton">
+                  <div class="dashboard-court-select-card" data-court-name="Apex Center Court 2" data-court-sport="Badminton" data-court-rate="28">
+                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=300&q=80" alt="Apex Center" class="rounded-3" style="width: 80px; height: 60px; object-fit: cover;">
+                    <div class="flex-grow-1">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="fw-bold text-dark">Apex Center Court 2</div>
+                        <span class="badge badge-badminton text-white">Badminton</span>
+                      </div>
+                      <div class="small text-muted">Tournament Clear Height (12m)</div>
+                      <div class="fw-bold text-primary small mt-1">$28.00 <span class="text-muted fw-normal">/ hr</span></div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <!-- Step 2: Date & Time Slots -->
+              <!-- Step 2: Date & Duration -->
               <div class="row g-3 mb-4">
                 <div class="col-md-6">
-                  <label class="form-label fw-bold small text-dark">2. Select Date</label>
-                  <input type="date" id="dashBookDate" class="form-control" value="2026-09-17">
+                  <label class="form-label fw-bold small text-dark" for="dashBookDate">2. Select Date</label>
+                  <input type="date" id="dashBookDate" class="form-control" value="2026-09-25">
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label fw-bold small text-dark">3. Duration</label>
+                  <label class="form-label fw-bold small text-dark" for="dashBookDuration">3. Duration</label>
                   <select class="form-select" id="dashBookDuration">
                     <option value="1" selected>1 Hour Session</option>
-                    <option value="2">2 Hours Session (Most Popular)</option>
+                    <option value="2">2 Hours Session (Recommended)</option>
                     <option value="3">3 Hours Session</option>
                   </select>
                 </div>
@@ -462,7 +688,7 @@
 
               <!-- Step 3: Time Slot Pills -->
               <div class="mb-4">
-                <label class="form-label fw-bold small text-dark mb-2">4. Available Time Slots</label>
+                <label class="form-label fw-bold small text-dark mb-2">4. Available Time Slot</label>
                 <div class="d-flex flex-wrap gap-2" id="dashTimeSlotContainer">
                   <button type="button" class="dash-time-slot-btn" data-slot="07:00 AM - 08:00 AM">07:00 AM</button>
                   <button type="button" class="dash-time-slot-btn" data-slot="09:00 AM - 10:00 AM">09:00 AM</button>
@@ -471,10 +697,11 @@
                   <button type="button" class="dash-time-slot-btn" data-slot="04:00 PM - 05:00 PM">04:00 PM</button>
                   <button type="button" class="dash-time-slot-btn active" data-slot="06:00 PM - 07:00 PM">06:00 PM</button>
                   <button type="button" class="dash-time-slot-btn" data-slot="08:00 PM - 09:00 PM">08:00 PM</button>
+                  <button type="button" class="dash-time-slot-btn" data-slot="09:30 PM - 10:30 PM">09:30 PM</button>
                 </div>
               </div>
 
-              <!-- Step 4: Add-ons & Price Breakdown -->
+              <!-- Step 4: Equipment & Price Breakdown -->
               <div class="p-3 bg-light rounded-4 border mb-4">
                 <div class="row align-items-center g-3">
                   <div class="col-md-7">
@@ -482,11 +709,11 @@
                     <div class="d-flex flex-wrap gap-3">
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="dashAddonRackets" checked>
-                        <label class="form-check-label small" for="dashAddonRackets">2x Pro Rackets (Free for Premium)</label>
+                        <label class="form-check-label small" for="dashAddonRackets">2x Pro Rackets (Free for Members)</label>
                       </div>
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="dashAddonShuttles">
-                        <label class="form-check-label small" for="dashAddonShuttles">Feather Shuttles Tube (+$5.00)</label>
+                        <label class="form-check-label small" for="dashAddonShuttles">Feather Shuttles / ITTF Balls (+$5.00)</label>
                       </div>
                     </div>
                   </div>
@@ -497,6 +724,7 @@
                 </div>
               </div>
 
+              <!-- Action Buttons -->
               <div class="d-flex justify-content-end gap-2">
                 <button type="button" class="btn btn-outline-dark" onclick="switchToTab('overview')">Cancel</button>
                 <button type="button" class="btn btn-primary px-4" id="btnConfirmDashBooking">
@@ -507,14 +735,14 @@
           </div>
 
           <!-- =================================================================
-               TAB 3: MY BOOKINGS
+               TAB 3: MY COURT BOOKINGS
                ================================================================= -->
           <div id="dash-tab-bookings" class="dashboard-tab-content d-none">
             <div class="card p-4 rounded-4 border shadow-sm">
               <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                 <div>
-                  <h4 class="fw-bold mb-1 text-dark">My Court Reservations</h4>
-                  <p class="text-muted small mb-0">View all upcoming matches, download check-in codes, or reschedule bookings.</p>
+                  <h4 class="fw-bold mb-1 text-dark">My Court Bookings</h4>
+                  <p class="text-muted small mb-0">View all upcoming reservations, get QR access codes, or cancel slots.</p>
                 </div>
                 <div class="d-flex gap-2">
                   <button type="button" class="filter-tab-pill active" data-booking-filter="all">All (<span id="countAllBookings">3</span>)</button>
@@ -538,53 +766,7 @@
                     </tr>
                   </thead>
                   <tbody id="myBookingsFullTbody">
-                    <tr class="booking-row status-filter-confirmed" id="booking-item-92841">
-                      <td class="fw-bold">#BK-92841</td>
-                      <td>
-                        <div class="fw-semibold text-dark">Center Court Alpha</div>
-                        <div class="small text-muted">BWF Synthetic Mat #01</div>
-                      </td>
-                      <td><span class="badge badge-badminton text-white">Badminton</span></td>
-                      <td>Sep 16, 2026<br><small class="text-muted">06:00 PM – 07:00 PM</small></td>
-                      <td class="fw-bold text-dark">$25.00</td>
-                      <td><span class="status-badge status-confirmed">Confirmed</span></td>
-                      <td class="text-end">
-                        <button class="btn btn-sm btn-outline-dark me-1" onclick="openQrModal('BK-92841', 'Center Court Alpha', 'Badminton', 'Sep 16, 2026 • 06:00 PM', 'Gate #B-04')"><i class="bi bi-qr-code"></i></button>
-                        <button class="btn btn-sm btn-outline-dark me-1" onclick="openReceiptModal('BK-92841', 'Center Court Alpha', 'Badminton', '$25.00', 'Sep 16, 2026')"><i class="bi bi-receipt"></i></button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="openCancelModal('BK-92841', 'Center Court Alpha', 'Sep 16, 2026 • 06:00 PM')">Cancel</button>
-                      </td>
-                    </tr>
-                    <tr class="booking-row status-filter-confirmed" id="booking-item-94102">
-                      <td class="fw-bold">#BK-94102</td>
-                      <td>
-                        <div class="fw-semibold text-dark">Falcon Speed Court</div>
-                        <div class="small text-muted">Court #03</div>
-                      </td>
-                      <td><span class="badge badge-badminton text-white">Badminton</span></td>
-                      <td>Sep 19, 2026<br><small class="text-muted">04:00 PM – 05:00 PM</small></td>
-                      <td class="fw-bold text-dark">$20.00</td>
-                      <td><span class="status-badge status-confirmed">Confirmed</span></td>
-                      <td class="text-end">
-                        <button class="btn btn-sm btn-outline-dark me-1" onclick="openQrModal('BK-94102', 'Falcon Speed Court', 'Badminton', 'Sep 19, 2026 • 04:00 PM', 'Gate #B-02')"><i class="bi bi-qr-code"></i></button>
-                        <button class="btn btn-sm btn-outline-dark me-1" onclick="openReceiptModal('BK-94102', 'Falcon Speed Court', 'Badminton', '$20.00', 'Sep 19, 2026')"><i class="bi bi-receipt"></i></button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="openCancelModal('BK-94102', 'Falcon Speed Court', 'Sep 19, 2026 • 04:00 PM')">Cancel</button>
-                      </td>
-                    </tr>
-                    <tr class="booking-row status-filter-completed" id="booking-item-83190">
-                      <td class="fw-bold">#BK-83190</td>
-                      <td>
-                        <div class="fw-semibold text-dark">Olympic Spin Studio</div>
-                        <div class="small text-muted">Table #02</div>
-                      </td>
-                      <td><span class="badge badge-tt text-white">Table Tennis</span></td>
-                      <td>Sep 12, 2026<br><small class="text-muted">05:00 PM – 06:00 PM</small></td>
-                      <td class="fw-bold text-dark">$18.00</td>
-                      <td><span class="status-badge status-completed">Completed</span></td>
-                      <td class="text-end">
-                        <button class="btn btn-sm btn-outline-dark me-1" onclick="openReceiptModal('BK-83190', 'Olympic Spin Studio', 'Table Tennis', '$18.00', 'Sep 12, 2026')"><i class="bi bi-receipt"></i></button>
-                        <button class="btn btn-sm btn-primary" onclick="switchToTab('book-court')">Re-Book</button>
-                      </td>
-                    </tr>
+                    <!-- Populated dynamically via JS -->
                   </tbody>
                 </table>
               </div>
@@ -592,33 +774,39 @@
           </div>
 
           <!-- =================================================================
-               TAB 4: MEMBERSHIP
+               TAB 4: MEMBERSHIP STATUS
                ================================================================= -->
           <div id="dash-tab-membership" class="dashboard-tab-content d-none">
             <div class="card p-4 rounded-4 border shadow-sm mb-4">
               <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                 <div>
-                  <h4 class="fw-bold mb-1 text-dark">Membership & Benefits</h4>
-                  <p class="text-muted small mb-0">Active plan, court hour allowances, guest passes, and upgrade options.</p>
+                  <h4 class="fw-bold mb-1 text-dark">Membership Status</h4>
+                  <p class="text-muted small mb-0">Current active plan, court allowances, guest passes, and upgrade perks.</p>
                 </div>
-                <span class="badge bg-success-subtle text-success fw-bold px-3 py-2 rounded-pill fs-6">
+                <span class="badge bg-success-subtle text-success fw-bold px-3 py-2 rounded-pill fs-6" id="memberStatusBadge">
                   <i class="bi bi-check-circle-fill me-1"></i> Active Status
                 </span>
               </div>
 
+              <!-- Current Plan Card -->
               <div class="p-4 bg-light rounded-4 border mb-4">
                 <div class="row align-items-center g-3">
                   <div class="col-md-8">
-                    <div class="badge badge-badminton text-white mb-2">Premium Athlete Plan</div>
-                    <h4 class="fw-bold text-dark mb-1">$79.00 / month</h4>
-                    <p class="text-muted small mb-0">Next billing cycle: <strong>October 01, 2026</strong> • Auto-renew active on Visa ending 4242.</p>
+                    <div class="badge badge-badminton text-white mb-2" id="currentPlanBadge">Premium Athlete Plan</div>
+                    <h4 class="fw-bold text-dark mb-1" id="currentPlanPrice">$79.00 / month</h4>
+                    <p class="text-muted small mb-0">
+                      Member Since: <strong>Jan 01, 2026</strong> • Next Renewal: <strong id="nextRenewalDate">Oct 01, 2026</strong> (Auto-Renew on Visa ending 4242).
+                    </p>
                   </div>
                   <div class="col-md-4 text-md-end">
-                    <button class="btn btn-primary" onclick="openUpgradeModal()">Upgrade to VIP Plan</button>
+                    <button class="btn btn-primary" onclick="openUpgradeModal()">
+                      <i class="bi bi-arrow-up-circle-fill me-1"></i> Upgrade / Change Plan
+                    </button>
                   </div>
                 </div>
               </div>
 
+              <!-- Quotas Progress -->
               <div class="row g-3 mb-4">
                 <div class="col-md-6">
                   <div class="p-3 bg-white rounded-3 border">
@@ -644,33 +832,78 @@
                 </div>
               </div>
 
-              <h5 class="fw-bold text-dark mb-3">Available Plan Tiers</h5>
+              <!-- Benefits List -->
+              <h5 class="fw-bold text-dark mb-3">Available Plan Benefits</h5>
+              <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                  <div class="p-3 bg-white border rounded-3 d-flex align-items-start gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    <div>
+                      <div class="fw-bold text-dark small">15 Free Court Hours Monthly</div>
+                      <div class="text-muted" style="font-size: 0.8rem;">Book any peak or non-peak Badminton & TT arena with priority queue.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="p-3 bg-white border rounded-3 d-flex align-items-start gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    <div>
+                      <div class="fw-bold text-dark small">25% Discount on Extra Slots</div>
+                      <div class="text-muted" style="font-size: 0.8rem;">Enjoy permanent 25% off all additional court reservations beyond quota.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="p-3 bg-white border rounded-3 d-flex align-items-start gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    <div>
+                      <div class="fw-bold text-dark small">Free Equipment Rentals</div>
+                      <div class="text-muted" style="font-size: 0.8rem;">Complimentary Yonex rackets and Stiga table tennis paddles every visit.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="p-3 bg-white border rounded-3 d-flex align-items-start gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    <div>
+                      <div class="fw-bold text-dark small">1 Free Seasonal Tournament Entry</div>
+                      <div class="text-muted" style="font-size: 0.8rem;">Waived entry fee on arena opens and quarterly competitive leagues.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Available Plan Tiers -->
+              <h5 class="fw-bold text-dark mb-3">Compare Plan Tiers</h5>
               <div class="row g-3">
                 <div class="col-md-4">
                   <div class="p-3 border rounded-3 bg-white h-100 d-flex flex-column">
                     <div class="fw-bold text-dark">Basic Player</div>
                     <div class="fs-4 fw-bold text-dark my-2">$29 <span class="fs-6 text-muted fw-normal">/ mo</span></div>
                     <div class="small text-muted mb-3 flex-grow-1">5 Free Court Hours • 10% Discount on additional slots</div>
-                    <button class="btn btn-outline-dark btn-sm w-100" onclick="showToast('Downgrade scheduled at next billing cycle.');">Switch to Basic</button>
+                    <button class="btn btn-outline-dark btn-sm w-100" onclick="switchMembershipTier('Basic Player', '$29.00 / month')">Switch to Basic</button>
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="p-3 border border-primary border-2 rounded-3 bg-light h-100 d-flex flex-column">
+                  <div class="p-3 border border-primary border-2 rounded-3 bg-light h-100 d-flex flex-column" id="cardTierPremium">
                     <div class="d-flex justify-content-between">
                       <span class="fw-bold text-primary">Premium Athlete</span>
-                      <span class="badge bg-primary text-white">Current</span>
+                      <span class="badge bg-primary text-white" id="badgeTierPremium">Current</span>
                     </div>
                     <div class="fs-4 fw-bold text-dark my-2">$79 <span class="fs-6 text-muted fw-normal">/ mo</span></div>
                     <div class="small text-muted mb-3 flex-grow-1">15 Free Court Hours • 25% Discount • 2 Guest Passes</div>
-                    <button class="btn btn-outline-primary btn-sm w-100" disabled>Active Plan</button>
+                    <button class="btn btn-outline-primary btn-sm w-100" id="btnTierPremium" disabled>Active Plan</button>
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="p-3 border rounded-3 bg-white h-100 d-flex flex-column">
-                    <div class="fw-bold text-dark">VIP Championship</div>
+                  <div class="p-3 border rounded-3 bg-white h-100 d-flex flex-column" id="cardTierVip">
+                    <div class="d-flex justify-content-between">
+                      <span class="fw-bold text-dark">VIP Championship</span>
+                      <span class="badge bg-warning text-dark d-none" id="badgeTierVip">Current</span>
+                    </div>
                     <div class="fs-4 fw-bold text-dark my-2">$149 <span class="fs-6 text-muted fw-normal">/ mo</span></div>
                     <div class="small text-muted mb-3 flex-grow-1">Unlimited Court Hours • Free Coaching Clinic • 5 Guest Passes</div>
-                    <button class="btn btn-primary btn-sm w-100" onclick="openUpgradeModal()">Upgrade to VIP</button>
+                    <button class="btn btn-primary btn-sm w-100" id="btnTierVip" onclick="openUpgradeModal()">Upgrade to VIP</button>
                   </div>
                 </div>
               </div>
@@ -678,14 +911,14 @@
           </div>
 
           <!-- =================================================================
-               TAB 5: TOURNAMENTS
+               TAB 5: TOURNAMENT REGISTRATION
                ================================================================= -->
           <div id="dash-tab-tournaments" class="dashboard-tab-content d-none">
             <div class="card p-4 rounded-4 border shadow-sm mb-4">
-              <h4 class="fw-bold mb-1 text-dark">My Tournament Registrations</h4>
-              <p class="text-muted small mb-4">Track your seedings, match schedules, brackets, and register for upcoming arena opens.</p>
+              <h4 class="fw-bold mb-1 text-dark">Tournament Registration</h4>
+              <p class="text-muted small mb-4">Track active entries, match seedings, and register for upcoming competitive arena opens.</p>
 
-              <!-- Active Tournament Focus -->
+              <!-- Active Tournament Focus Card -->
               <div class="p-4 border border-primary border-2 rounded-4 bg-light mb-4">
                 <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
                   <span class="badge badge-badminton text-white">Badminton • Men's Singles</span>
@@ -693,54 +926,244 @@
                 </div>
                 <h4 class="fw-bold text-dark mb-1">Autumn Smash Open 2026</h4>
                 <div class="text-muted small mb-3">
-                  <i class="bi bi-calendar-event me-1 text-primary"></i> <strong>First Round:</strong> Sep 28, 2026 at 10:30 AM • Court 1 Alpha
+                  <i class="bi bi-calendar-event me-1 text-primary"></i> <strong>First Match:</strong> Sep 28, 2026 at 10:30 AM • Center Court Alpha
                 </div>
                 <div class="d-flex flex-wrap gap-2">
-                  <button class="btn btn-outline-dark btn-sm" onclick="showToast('Bracket draw PDF downloaded: Seed #4 vs David Chen (Seed #5)');">
+                  <button class="btn btn-outline-dark btn-sm" onclick="showToast('Bracket draw downloaded: Seed #4 vs David Chen (Seed #5)');">
                     <i class="bi bi-diagram-3 me-1"></i> View Draw Bracket
                   </button>
-                  <button class="btn btn-outline-dark btn-sm" onclick="showToast('Official Tournament Rules downloaded.');">
+                  <button class="btn btn-outline-dark btn-sm" onclick="showToast('Official Tournament Rules PDF ready.');">
                     <i class="bi bi-file-earmark-pdf me-1"></i> Tournament Rules
                   </button>
-                  <button class="btn btn-outline-primary btn-sm" onclick="showToast('Official match referee: Head Coach Marcus Vance');">
-                    <i class="bi bi-person-lines-fill me-1"></i> Contact Referee
+                  <button class="btn btn-outline-primary btn-sm" onclick="showToast('Official referee: Head Coach Marcus Vance (Court 1)');">
+                    <i class="bi bi-person-lines-fill me-1"></i> Match Referee
                   </button>
                 </div>
               </div>
 
-              <!-- Upcoming Open Tournaments -->
-              <h5 class="fw-bold text-dark mb-3">Upcoming Arena Tournaments Open for Registration</h5>
-              <div class="d-flex flex-column gap-3">
-                <div class="p-3 border rounded-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+              <!-- Available Tournaments List -->
+              <h5 class="fw-bold text-dark mb-3">Available Tournaments Open for Registration</h5>
+              <div class="d-flex flex-column gap-3" id="tournamentsListContainer">
+                <!-- Tournament 1 -->
+                <div class="p-3 border rounded-3 d-flex justify-content-between align-items-center flex-wrap gap-3 bg-white" id="tourney-item-1">
                   <div>
-                    <span class="badge badge-tt text-white mb-1">Table Tennis</span>
-                    <h6 class="fw-bold mb-0 text-dark">Smash & Spin Autumn Table Tennis Invitational</h6>
-                    <div class="small text-muted">Oct 12, 2026 • ITTF Sanctioned • $30 Entry Fee</div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                      <span class="badge badge-tt text-white">Table Tennis</span>
+                      <span class="badge bg-success-subtle text-success small fw-semibold" id="tourneyStatusBadge-1">Open</span>
+                    </div>
+                    <h6 class="fw-bold mb-1 text-dark">Smash & Spin Autumn Table Tennis Invitational</h6>
+                    <div class="small text-muted">Oct 12, 2026 • ITTF Sanctioned • Entry Fee: <strong>$30.00</strong></div>
                   </div>
-                  <button class="btn btn-outline-primary btn-sm" onclick="showToast('Registered for TT Invitational! Entry receipt generated.');">Register ($30)</button>
+                  <button class="btn btn-outline-primary btn-sm" id="btnRegTourney-1" onclick="registerTournament(1, 'TT Invitational', 'Table Tennis', '$30.00', 'Oct 12, 2026')">
+                    <i class="bi bi-plus-circle me-1"></i> Register ($30.00)
+                  </button>
                 </div>
 
-                <div class="p-3 border rounded-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <!-- Tournament 2 -->
+                <div class="p-3 border rounded-3 d-flex justify-content-between align-items-center flex-wrap gap-3 bg-white" id="tourney-item-2">
                   <div>
-                    <span class="badge badge-badminton text-white mb-1">Badminton</span>
-                    <h6 class="fw-bold mb-0 text-dark">All-Star Doubles Challenge</h6>
-                    <div class="small text-muted">Nov 05, 2026 • Men's / Mixed Doubles • $50 Entry per Team</div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                      <span class="badge badge-badminton text-white">Badminton</span>
+                      <span class="badge bg-success-subtle text-success small fw-semibold" id="tourneyStatusBadge-2">Open</span>
+                    </div>
+                    <h6 class="fw-bold mb-1 text-dark">All-Star Doubles Challenge 2026</h6>
+                    <div class="small text-muted">Nov 05, 2026 • Men's / Mixed Doubles • Entry Fee: <strong>$50.00</strong></div>
                   </div>
-                  <button class="btn btn-outline-primary btn-sm" onclick="showToast('Registered for Doubles Challenge!');">Register Team ($50)</button>
+                  <button class="btn btn-outline-primary btn-sm" id="btnRegTourney-2" onclick="registerTournament(2, 'All-Star Doubles', 'Badminton', '$50.00', 'Nov 05, 2026')">
+                    <i class="bi bi-plus-circle me-1"></i> Register ($50.00)
+                  </button>
+                </div>
+
+                <!-- Tournament 3 -->
+                <div class="p-3 border rounded-3 d-flex justify-content-between align-items-center flex-wrap gap-3 bg-white" id="tourney-item-3">
+                  <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                      <span class="badge badge-badminton text-white">Badminton</span>
+                      <span class="badge bg-success-subtle text-success small fw-semibold" id="tourneyStatusBadge-3">Open</span>
+                    </div>
+                    <h6 class="fw-bold mb-1 text-dark">Winter Arena Masters Cup 2026</h6>
+                    <div class="small text-muted">Dec 10, 2026 • BWF Certified Arena Open • Entry Fee: <strong>$40.00</strong></div>
+                  </div>
+                  <button class="btn btn-outline-primary btn-sm" id="btnRegTourney-3" onclick="registerTournament(3, 'Winter Masters Cup', 'Badminton', '$40.00', 'Dec 10, 2026')">
+                    <i class="bi bi-plus-circle me-1"></i> Register ($40.00)
+                  </button>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- =================================================================
-               TAB 6: RECEIPTS & INVOICES
+               TAB: CUSTOMER REWARDS & SMASHPOINTS (CUSTOMER VIEW)
+               ================================================================= -->
+          <div id="dash-tab-customer-rewards" class="dashboard-tab-content d-none">
+            <div class="card p-4 rounded-4 border shadow-sm mb-4">
+              <h4 class="fw-bold mb-1 text-dark">Customer Loyalty Rewards</h4>
+              <p class="text-muted small mb-4">Redeem your SmashPoints for free court bookings, equipment, and exclusive discounts.</p>
+
+              <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                  <div class="p-3 border rounded-3 bg-light text-center">
+                    <div class="display-6 fw-bold text-primary mb-1">1,250</div>
+                    <div class="fw-bold text-dark">Available Points</div>
+                    <div class="small text-muted">Earn 10 pts per $1 spent</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="p-3 border rounded-3 bg-light text-center">
+                    <div class="display-6 fw-bold text-success mb-1">Gold VIP</div>
+                    <div class="fw-bold text-dark">Current Loyalty Tier</div>
+                    <div class="small text-muted">1.25x point multiplier active</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="p-3 border rounded-3 bg-light text-center">
+                    <div class="display-6 fw-bold text-warning mb-1">$45.00</div>
+                    <div class="fw-bold text-dark">Voucher Value</div>
+                    <div class="small text-muted">Ready to redeem at checkout</div>
+                  </div>
+                </div>
+              </div>
+
+              <h5 class="fw-bold text-dark mb-3">Redeem Rewards & Perks</h5>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="p-3 border rounded-3 d-flex justify-content-between align-items-center">
+                    <div>
+                      <div class="fw-bold text-dark">1 Hour Free Court Slot</div>
+                      <div class="small text-muted">Cost: <strong>500 SmashPoints</strong></div>
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="showToast('1 Hour Court Voucher credited to your account!');">Redeem</button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="p-3 border rounded-3 d-flex justify-content-between align-items-center">
+                    <div>
+                      <div class="fw-bold text-dark">Free Pro Racket Rental Pack</div>
+                      <div class="small text-muted">Cost: <strong>200 SmashPoints</strong></div>
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="showToast('Free Racket Rental voucher activated!');">Redeem</button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="p-3 border rounded-3 d-flex justify-content-between align-items-center">
+                    <div>
+                      <div class="fw-bold text-dark">Tournament Entry Fee Waiver (50%)</div>
+                      <div class="small text-muted">Cost: <strong>600 SmashPoints</strong></div>
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="showToast('50% Tournament discount voucher applied!');">Redeem</button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="p-3 border rounded-3 d-flex justify-content-between align-items-center">
+                    <div>
+                      <div class="fw-bold text-dark">Guest Pass Bundle (3 Passes)</div>
+                      <div class="small text-muted">Cost: <strong>400 SmashPoints</strong></div>
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="showToast('3 Guest Passes added to your customer portal!');">Redeem</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =================================================================
+               TAB: CUSTOMER SUPPORT & HELPDESK
+               ================================================================= -->
+          <div id="dash-tab-customer-support" class="dashboard-tab-content d-none">
+            <div class="card p-4 rounded-4 border shadow-sm mb-4">
+              <h4 class="fw-bold mb-1 text-dark">Customer Support & Concierge</h4>
+              <p class="text-muted small mb-4">Need help with court bookings, equipment, or memberships? Submit an instant request.</p>
+
+              <form id="customerSupportForm" onsubmit="event.preventDefault(); showToast('Support ticket #TICK-9428 submitted! Arena staff will respond in 15 mins.'); this.reset();">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label small fw-bold text-dark">Topic / Category</label>
+                    <select class="form-select" required>
+                      <option selected>Court Rescheduling / Cancellation</option>
+                      <option>Racket Restringing & Gear Rental</option>
+                      <option>Membership Tier Upgrade</option>
+                      <option>Tournament Entry Inquiry</option>
+                      <option>Facility Access & Lockers</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label small fw-bold text-dark">Preferred Contact Method</label>
+                    <select class="form-select">
+                      <option selected>SMS Text Message</option>
+                      <option>Email</option>
+                      <option>Phone Call</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label small fw-bold text-dark">Message / Inquiry Details</label>
+                    <textarea class="form-control" rows="4" placeholder="Describe your request or inquiry..." required></textarea>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary px-4">
+                      <i class="bi bi-send-fill me-1"></i> Submit Support Request
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- =================================================================
+               TAB 6: BOOKING HISTORY
+               ================================================================= -->
+          <div id="dash-tab-booking-history" class="dashboard-tab-content d-none">
+            <div class="card p-4 rounded-4 border shadow-sm">
+              <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <div>
+                  <h4 class="fw-bold mb-1 text-dark">Booking History</h4>
+                  <p class="text-muted small mb-0">Complete historical record of all completed, upcoming, and past reservations.</p>
+                </div>
+                <div class="d-flex gap-2">
+                  <select class="form-select form-select-sm" id="historySportFilter" style="width: 140px;">
+                    <option value="all" selected>All Sports</option>
+                    <option value="badminton">Badminton</option>
+                    <option value="table tennis">Table Tennis</option>
+                  </select>
+                  <select class="form-select form-select-sm" id="historyStatusFilter" style="width: 140px;">
+                    <option value="all" selected>All Statuses</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table align-middle">
+                  <thead>
+                    <tr>
+                      <th>Booking ID</th>
+                      <th>Sport</th>
+                      <th>Court</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Amount</th>
+                      <th>Payment</th>
+                      <th>Booking Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bookingHistoryFullTbody">
+                    <!-- Populated dynamically via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- =================================================================
+               TAB 7: PAYMENT RECEIPTS & INVOICES
                ================================================================= -->
           <div id="dash-tab-receipts" class="dashboard-tab-content d-none">
             <div class="card p-4 rounded-4 border shadow-sm">
               <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                 <div>
-                  <h4 class="fw-bold mb-1 text-dark">Payment Receipts & Invoices</h4>
-                  <p class="text-muted small mb-0">Download official tax invoices and booking receipts for your records.</p>
+                  <h4 class="fw-bold mb-1 text-dark">Payment Receipts</h4>
+                  <p class="text-muted small mb-0">Official tax invoices, transaction breakdowns, and downloadable PDF receipts.</p>
                 </div>
                 <button class="btn btn-outline-dark btn-sm" onclick="downloadAllReceiptsStatementPdf()">
                   <i class="bi bi-file-earmark-arrow-down me-1"></i> Export All (PDF)
@@ -751,75 +1174,17 @@
                 <table class="table align-middle">
                   <thead>
                     <tr>
-                      <th>Invoice ID</th>
-                      <th>Description</th>
+                      <th>Receipt ID</th>
+                      <th>Booking / Description</th>
                       <th>Date</th>
                       <th>Amount</th>
+                      <th>Method</th>
                       <th>Status</th>
-                      <th class="text-end">Receipt</th>
+                      <th class="text-end">Action</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td class="fw-bold">#INV-2026-09</td>
-                      <td>
-                        <div class="fw-semibold text-dark">Premium Membership Monthly Fee</div>
-                        <div class="small text-muted">Visa ending 4242</div>
-                      </td>
-                      <td>Sep 01, 2026</td>
-                      <td class="fw-bold text-dark">$79.00</td>
-                      <td><span class="status-badge status-completed">Paid</span></td>
-                      <td class="text-end">
-                        <button class="btn btn-outline-dark btn-sm" onclick="openReceiptModal('INV-2026-09', 'Monthly Premium Membership', 'Club Services', '$79.00', 'Sep 01, 2026')">
-                          <i class="bi bi-download me-1"></i> Invoice
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="fw-bold">#INV-2026-08</td>
-                      <td>
-                        <div class="fw-semibold text-dark">Court Reservation #BK-92841</div>
-                        <div class="small text-muted">Center Court Alpha • 1 Hr</div>
-                      </td>
-                      <td>Sep 16, 2026</td>
-                      <td class="fw-bold text-dark">$25.00</td>
-                      <td><span class="status-badge status-completed">Paid</span></td>
-                      <td class="text-end">
-                        <button class="btn btn-outline-dark btn-sm" onclick="openReceiptModal('INV-2026-08', 'Center Court Alpha', 'Badminton', '$25.00', 'Sep 16, 2026')">
-                          <i class="bi bi-download me-1"></i> Invoice
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="fw-bold">#INV-2026-07</td>
-                      <td>
-                        <div class="fw-semibold text-dark">Autumn Smash Open Tournament Entry</div>
-                        <div class="small text-muted">Men's Singles Seed #4</div>
-                      </td>
-                      <td>Sep 14, 2026</td>
-                      <td class="fw-bold text-dark">$35.00</td>
-                      <td><span class="status-badge status-completed">Paid</span></td>
-                      <td class="text-end">
-                        <button class="btn btn-outline-dark btn-sm" onclick="openReceiptModal('INV-2026-07', 'Tournament Registration', 'Autumn Open', '$35.00', 'Sep 14, 2026')">
-                          <i class="bi bi-download me-1"></i> Invoice
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="fw-bold">#INV-2026-06</td>
-                      <td>
-                        <div class="fw-semibold text-dark">Court Reservation #BK-83190</div>
-                        <div class="small text-muted">Olympic Spin Studio • 1 Hr</div>
-                      </td>
-                      <td>Sep 12, 2026</td>
-                      <td class="fw-bold text-dark">$18.00</td>
-                      <td><span class="status-badge status-completed">Paid</span></td>
-                      <td class="text-end">
-                        <button class="btn btn-outline-dark btn-sm" onclick="openReceiptModal('INV-2026-06', 'Olympic Spin Studio', 'Table Tennis', '$18.00', 'Sep 12, 2026')">
-                          <i class="bi bi-download me-1"></i> Invoice
-                        </button>
-                      </td>
-                    </tr>
+                  <tbody id="receiptsTableTbody">
+                    <!-- Populated dynamically via JS -->
                   </tbody>
                 </table>
               </div>
@@ -827,41 +1192,42 @@
           </div>
 
           <!-- =================================================================
-               TAB 7: PROFILE SETTINGS
+               TAB 8: PROFILE / ACCOUNT SETTINGS
                ================================================================= -->
           <div id="dash-tab-profile" class="dashboard-tab-content d-none">
             <div class="card p-4 rounded-4 border shadow-sm mb-4">
-              <h4 class="fw-bold mb-1 text-dark">Player Profile & Preferences</h4>
-              <p class="text-muted small mb-4">Update your personal information, player rankings, and notification alerts.</p>
+              <h4 class="fw-bold mb-1 text-dark">Profile & Account Settings</h4>
+              <p class="text-muted small mb-4">Update your player information, contact details, preferred playing hand, and alerts.</p>
 
-              <!-- Avatar Change -->
+              <!-- Avatar Section -->
               <div class="d-flex align-items-center gap-4 mb-4 p-3 bg-light rounded-4 border">
                 <img id="profilePreviewImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="rounded-circle border border-primary border-2" style="width: 75px; height: 75px; object-fit: cover;">
                 <div>
-                  <div class="fw-bold text-dark mb-1">Profile Photo</div>
+                  <div class="fw-bold text-dark mb-1">Player Photo</div>
                   <div class="small text-muted mb-2">JPG, GIF or PNG. Max size of 2MB.</div>
-                  <button type="button" class="btn btn-outline-dark btn-sm" onclick="showToast('Upload photo dialog opened.');">
+                  <button type="button" class="btn btn-outline-dark btn-sm" onclick="showToast('Profile photo selection simulated.');">
                     <i class="bi bi-upload me-1"></i> Change Photo
                   </button>
                 </div>
               </div>
 
+              <!-- Profile Form -->
               <form id="dashProfileForm">
                 <div class="row g-3">
                   <div class="col-md-6">
-                    <label class="form-label small fw-bold text-dark">Full Name</label>
+                    <label class="form-label small fw-bold text-dark" for="inputProfileName">Full Name <span class="text-danger">*</span></label>
                     <input type="text" id="inputProfileName" class="form-control" value="Alex Morgan" required>
                   </div>
                   <div class="col-md-6">
-                    <label class="form-label small fw-bold text-dark">Email Address</label>
+                    <label class="form-label small fw-bold text-dark" for="inputProfileEmail">Email Address <span class="text-danger">*</span></label>
                     <input type="email" id="inputProfileEmail" class="form-control" value="alex.morgan@example.com" required>
                   </div>
                   <div class="col-md-6">
-                    <label class="form-label small fw-bold text-dark">Phone Number</label>
+                    <label class="form-label small fw-bold text-dark" for="inputProfilePhone">Phone Number</label>
                     <input type="tel" id="inputProfilePhone" class="form-control" value="+1 (555) 392-8492">
                   </div>
                   <div class="col-md-6">
-                    <label class="form-label small fw-bold text-dark">Preferred Hand</label>
+                    <label class="form-label small fw-bold text-dark" for="inputProfileHand">Preferred Hand</label>
                     <select class="form-select" id="inputProfileHand">
                       <option selected>Right Handed</option>
                       <option>Left Handed</option>
@@ -869,18 +1235,19 @@
                     </select>
                   </div>
                   <div class="col-md-6">
-                    <label class="form-label small fw-bold text-dark">Skill Level</label>
-                    <select class="form-select">
+                    <label class="form-label small fw-bold text-dark" for="inputProfileSkill">Skill Level</label>
+                    <select class="form-select" id="inputProfileSkill">
                       <option>Beginner (Recreational)</option>
                       <option selected>Intermediate (League Player)</option>
                       <option>Advanced (Tournament Competitive)</option>
                     </select>
                   </div>
                   <div class="col-md-6">
-                    <label class="form-label small fw-bold text-dark">Emergency Contact</label>
-                    <input type="text" class="form-control" value="Sarah Morgan (+1 555-019-2849)">
+                    <label class="form-label small fw-bold text-dark" for="inputProfileEmergency">Emergency Contact</label>
+                    <input type="text" id="inputProfileEmergency" class="form-control" value="Sarah Morgan (+1 555-019-2849)">
                   </div>
 
+                  <!-- Notification Preferences -->
                   <div class="col-12 mt-4">
                     <div class="fw-bold text-dark mb-2 small">Communication & Notifications</div>
                     <div class="form-check mb-2">
@@ -889,11 +1256,11 @@
                     </div>
                     <div class="form-check mb-2">
                       <input class="form-check-input" type="checkbox" id="checkNotifTournament" checked>
-                      <label class="form-check-label small" for="checkNotifTournament">Tournament Draw and Match Time Alerts</label>
+                      <label class="form-check-label small" for="checkNotifTournament">Tournament Draw and Match Schedule Alerts</label>
                     </div>
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" id="checkNotifPromo">
-                      <label class="form-check-label small" for="checkNotifPromo">Weekly Non-Peak Discounts and Pro Tips</label>
+                      <label class="form-check-label small" for="checkNotifPromo">Weekly Non-Peak Discounts and Pro Coaching Tips</label>
                     </div>
                   </div>
 
@@ -913,7 +1280,7 @@
   </main>
 
   <!-- =========================================================================
-       FOOTER
+       4. SITE FOOTER
        ========================================================================= -->
   <footer class="site-footer">
     <div class="container">
@@ -973,7 +1340,7 @@
       </div>
 
       <div class="footer-bottom">
-        <div>© 2026 Smash & Spin. All Rights Reserved. Production-Ready HTML Template.</div>
+        <div>© 2026 Smash & Spin. All Rights Reserved.</div>
         <div class="d-flex gap-3">
           <a href="privacy-policy.html">Privacy Policy</a>
           <a href="terms.html">Terms of Service</a>
@@ -984,7 +1351,7 @@
   </footer>
 
   <!-- =========================================================================
-       MODAL 1: QR CHECK-IN MODAL
+       MODAL 1: QR CHECK-IN PASS MODAL
        ========================================================================= -->
   <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -994,7 +1361,6 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <!-- QR SVG Graphic -->
           <div class="qr-code-box mb-3">
             <svg viewBox="0 0 100 100" style="width: 140px; height: 140px;" fill="#0B0F19">
               <rect width="30" height="30" x="5" y="5" fill="#00875A" rx="4" />
@@ -1006,7 +1372,7 @@
               <rect width="30" height="30" x="5" y="65" fill="#00875A" rx="4" />
               <rect width="16" height="16" x="12" y="72" fill="#fff" />
               <rect width="8" height="8" x="16" y="76" fill="#00875A" />
-              <!-- Data Pixels -->
+              <!-- Data pixels -->
               <rect width="8" height="8" x="42" y="10" />
               <rect width="8" height="8" x="42" y="24" />
               <rect width="8" height="8" x="10" y="42" />
@@ -1023,7 +1389,7 @@
             </svg>
           </div>
 
-          <h5 class="fw-bold text-dark mb-1" id="qrModalCourt">Center Court Alpha</h5>
+          <h5 class="fw-bold text-dark mb-1" id="qrModalCourt">Grand Arena – Court 1</h5>
           <div class="text-primary fw-semibold mb-2" id="qrModalTime">Today • 06:00 PM – 07:00 PM</div>
           <div class="badge bg-light text-dark border px-3 py-2 fs-6 mb-3" id="qrModalAccess">
             Gate Access Code: #B-04
@@ -1032,7 +1398,7 @@
         </div>
         <div class="modal-footer border-0 pt-0 justify-content-center">
           <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary btn-sm" onclick="showToast('Pass added to Apple & Google Wallet!');">
+          <button type="button" class="btn btn-primary btn-sm" onclick="showToast('Pass added to Digital Wallet!');">
             <i class="bi bi-wallet2 me-1"></i> Add to Wallet
           </button>
         </div>
@@ -1041,7 +1407,7 @@
   </div>
 
   <!-- =========================================================================
-       MODAL 2: RECEIPT MODAL
+       MODAL 2: PAYMENT RECEIPT MODAL
        ========================================================================= -->
   <div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="receiptModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -1052,16 +1418,17 @@
         </div>
         <div class="modal-body">
           <div class="p-3 bg-light rounded-3 mb-3 text-start">
-            <div class="d-flex justify-content-between mb-2"><strong>Invoice Number:</strong> <span id="recInvoiceId" class="fw-bold text-dark">#INV-92841</span></div>
-            <div class="d-flex justify-content-between mb-2"><strong>Item / Court:</strong> <span id="recCourt">Center Court Alpha</span></div>
+            <div class="d-flex justify-content-between mb-2"><strong>Receipt ID:</strong> <span id="recInvoiceId" class="fw-bold text-dark">#INV-92841</span></div>
+            <div class="d-flex justify-content-between mb-2"><strong>Booking / Item:</strong> <span id="recCourt">Grand Arena – Court 1</span></div>
             <div class="d-flex justify-content-between mb-2"><strong>Sport / Category:</strong> <span id="recSport">Badminton</span></div>
             <div class="d-flex justify-content-between mb-2"><strong>Date Paid:</strong> <span id="recDate">Sep 16, 2026</span></div>
-            <div class="d-flex justify-content-between mb-2"><strong>Payment Method:</strong> <span>Visa •••• 4242</span></div>
+            <div class="d-flex justify-content-between mb-2"><strong>Payment Method:</strong> <span>Visa ending 4242</span></div>
+            <div class="d-flex justify-content-between mb-2"><strong>Payment Status:</strong> <span class="badge bg-success-subtle text-success">Paid & Verified</span></div>
             <hr class="my-2">
             <div class="d-flex justify-content-between fw-bold fs-5 text-primary"><strong>Total Amount:</strong> <span id="recAmount">$25.00</span></div>
           </div>
           <div class="small text-muted text-start">
-            <i class="bi bi-check-circle-fill text-success me-1"></i> Payment verified by Smash & Spin Arenas. Includes applicable facility taxes.
+            <i class="bi bi-check-circle-fill text-success me-1"></i> Payment processed securely by Smash & Spin Arenas. Includes applicable facility taxes.
           </div>
         </div>
         <div class="modal-footer d-flex justify-content-between align-items-center">
@@ -1090,18 +1457,19 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body text-start">
-          <p class="mb-3">Are you sure you want to cancel the following reservation?</p>
+          <p class="mb-3">Are you sure you want to cancel the following court reservation?</p>
           <div class="p-3 bg-light rounded-3 mb-3">
-            <div class="fw-bold text-dark" id="cancelModalCourt">Center Court Alpha</div>
+            <div class="fw-bold text-dark" id="cancelModalCourt">Grand Arena – Court 1</div>
             <div class="small text-muted" id="cancelModalTime">Sep 16, 2026 • 06:00 PM – 07:00 PM</div>
-            <div class="small text-success mt-1"><i class="bi bi-info-circle-fill me-1"></i> Full refund will be automatically credited to your membership hours.</div>
+            <div class="small text-success mt-1"><i class="bi bi-info-circle-fill me-1"></i> Full court hours will be automatically credited to your membership balance.</div>
           </div>
-          <label class="form-label small fw-bold text-dark">Reason for Cancellation (Optional)</label>
-          <select class="form-select form-select-sm mb-2">
+          <label class="form-label small fw-bold text-dark" for="cancelReasonSelect">Reason for Cancellation</label>
+          <select class="form-select form-select-sm mb-2" id="cancelReasonSelect">
             <option selected>Schedule Conflict</option>
-            <option>Partner Unavailable</option>
-            <option>Injury / Health</option>
-            <option>Other</option>
+            <option>Playing Partner Unavailable</option>
+            <option>Injury / Health Reason</option>
+            <option>Weather / Travel Delay</option>
+            <option>Other Reason</option>
           </select>
         </div>
         <div class="modal-footer">
@@ -1123,7 +1491,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body text-start">
-          <p class="mb-3">Upgrade your membership plan to unlock unlimited court hours, free coaching clinics, and 5 monthly guest passes.</p>
+          <p class="mb-3">Upgrade your membership plan to unlock unlimited court access, free coaching clinics, and 5 monthly guest passes.</p>
           <div class="p-3 bg-light rounded-3 mb-3">
             <div class="d-flex justify-content-between mb-1"><strong>New Plan:</strong> <span class="text-primary fw-bold">VIP Championship</span></div>
             <div class="d-flex justify-content-between mb-1"><strong>Monthly Rate:</strong> <span class="fw-bold text-dark">$149.00 / month</span></div>
@@ -1141,22 +1509,116 @@
 
   <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- html2pdf JS for high-resolution PDF generation -->
+  <!-- html2pdf JS for PDF generator -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <!-- Custom JS Modules -->
   <script src="assets/js/theme-direction.js"></script>
-  <script src="assets/js/court-data.js"></script>
-  <script src="assets/js/blog-data.js"></script>
-  <script src="assets/js/booking.js"></script>
+  <script src="assets/js/auth.js"></script>
   <script src="assets/js/validation.js"></script>
   <script src="assets/js/main.js"></script>
 
   <script>
-    // Global Tab Switcher Function
+    // =========================================================================
+    // DUAL DASHBOARD STATE & DATA STORE
+    // =========================================================================
+    let currentDashboardMode = 'user'; // 'user' or 'customer'
+
+    const STORAGE_BOOKINGS_KEY = 'smash_spin_player_bookings';
+    const STORAGE_TOURNEYS_KEY = 'smash_spin_player_tourneys';
+    const STORAGE_RECEIPTS_KEY = 'smash_spin_player_receipts';
+
+    const defaultBookings = [
+      { id: 'BK-92841', court: 'Grand Arena – Court 1', sport: 'Badminton', date: '2026-09-25', time: '06:00 PM – 07:00 PM', price: '$25.00', status: 'confirmed', paymentStatus: 'Paid' },
+      { id: 'BK-94102', court: 'Falcon Speed Court', sport: 'Badminton', date: '2026-09-28', time: '04:00 PM – 05:00 PM', price: '$20.00', status: 'confirmed', paymentStatus: 'Paid' },
+      { id: 'BK-83190', court: 'Olympic Spin Studio', sport: 'Table Tennis', date: '2026-09-12', time: '05:00 PM – 06:00 PM', price: '$18.00', status: 'completed', paymentStatus: 'Paid' },
+      { id: 'BK-78902', court: 'Champions VIP Court', sport: 'Badminton', date: '2026-09-05', time: '07:00 PM – 08:00 PM', price: '$35.00', status: 'completed', paymentStatus: 'Paid' },
+      { id: 'BK-64211', court: 'Smash Elite Table 1', sport: 'Table Tennis', date: '2026-08-28', time: '03:00 PM – 04:00 PM', price: '$16.00', status: 'completed', paymentStatus: 'Paid' }
+    ];
+
+    const defaultReceipts = [
+      { receiptId: 'INV-2026-09', bookingId: 'MEM-PREMIUM-SEP', description: 'Monthly Premium Membership', sport: 'Membership', date: 'Sep 01, 2026', amount: '$79.00', method: 'Visa ending 4242', status: 'Paid' },
+      { receiptId: 'INV-2026-08', bookingId: 'BK-92841', description: 'Grand Arena – Court 1', sport: 'Badminton', date: 'Sep 25, 2026', amount: '$25.00', method: 'Visa ending 4242', status: 'Paid' },
+      { receiptId: 'INV-2026-07', bookingId: 'TRN-AUTUMN-2026', description: 'Autumn Smash Open Tournament Entry', sport: 'Badminton', date: 'Sep 14, 2026', amount: '$35.00', method: 'Visa ending 4242', status: 'Paid' },
+      { receiptId: 'INV-2026-06', bookingId: 'BK-83190', description: 'Olympic Spin Studio', sport: 'Table Tennis', date: 'Sep 12, 2026', amount: '$18.00', method: 'Visa ending 4242', status: 'Paid' },
+      { receiptId: 'INV-2026-05', bookingId: 'BK-78902', description: 'Champions VIP Court', sport: 'Badminton', date: 'Sep 05, 2026', amount: '$35.00', method: 'Visa ending 4242', status: 'Paid' }
+    ];
+
+    function getStoredBookings() {
+      try {
+        const raw = localStorage.getItem(STORAGE_BOOKINGS_KEY);
+        return raw ? JSON.parse(raw) : defaultBookings;
+      } catch (e) {
+        return defaultBookings;
+      }
+    }
+
+    function saveStoredBookings(bookings) {
+      try {
+        localStorage.setItem(STORAGE_BOOKINGS_KEY, JSON.stringify(bookings));
+      } catch (e) {}
+    }
+
+    function getStoredReceipts() {
+      try {
+        const raw = localStorage.getItem(STORAGE_RECEIPTS_KEY);
+        return raw ? JSON.parse(raw) : defaultReceipts;
+      } catch (e) {
+        return defaultReceipts;
+      }
+    }
+
+    function saveStoredReceipts(receipts) {
+      try {
+        localStorage.setItem(STORAGE_RECEIPTS_KEY, JSON.stringify(receipts));
+      } catch (e) {}
+    }
+
+    // =========================================================================
+    // DUAL DASHBOARD MODE SWITCHER (User Dashboard <-> Customer Dashboard)
+    // =========================================================================
+    function switchDashboardMode(mode) {
+      currentDashboardMode = mode;
+      const btnUser = document.getElementById('btnModeUser');
+      const btnCust = document.getElementById('btnModeCustomer');
+      const portalBadge = document.getElementById('dashboardPortalBadge');
+      const btnQuick = document.getElementById('btnSwitchModeQuick');
+      const rewardsNav = document.getElementById('navLinkCustomerRewards');
+      const supportNav = document.getElementById('navLinkCustomerSupport');
+
+      if (mode === 'customer') {
+        if (btnUser) { btnUser.classList.remove('active'); btnUser.classList.add('text-dark'); }
+        if (btnCust) { btnCust.classList.add('active'); btnCust.classList.remove('text-dark'); }
+        if (portalBadge) portalBadge.innerHTML = '<i class="bi bi-person-badge-fill me-1"></i> Customer Dashboard';
+        if (btnQuick) btnQuick.textContent = 'User View';
+        if (rewardsNav) rewardsNav.classList.remove('d-none');
+        if (supportNav) supportNav.classList.remove('d-none');
+
+        // Show customer overview
+        switchToTab('customer-overview');
+        showToast('Switched to Customer Dashboard mode.');
+      } else {
+        if (btnUser) { btnUser.classList.add('active'); btnUser.classList.remove('text-dark'); }
+        if (btnCust) { btnCust.classList.remove('active'); btnCust.classList.add('text-dark'); }
+        if (portalBadge) portalBadge.innerHTML = '<i class="bi bi-speedometer2 me-1"></i> Player Dashboard';
+        if (btnQuick) btnQuick.textContent = 'Customer View';
+        if (rewardsNav) rewardsNav.classList.add('d-none');
+        if (supportNav) supportNav.classList.add('d-none');
+
+        // Show user overview
+        switchToTab('overview');
+        showToast('Switched to User Dashboard mode.');
+      }
+    }
+    window.switchDashboardMode = switchDashboardMode;
+
+    // =========================================================================
+    // TAB SWITCHER
+    // =========================================================================
     function switchToTab(tabId) {
       const navLinks = document.querySelectorAll('.dashboard-nav-item');
       navLinks.forEach(link => {
-        if (link.getAttribute('data-dash-target') === tabId) {
+        const target = link.getAttribute('data-dash-target');
+        if (target === tabId || (tabId === 'customer-overview' && target === 'overview')) {
           link.classList.add('active');
         } else {
           link.classList.remove('active');
@@ -1166,7 +1628,10 @@
       const tabSections = document.querySelectorAll('.dashboard-tab-content');
       tabSections.forEach(sec => sec.classList.add('d-none'));
 
-      const activeSec = document.getElementById(`dash-tab-${tabId}`);
+      let targetElId = `dash-tab-${tabId}`;
+      if (tabId === 'my-bookings' || tabId === 'bookings') targetElId = 'dash-tab-bookings';
+      
+      const activeSec = document.getElementById(targetElId);
       if (activeSec) {
         activeSec.classList.remove('d-none');
       }
@@ -1175,15 +1640,26 @@
       const indicator = document.getElementById('activeTabIndicator');
       if (indicator) {
         const titles = {
-          'overview': '/ Overview',
+          'overview': '/ User Overview',
+          'customer-overview': '/ Customer Overview',
           'book-court': '/ Book a Court',
-          'bookings': '/ My Bookings',
-          'membership': '/ Membership',
-          'tournaments': '/ Tournaments',
+          'bookings': '/ My Court Bookings',
+          'membership': '/ Membership Status',
+          'tournaments': '/ Tournament Registration',
+          'customer-rewards': '/ Customer Rewards',
+          'customer-support': '/ Support Helpdesk',
+          'booking-history': '/ Booking History',
           'receipts': '/ Payment Receipts',
-          'profile': '/ Profile Settings'
+          'profile': '/ Profile / Settings'
         };
         indicator.textContent = titles[tabId] || `/ ${tabId}`;
+      }
+
+      // Close mobile sidebar if open
+      const sideCollapseEl = document.getElementById('dashboardSidebarCollapse');
+      if (sideCollapseEl && window.innerWidth < 992 && sideCollapseEl.classList.contains('show')) {
+        const bsCollapse = bootstrap.Collapse.getInstance(sideCollapseEl);
+        if (bsCollapse) bsCollapse.hide();
       }
 
       window.location.hash = tabId;
@@ -1191,7 +1667,151 @@
     }
     window.switchToTab = switchToTab;
 
-    // Modal Helpers
+    // =========================================================================
+    // RENDER FUNCTIONS
+    // =========================================================================
+    function renderOverviewBookings() {
+      const tbody = document.getElementById('overviewBookingsTbody');
+      if (!tbody) return;
+      const bookings = getStoredBookings();
+      const recent = bookings.slice(0, 3);
+
+      tbody.innerHTML = recent.map(b => `
+        <tr id="row-${b.id.toLowerCase()}">
+          <td class="fw-bold">#${b.id}</td>
+          <td>
+            <div class="fw-semibold text-dark">${b.court}</div>
+            <div class="small text-muted">${b.sport}</div>
+          </td>
+          <td>${b.date} • ${b.time.split('–')[0] || b.time}</td>
+          <td class="fw-bold text-dark">${b.price}</td>
+          <td><span class="status-badge status-${b.status}">${b.status.charAt(0).toUpperCase() + b.status.slice(1)}</span></td>
+          <td class="text-end">
+            <div class="btn-group btn-group-sm">
+              <button type="button" class="btn btn-outline-dark" onclick="openQrModal('${b.id}', '${b.court}', '${b.sport}', '${b.date} • ${b.time}', 'Gate #B-04')" title="QR Check-in"><i class="bi bi-qr-code"></i></button>
+              <button type="button" class="btn btn-outline-dark" onclick="openReceiptModal('${b.id}', '${b.court}', '${b.sport}', '${b.price}', '${b.date}')" title="Receipt"><i class="bi bi-receipt"></i></button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderMyBookingsTable(filter = 'all') {
+      const tbody = document.getElementById('myBookingsFullTbody');
+      if (!tbody) return;
+      const bookings = getStoredBookings();
+
+      const filtered = filter === 'all' ? bookings : bookings.filter(b => b.status === filter);
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center text-muted py-4">No reservations found for filter "${filter}".</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(b => `
+        <tr class="booking-row status-filter-${b.status}" id="booking-item-${b.id}">
+          <td class="fw-bold">#${b.id}</td>
+          <td>
+            <div class="fw-semibold text-dark">${b.court}</div>
+            <div class="small text-muted">${b.sport}</div>
+          </td>
+          <td><span class="badge ${b.sport.toLowerCase().includes('badminton') ? 'badge-badminton' : 'badge-tt'} text-white">${b.sport}</span></td>
+          <td>${b.date}<br><small class="text-muted">${b.time}</small></td>
+          <td class="fw-bold text-dark">${b.price}</td>
+          <td><span class="status-badge status-${b.status}">${b.status.charAt(0).toUpperCase() + b.status.slice(1)}</span></td>
+          <td class="text-end">
+            <button class="btn btn-sm btn-outline-dark me-1" onclick="openQrModal('${b.id}', '${b.court}', '${b.sport}', '${b.date} • ${b.time}', 'Gate #B-04')" title="QR Check-in"><i class="bi bi-qr-code"></i></button>
+            <button class="btn btn-sm btn-outline-dark me-1" onclick="openReceiptModal('${b.id}', '${b.court}', '${b.sport}', '${b.price}', '${b.date}')" title="View Receipt"><i class="bi bi-receipt"></i></button>
+            ${b.status === 'confirmed' ? `<button class="btn btn-sm btn-outline-danger" onclick="openCancelModal('${b.id}', '${b.court}', '${b.date} • ${b.time}')">Cancel</button>` : `<button class="btn btn-sm btn-primary" onclick="switchToTab('book-court')">Re-Book</button>`}
+          </td>
+        </tr>
+      `).join('');
+
+      // Update counters
+      const totalAll = bookings.length;
+      const totalUpcoming = bookings.filter(b => b.status === 'confirmed').length;
+      const countUp = document.getElementById('countUpcomingBookings');
+      const countAll = document.getElementById('countAllBookings');
+      const sidebarBadge = document.getElementById('sidebarBookingBadge');
+      const metricUpcoming = document.getElementById('metricUpcomingSlots');
+      const metricTotal = document.getElementById('metricTotalBookings');
+
+      if (countUp) countUp.textContent = totalUpcoming;
+      if (countAll) countAll.textContent = totalAll;
+      if (sidebarBadge) sidebarBadge.textContent = totalUpcoming;
+      if (metricUpcoming) metricUpcoming.textContent = `${totalUpcoming} Slots`;
+      if (metricTotal) metricTotal.textContent = `${totalAll} Bookings`;
+    }
+
+    function renderBookingHistoryTable(sportFilter = 'all', statusFilter = 'all') {
+      const tbody = document.getElementById('bookingHistoryFullTbody');
+      if (!tbody) return;
+      let bookings = getStoredBookings();
+
+      if (sportFilter !== 'all') {
+        bookings = bookings.filter(b => b.sport.toLowerCase().includes(sportFilter.toLowerCase()));
+      }
+      if (statusFilter !== 'all') {
+        bookings = bookings.filter(b => b.status === statusFilter);
+      }
+
+      if (bookings.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted py-4">No historical records match your filter criteria.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = bookings.map(b => `
+        <tr>
+          <td class="fw-bold">#${b.id}</td>
+          <td><span class="badge ${b.sport.toLowerCase().includes('badminton') ? 'badge-badminton' : 'badge-tt'} text-white">${b.sport}</span></td>
+          <td>
+            <div class="fw-semibold text-dark">${b.court}</div>
+          </td>
+          <td>${b.date}</td>
+          <td><small class="text-muted">${b.time}</small></td>
+          <td class="fw-bold text-dark">${b.price}</td>
+          <td><span class="badge bg-success-subtle text-success">${b.paymentStatus || 'Paid'}</span></td>
+          <td><span class="status-badge status-${b.status}">${b.status.charAt(0).toUpperCase() + b.status.slice(1)}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    function renderReceiptsTable() {
+      const tbody = document.getElementById('receiptsTableTbody');
+      if (!tbody) return;
+      const receipts = getStoredReceipts();
+
+      tbody.innerHTML = receipts.map(r => `
+        <tr>
+          <td class="fw-bold">#${r.receiptId}</td>
+          <td>
+            <div class="fw-semibold text-dark">${r.description}</div>
+            <div class="small text-muted">Ref: ${r.bookingId}</div>
+          </td>
+          <td>${r.date}</td>
+          <td class="fw-bold text-dark">${r.amount}</td>
+          <td><span class="small text-muted">${r.method}</span></td>
+          <td><span class="status-badge status-completed">${r.status}</span></td>
+          <td class="text-end">
+            <button class="btn btn-outline-dark btn-sm" onclick="openReceiptModal('${r.receiptId}', '${r.description}', '${r.sport}', '${r.amount}', '${r.date}')">
+              <i class="bi bi-file-earmark-pdf me-1"></i> View Receipt
+            </button>
+          </td>
+        </tr>
+      `).join('');
+
+      // Update total payments metric
+      const totalAmount = receipts.reduce((sum, r) => {
+        const num = parseFloat(r.amount.replace(/[^0-9.-]+/g, '')) || 0;
+        return sum + num;
+      }, 0);
+      const metricEl = document.getElementById('metricTotalPayments');
+      if (metricEl) metricEl.textContent = `$${totalAmount.toFixed(2)}`;
+    }
+
+    // =========================================================================
+    // MODAL HELPERS & ACTIONS
+    // =========================================================================
     function openQrModal(id, court, sport, time, access) {
       document.getElementById('qrModalCourt').textContent = court;
       document.getElementById('qrModalTime').textContent = time;
@@ -1199,9 +1819,10 @@
       const modal = new bootstrap.Modal(document.getElementById('qrModal'));
       modal.show();
     }
+    window.openQrModal = openQrModal;
 
     function openReceiptModal(id, court, sport, amount, date) {
-      document.getElementById('recInvoiceId').textContent = '#' + id;
+      document.getElementById('recInvoiceId').textContent = '#' + id.replace(/^#/, '');
       document.getElementById('recCourt').textContent = court;
       document.getElementById('recSport').textContent = sport;
       document.getElementById('recAmount').textContent = amount;
@@ -1209,20 +1830,126 @@
       const modal = new bootstrap.Modal(document.getElementById('receiptModal'));
       modal.show();
     }
+    window.openReceiptModal = openReceiptModal;
+
+    let cancelTargetId = null;
+    function openCancelModal(id, court, time) {
+      cancelTargetId = id;
+      document.getElementById('cancelModalCourt').textContent = court;
+      document.getElementById('cancelModalTime').textContent = time;
+      const modal = new bootstrap.Modal(document.getElementById('cancelModal'));
+      modal.show();
+    }
+    window.openCancelModal = openCancelModal;
+
+    function openUpgradeModal() {
+      const modal = new bootstrap.Modal(document.getElementById('upgradeModal'));
+      modal.show();
+    }
+    window.openUpgradeModal = openUpgradeModal;
+
+    function confirmUpgrade() {
+      const modalEl = document.getElementById('upgradeModal');
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+
+      switchMembershipTier('VIP Championship', '$149.00 / month');
+      showToast('Upgraded to VIP Championship Plan! Unlimited court hours active.');
+    }
+    window.confirmUpgrade = confirmUpgrade;
+
+    function switchMembershipTier(tierName, tierPrice) {
+      const currentPlanBadge = document.getElementById('currentPlanBadge');
+      const currentPlanPrice = document.getElementById('currentPlanPrice');
+      const sidebarUserTier = document.getElementById('sidebarUserTier');
+      const metricMembership = document.getElementById('metricMembershipPlan');
+      const ovMembershipBadge = document.getElementById('ovMembershipBadge');
+
+      if (currentPlanBadge) currentPlanBadge.textContent = tierName;
+      if (currentPlanPrice) currentPlanPrice.textContent = tierPrice;
+      if (sidebarUserTier) sidebarUserTier.textContent = tierName;
+      if (metricMembership) metricMembership.textContent = tierName.split(' ')[0];
+      if (ovMembershipBadge) ovMembershipBadge.textContent = tierName;
+
+      // Update comparison badges
+      const btnPremium = document.getElementById('btnTierPremium');
+      const btnVip = document.getElementById('btnTierVip');
+      const badgeVip = document.getElementById('badgeTierVip');
+      const badgePremium = document.getElementById('badgeTierPremium');
+
+      if (tierName.includes('VIP')) {
+        if (btnPremium) { btnPremium.disabled = false; btnPremium.textContent = 'Switch to Premium'; }
+        if (btnVip) { btnVip.disabled = true; btnVip.textContent = 'Active Plan'; }
+        if (badgeVip) badgeVip.classList.remove('d-none');
+        if (badgePremium) badgePremium.classList.add('d-none');
+      } else {
+        if (btnPremium) { btnPremium.disabled = true; btnPremium.textContent = 'Active Plan'; }
+        if (btnVip) { btnVip.disabled = false; btnVip.textContent = 'Upgrade to VIP'; }
+        if (badgeVip) badgeVip.classList.add('d-none');
+        if (badgePremium) badgePremium.classList.remove('d-none');
+      }
+
+      showToast(`Membership switched to ${tierName}!`);
+    }
+    window.switchMembershipTier = switchMembershipTier;
 
     // =========================================================================
-    // OFFICIAL PDF RECEIPT GENERATOR & EXPORTER
+    // TOURNAMENT REGISTRATION ACTION
+    // =========================================================================
+    function registerTournament(tourneyId, name, sport, fee, date) {
+      const btn = document.getElementById(`btnRegTourney-${tourneyId}`);
+      const badge = document.getElementById(`tourneyStatusBadge-${tourneyId}`);
+
+      if (btn && btn.disabled) return;
+
+      if (btn) {
+        btn.disabled = true;
+        btn.className = 'btn btn-success btn-sm';
+        btn.innerHTML = '<i class="bi bi-check2 me-1"></i> Registered & Confirmed';
+      }
+      if (badge) {
+        badge.className = 'badge bg-success text-white small fw-semibold';
+        badge.textContent = 'Registered';
+      }
+
+      // Add receipt
+      const receipts = getStoredReceipts();
+      const newRecId = 'INV-2026-TRN' + tourneyId;
+      receipts.unshift({
+        receiptId: newRecId,
+        bookingId: 'TRN-' + tourneyId,
+        description: `${name} Entry Registration`,
+        sport: sport,
+        date: date,
+        amount: fee,
+        method: 'Visa ending 4242',
+        status: 'Paid'
+      });
+      saveStoredReceipts(receipts);
+      renderReceiptsTable();
+
+      // Update tournament count
+      const metricTourney = document.getElementById('metricTourneyCount');
+      if (metricTourney) metricTourney.textContent = '2 Active';
+      const sideTourneyBadge = document.getElementById('sidebarTourneyBadge');
+      if (sideTourneyBadge) sideTourneyBadge.textContent = '2 Active';
+
+      showToast(`Successfully registered for ${name}! Receipt #${newRecId} created.`);
+    }
+    window.registerTournament = registerTournament;
+
+    // =========================================================================
+    // PDF RECEIPT GENERATOR
     // =========================================================================
     function buildReceiptTemplate(id, court, sport, amount, date, userName, userEmail) {
       const cleanId = (id || 'INV-001').replace(/^#/, '');
       const numericAmount = amount || '$25.00';
-      const displayUser = userName || (typeof Auth !== 'undefined' && Auth.getUser()?.name) || 'Alex Morgan';
-      const displayEmail = userEmail || (typeof Auth !== 'undefined' && Auth.getUser()?.email) || 'alex.morgan@email.com';
+      const displayUser = userName || 'Alex Morgan';
+      const displayEmail = userEmail || 'alex.morgan@example.com';
       const displayDate = date || new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
 
       return `
         <div id="pdfInvoiceDoc" style="font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif; padding: 36px 40px; color: #1e293b; background: #ffffff; width: 100%; max-width: 760px; margin: 0 auto; box-sizing: border-box; line-height: 1.5;">
-          <!-- Invoice Header -->
           <table style="width: 100%; border-bottom: 3px solid #00875A; padding-bottom: 18px; margin-bottom: 24px; border-collapse: collapse;">
             <tr>
               <td style="vertical-align: top;">
@@ -1231,7 +1958,7 @@
                   Smash<span style="color: #FF5A1F;">&amp;</span>Spin
                 </div>
                 <div style="font-size: 11px; color: #64748b; font-weight: 500;">Olympic Badminton &amp; Table Tennis Arena Complex</div>
-                <div style="font-size: 11px; color: #64748b;">100 Olympic Way, Sports District • support@smashspin.com</div>
+                <div style="font-size: 11px; color: #64748b;">104 Olympic Way, Sports City • support@smashspin.com</div>
               </td>
               <td style="vertical-align: top; text-align: right;">
                 <div style="display: inline-block; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; margin-bottom: 6px;">
@@ -1243,15 +1970,14 @@
             </tr>
           </table>
 
-          <!-- Meta Grid -->
           <table style="width: 100%; margin-bottom: 24px; border-collapse: collapse;">
             <tr>
               <td style="width: 50%; vertical-align: top; padding-right: 12px;">
                 <div style="background: #f8fafc; padding: 14px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                  <div style="font-weight: 700; color: #64748b; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; margin-bottom: 6px;">Billed To (Player):</div>
+                  <div style="font-weight: 700; color: #64748b; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; margin-bottom: 6px;">Billed To (Player/Customer):</div>
                   <div style="font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 2px;">${displayUser}</div>
                   <div style="font-size: 12px; color: #64748b; margin-bottom: 2px;">${displayEmail}</div>
-                  <div style="font-size: 11px; color: #059669; font-weight: 600;">Player Status: Verified Member</div>
+                  <div style="font-size: 11px; color: #059669; font-weight: 600;">Status: Verified Member</div>
                 </div>
               </td>
               <td style="width: 50%; vertical-align: top; padding-left: 12px;">
@@ -1265,13 +1991,12 @@
             </tr>
           </table>
 
-          <!-- Itemized Table -->
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
             <thead>
               <tr style="background: #0f172a; color: #ffffff;">
                 <th style="padding: 10px 14px; font-size: 12px; text-align: left; font-weight: 600; border-radius: 6px 0 0 0;">Item / Service Description</th>
-                <th style="padding: 10px 14px; font-size: 12px; text-align: left; font-weight: 600;">Sport Category</th>
-                <th style="padding: 10px 14px; font-size: 12px; text-align: center; font-weight: 600;">Qty / Time</th>
+                <th style="padding: 10px 14px; font-size: 12px; text-align: left; font-weight: 600;">Category</th>
+                <th style="padding: 10px 14px; font-size: 12px; text-align: center; font-weight: 600;">Qty / Duration</th>
                 <th style="padding: 10px 14px; font-size: 12px; text-align: right; font-weight: 600; border-radius: 0 6px 0 0;">Amount</th>
               </tr>
             </thead>
@@ -1279,21 +2004,20 @@
               <tr style="border-bottom: 1px solid #e2e8f0;">
                 <td style="padding: 14px; font-size: 13px;">
                   <div style="font-weight: 700; color: #0f172a;">${court}</div>
-                  <div style="font-size: 11px; color: #64748b; margin-top: 2px;">BWF &amp; ITTF Tournament Standard Arena Slot</div>
+                  <div style="font-size: 11px; color: #64748b; margin-top: 2px;">BWF &amp; ITTF Tournament Standard Arena Complex</div>
                 </td>
                 <td style="padding: 14px; font-size: 12px; color: #475569;">${sport}</td>
-                <td style="padding: 14px; font-size: 12px; text-align: center; color: #475569;">1 Slot (60 min)</td>
+                <td style="padding: 14px; font-size: 12px; text-align: center; color: #475569;">1 Reservation</td>
                 <td style="padding: 14px; font-size: 13px; text-align: right; font-weight: 700; color: #0f172a;">${numericAmount}</td>
               </tr>
             </tbody>
           </table>
 
-          <!-- Total Summary -->
           <table style="width: 100%; margin-bottom: 28px; border-collapse: collapse;">
             <tr>
               <td style="width: 55%; vertical-align: top; padding-right: 20px;">
                 <div style="font-size: 11px; color: #64748b; line-height: 1.6; border-left: 3px solid #00875A; padding-left: 10px;">
-                  <strong style="color: #0f172a;">Important Note:</strong> Show this digital receipt or QR check-in code at the arena front desk upon arrival. Free cancellation is permitted up to 4 hours before reserved slot time.
+                  <strong style="color: #0f172a;">Arena Policy:</strong> Present this receipt or QR code pass at turnstiles upon check-in. Free cancellation permitted up to 4 hours in advance.
                 </div>
               </td>
               <td style="width: 45%; vertical-align: top;">
@@ -1303,7 +2027,7 @@
                     <span style="color: #0f172a; font-weight: 600;">${numericAmount}</span>
                   </div>
                   <div style="display: flex; justify-content: space-between; font-size: 12px; color: #64748b; margin-bottom: 6px;">
-                    <span>Facility Lighting &amp; AC Fee:</span>
+                    <span>Facility Lighting &amp; AC:</span>
                     <span style="color: #059669; font-weight: 600;">Included ($0.00)</span>
                   </div>
                   <div style="border-top: 2px solid #cbd5e1; padding-top: 8px; margin-top: 4px; display: flex; justify-content: space-between; font-size: 16px; font-weight: 800; color: #00875A;">
@@ -1315,16 +2039,15 @@
             </tr>
           </table>
 
-          <!-- Footer Stamp -->
           <table style="width: 100%; border-top: 1px dashed #cbd5e1; padding-top: 14px; font-size: 10px; color: #64748b; border-collapse: collapse;">
             <tr>
               <td style="vertical-align: middle;">
                 <div style="font-weight: 700; color: #475569; margin-bottom: 2px;">SMASH &amp; SPIN SPORTS ARENAS • OFFICIAL RECEIPT</div>
-                <div>Automated computer-generated receipt. System Timestamp: ${new Date().toISOString()}</div>
+                <div>Automated computer-generated payment voucher.</div>
               </td>
               <td style="vertical-align: middle; text-align: right;">
                 <div style="display: inline-block; border: 1px solid #cbd5e1; background: #ffffff; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 9px; color: #00875A; font-weight: 700;">
-                  VERIFIED-TXN-OK
+                  VERIFIED-OK
                 </div>
               </td>
             </tr>
@@ -1344,19 +2067,14 @@
             <meta charset="utf-8">
             <style>
               body { margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-              @media print {
-                body { padding: 0; }
-                @page { margin: 10mm; }
-              }
+              @media print { body { padding: 0; } @page { margin: 10mm; } }
             </style>
           </head>
           <body>
             ${receiptHtml}
             <script>
               window.onload = function() {
-                setTimeout(function() {
-                  window.print();
-                }, 300);
+                setTimeout(function() { window.print(); }, 300);
               };
             <\/script>
           </body>
@@ -1368,8 +2086,8 @@
 
     function downloadReceiptPdf(id, court, sport, amount, date) {
       const cleanId = (id || 'INV-001').replace(/^#/, '');
-      const userName = (typeof Auth !== 'undefined' && Auth.getUser()?.name) || 'Alex Morgan';
-      const userEmail = (typeof Auth !== 'undefined' && Auth.getUser()?.email) || 'alex.morgan@email.com';
+      const userName = (typeof Auth !== 'undefined' && Auth.getCurrentUser()?.name) || 'Alex Morgan';
+      const userEmail = (typeof Auth !== 'undefined' && Auth.getCurrentUser()?.email) || 'alex.morgan@example.com';
 
       const receiptHtml = buildReceiptTemplate(cleanId, court, sport, amount, date, userName, userEmail);
 
@@ -1395,10 +2113,9 @@
         html2pdf().set(opt).from(element.firstElementChild).save().then(() => {
           document.body.removeChild(element);
           if (typeof showToast === 'function') {
-            showToast(`Official PDF receipt #${cleanId} downloaded successfully!`);
+            showToast(`PDF receipt #${cleanId} downloaded successfully!`);
           }
         }).catch(err => {
-          console.warn('html2pdf fallback triggering:', err);
           document.body.removeChild(element);
           printReceiptWindow(receiptHtml);
         });
@@ -1411,7 +2128,7 @@
 
     function downloadReceiptFromModal() {
       const id = document.getElementById('recInvoiceId')?.textContent || 'INV-92841';
-      const court = document.getElementById('recCourt')?.textContent || 'Center Court Alpha';
+      const court = document.getElementById('recCourt')?.textContent || 'Grand Arena – Court 1';
       const sport = document.getElementById('recSport')?.textContent || 'Badminton';
       const amount = document.getElementById('recAmount')?.textContent || '$25.00';
       const date = document.getElementById('recDate')?.textContent || 'Sep 16, 2026';
@@ -1433,12 +2150,12 @@
 
     function printReceiptFromModal() {
       const id = document.getElementById('recInvoiceId')?.textContent || 'INV-92841';
-      const court = document.getElementById('recCourt')?.textContent || 'Center Court Alpha';
+      const court = document.getElementById('recCourt')?.textContent || 'Grand Arena – Court 1';
       const sport = document.getElementById('recSport')?.textContent || 'Badminton';
       const amount = document.getElementById('recAmount')?.textContent || '$25.00';
       const date = document.getElementById('recDate')?.textContent || 'Sep 16, 2026';
-      const userName = (typeof Auth !== 'undefined' && Auth.getUser()?.name) || 'Alex Morgan';
-      const userEmail = (typeof Auth !== 'undefined' && Auth.getUser()?.email) || 'alex.morgan@email.com';
+      const userName = (typeof Auth !== 'undefined' && Auth.getCurrentUser()?.name) || 'Alex Morgan';
+      const userEmail = (typeof Auth !== 'undefined' && Auth.getCurrentUser()?.email) || 'alex.morgan@example.com';
 
       const html = buildReceiptTemplate(id, court, sport, amount, date, userName, userEmail);
       printReceiptWindow(html);
@@ -1446,8 +2163,20 @@
     window.printReceiptFromModal = printReceiptFromModal;
 
     function downloadAllReceiptsStatementPdf() {
-      const userName = (typeof Auth !== 'undefined' && Auth.getUser()?.name) || 'Alex Morgan';
-      const userEmail = (typeof Auth !== 'undefined' && Auth.getUser()?.email) || 'alex.morgan@email.com';
+      const userName = (typeof Auth !== 'undefined' && Auth.getCurrentUser()?.name) || 'Alex Morgan';
+      const userEmail = (typeof Auth !== 'undefined' && Auth.getCurrentUser()?.email) || 'alex.morgan@example.com';
+      const receipts = getStoredReceipts();
+
+      const rows = receipts.map(r => `
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="padding: 10px 12px; font-weight: 700;">#${r.receiptId}</td>
+          <td style="padding: 10px 12px;">${r.description}</td>
+          <td style="padding: 10px 12px; text-align: center;">${r.date}</td>
+          <td style="padding: 10px 12px; text-align: right; font-weight: 700;">${r.amount}</td>
+        </tr>
+      `).join('');
+
+      const totalNum = receipts.reduce((s, r) => s + (parseFloat(r.amount.replace(/[^0-9.-]+/g, '')) || 0), 0).toFixed(2);
 
       const statementHtml = `
         <div id="pdfStatementDoc" style="font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif; padding: 36px 40px; color: #1e293b; background: #ffffff; width: 100%; max-width: 760px; margin: 0 auto; box-sizing: border-box; line-height: 1.5;">
@@ -1458,7 +2187,7 @@
                   <span style="display: inline-block; background: #00875A; color: #ffffff; border-radius: 6px; width: 30px; height: 30px; line-height: 30px; text-align: center; font-size: 16px; margin-right: 6px;">&#9733;</span>
                   Smash<span style="color: #FF5A1F;">&amp;</span>Spin
                 </div>
-                <div style="font-size: 11px; color: #64748b;">Annual Payment &amp; Reservation Statement (2026)</div>
+                <div style="font-size: 11px; color: #64748b;">Annual Payment &amp; Reservation Statement</div>
               </td>
               <td style="vertical-align: top; text-align: right;">
                 <div style="display: inline-block; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; margin-bottom: 6px;">
@@ -1471,7 +2200,7 @@
 
           <div style="background: #f8fafc; padding: 14px 16px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 24px;">
             <div style="font-size: 14px; font-weight: 700; color: #0f172a;">${userName} (${userEmail})</div>
-            <div style="font-size: 12px; color: #64748b;">Total Invoices: 4 • Total Amount Settled: $157.00 • Member Status: Verified</div>
+            <div style="font-size: 12px; color: #64748b;">Total Invoices: ${receipts.length} • Total Settled: $${totalNum}</div>
           </div>
 
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 12px;">
@@ -1484,19 +2213,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px 12px; font-weight: 700;">#INV-2026-09</td><td style="padding: 10px 12px;">Premium Membership Monthly Fee</td><td style="padding: 10px 12px; text-align: center;">Sep 01, 2026</td><td style="padding: 10px 12px; text-align: right; font-weight: 700;">$79.00</td></tr>
-              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px 12px; font-weight: 700;">#INV-2026-08</td><td style="padding: 10px 12px;">Court Reservation #BK-92841 (Center Court Alpha)</td><td style="padding: 10px 12px; text-align: center;">Sep 16, 2026</td><td style="padding: 10px 12px; text-align: right; font-weight: 700;">$25.00</td></tr>
-              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px 12px; font-weight: 700;">#INV-2026-07</td><td style="padding: 10px 12px;">Autumn Smash Open Tournament Entry Fee</td><td style="padding: 10px 12px; text-align: center;">Sep 14, 2026</td><td style="padding: 10px 12px; text-align: right; font-weight: 700;">$35.00</td></tr>
-              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px 12px; font-weight: 700;">#INV-2026-06</td><td style="padding: 10px 12px;">Court Reservation #BK-83190 (Olympic Spin Studio)</td><td style="padding: 10px 12px; text-align: center;">Sep 12, 2026</td><td style="padding: 10px 12px; text-align: right; font-weight: 700;">$18.00</td></tr>
+              ${rows}
             </tbody>
           </table>
 
           <div style="background: #f8fafc; padding: 14px 18px; border-radius: 8px; border: 1px solid #e2e8f0; text-align: right; font-size: 16px; font-weight: 800; color: #00875A; margin-bottom: 24px;">
-            Total Settled (2026): $157.00
+            Total Settled: $${totalNum}
           </div>
 
           <div style="border-top: 1px dashed #cbd5e1; padding-top: 14px; font-size: 10px; color: #64748b;">
-            Official statement issued by Smash &amp; Spin Sports Arenas. Certified Tax Compliant.
+            Official statement issued by Smash &amp; Spin Sports Arenas.
           </div>
         </div>
       `;
@@ -1512,7 +2238,7 @@
       if (typeof html2pdf !== 'undefined') {
         const opt = {
           margin:       [8, 8, 8, 8],
-          filename:     'Smash_Spin_Annual_Statement_2026.pdf',
+          filename:     'Smash_Spin_Account_Statement.pdf',
           image:        { type: 'jpeg', quality: 0.98 },
           html2canvas:  { scale: 2, useCORS: true, letterRendering: true, logging: false },
           jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -1520,7 +2246,7 @@
         html2pdf().set(opt).from(element.firstElementChild).save().then(() => {
           document.body.removeChild(element);
           if (typeof showToast === 'function') {
-            showToast('All 2026 receipts exported to PDF statement!');
+            showToast('All payment receipts exported to PDF statement!');
           }
         }).catch(err => {
           document.body.removeChild(element);
@@ -1533,49 +2259,50 @@
     }
     window.downloadAllReceiptsStatementPdf = downloadAllReceiptsStatementPdf;
 
-    let cancelTargetId = null;
-    function openCancelModal(id, court, time) {
-      cancelTargetId = id;
-      document.getElementById('cancelModalCourt').textContent = court;
-      document.getElementById('cancelModalTime').textContent = time;
-      const modal = new bootstrap.Modal(document.getElementById('cancelModal'));
-      modal.show();
-    }
-
-    function openUpgradeModal() {
-      const modal = new bootstrap.Modal(document.getElementById('upgradeModal'));
-      modal.show();
-    }
-
-    function confirmUpgrade() {
-      const modalEl = document.getElementById('upgradeModal');
-      const modal = bootstrap.Modal.getInstance(modalEl);
-      if (modal) modal.hide();
-      showToast('Upgraded to VIP Championship Plan! Welcome to unlimited court access.');
-    }
-
+    // =========================================================================
+    // DOM INITIALIZATION
+    // =========================================================================
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. URL Hash-based initial tab
-      const hash = window.location.hash.replace('#', '');
-      if (hash && document.getElementById(`dash-tab-${hash}`)) {
-        switchToTab(hash);
-      } else if (hash === 'my-bookings') {
-        switchToTab('bookings');
-      }
+      // 1. Initial Render
+      renderOverviewBookings();
+      renderMyBookingsTable('all');
+      renderBookingHistoryTable('all', 'all');
+      renderReceiptsTable();
 
-      // 2. Sidebar Navigation Click
-      const navLinks = document.querySelectorAll('.dashboard-nav-item');
-      navLinks.forEach(link => {
+      // 2. Hash-based Mode & Tab Routing
+      function handleHashRouting() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash === 'customer-dashboard' || hash === 'customer-overview' || hash === 'customer') {
+          switchDashboardMode('customer');
+        } else if (hash === 'user-dashboard' || hash === 'overview') {
+          switchDashboardMode('user');
+        } else if (hash) {
+          if (hash === 'my-bookings' || hash === 'bookings') {
+            switchToTab('bookings');
+          } else if (document.getElementById(`dash-tab-${hash}`)) {
+            switchToTab(hash);
+          }
+        }
+      }
+      handleHashRouting();
+      window.addEventListener('hashchange', handleHashRouting);
+
+      // 3. Sidebar Click Listeners
+      document.querySelectorAll('.dashboard-nav-item').forEach(link => {
         link.addEventListener('click', function(e) {
           const target = this.getAttribute('data-dash-target');
           if (target) {
             e.preventDefault();
-            switchToTab(target);
+            if (target === 'overview' && currentDashboardMode === 'customer') {
+              switchToTab('customer-overview');
+            } else {
+              switchToTab(target);
+            }
           }
         });
       });
 
-      // 3. Sport Filter in In-Dashboard Booking
+      // 4. Sport Filter in In-Dashboard Booking
       const sportBtns = document.querySelectorAll('.dash-sport-filter');
       const courtCards = document.querySelectorAll('.dash-court-item');
       sportBtns.forEach(btn => {
@@ -1598,7 +2325,7 @@
         });
       });
 
-      // 4. Court Card Select in In-Dashboard Booking
+      // 5. Court Card Selection in Booking Tab
       let selectedRate = 25;
       let selectedCourtName = 'Grand Arena – Court 1';
       let selectedSportName = 'Badminton';
@@ -1614,7 +2341,7 @@
         });
       });
 
-      // 5. Time Slot Select
+      // 6. Time Slot Pill Selection
       const slotBtns = document.querySelectorAll('.dash-time-slot-btn');
       let selectedSlot = '06:00 PM – 07:00 PM';
       slotBtns.forEach(btn => {
@@ -1625,11 +2352,11 @@
         });
       });
 
-      // 6. Price Calculation
+      // 7. Price Calculation
       const durationSelect = document.getElementById('dashBookDuration');
       const shuttleAddon = document.getElementById('dashAddonShuttles');
       function updateDashPrice() {
-        const dur = parseInt(durationSelect.value) || 1;
+        const dur = parseInt(durationSelect?.value || '1') || 1;
         const addonFee = (shuttleAddon && shuttleAddon.checked) ? 5 : 0;
         const base = selectedRate * dur;
         const discount = base * 0.25; // 25% member discount
@@ -1640,56 +2367,65 @@
       if (durationSelect) durationSelect.addEventListener('change', updateDashPrice);
       if (shuttleAddon) shuttleAddon.addEventListener('change', updateDashPrice);
 
-      // 7. In-Dashboard Booking Confirmation
+      // Set min date for datepicker to today
+      const dateInput = document.getElementById('dashBookDate');
+      if (dateInput) {
+        const todayStr = new Date().toISOString().split('T')[0];
+        dateInput.min = todayStr;
+        dateInput.value = todayStr;
+      }
+
+      // 8. In-Dashboard Booking Confirmation Execution
       const btnConfirmBooking = document.getElementById('btnConfirmDashBooking');
       if (btnConfirmBooking) {
         btnConfirmBooking.addEventListener('click', () => {
-          const dateVal = document.getElementById('dashBookDate').value || '2026-09-17';
+          const dateVal = document.getElementById('dashBookDate').value || new Date().toISOString().split('T')[0];
           const newId = 'BK-' + Math.floor(10000 + Math.random() * 90000);
           const dur = parseInt(durationSelect.value) || 1;
           const totalPaid = ((selectedRate * dur * 0.75) + (shuttleAddon.checked ? 5 : 0)).toFixed(2);
 
-          // Add row to myBookingsFullTbody
-          const tbody = document.getElementById('myBookingsFullTbody');
-          if (tbody) {
-            const newRow = document.createElement('tr');
-            newRow.className = 'booking-row status-filter-confirmed';
-            newRow.id = `booking-item-${newId}`;
-            newRow.innerHTML = `
-              <td class="fw-bold">#${newId}</td>
-              <td>
-                <div class="fw-semibold text-dark">${selectedCourtName}</div>
-                <div class="small text-muted">Reserved via Dashboard</div>
-              </td>
-              <td><span class="badge ${selectedSportName.toLowerCase().includes('badminton') ? 'badge-badminton' : 'badge-tt'} text-white">${selectedSportName}</span></td>
-              <td>${dateVal}<br><small class="text-muted">${selectedSlot}</small></td>
-              <td class="fw-bold text-dark">$${totalPaid}</td>
-              <td><span class="status-badge status-confirmed">Confirmed</span></td>
-              <td class="text-end">
-                <button class="btn btn-sm btn-outline-dark me-1" onclick="openQrModal('${newId}', '${selectedCourtName}', '${selectedSportName}', '${dateVal} • ${selectedSlot}', 'Gate #B-01')"><i class="bi bi-qr-code"></i></button>
-                <button class="btn btn-sm btn-outline-dark me-1" onclick="openReceiptModal('${newId}', '${selectedCourtName}', '${selectedSportName}', '$${totalPaid}', '${dateVal}')"><i class="bi bi-receipt"></i></button>
-                <button class="btn btn-sm btn-outline-danger" onclick="openCancelModal('${newId}', '${selectedCourtName}', '${dateVal} • ${selectedSlot}')">Cancel</button>
-              </td>
-            `;
-            tbody.prepend(newRow);
-          }
+          const newBooking = {
+            id: newId,
+            court: selectedCourtName,
+            sport: selectedSportName,
+            date: dateVal,
+            time: selectedSlot,
+            price: `$${totalPaid}`,
+            status: 'confirmed',
+            paymentStatus: 'Paid'
+          };
 
-          // Update counts
-          const countUp = document.getElementById('countUpcomingBookings');
-          if (countUp) countUp.textContent = parseInt(countUp.textContent || '2') + 1;
-          const countAll = document.getElementById('countAllBookings');
-          if (countAll) countAll.textContent = parseInt(countAll.textContent || '3') + 1;
-          const sidebarCount = document.getElementById('sidebarBookingBadge');
-          if (sidebarCount) sidebarCount.textContent = countUp.textContent;
-          const metricSlots = document.getElementById('metricUpcomingSlots');
-          if (metricSlots) metricSlots.textContent = `${countUp.textContent} Slots`;
+          const bookings = getStoredBookings();
+          bookings.unshift(newBooking);
+          saveStoredBookings(bookings);
+
+          // Add receipt
+          const receipts = getStoredReceipts();
+          const newRecId = 'INV-2026-' + Math.floor(10 + Math.random() * 90);
+          receipts.unshift({
+            receiptId: newRecId,
+            bookingId: newId,
+            description: selectedCourtName,
+            sport: selectedSportName,
+            date: dateVal,
+            amount: `$${totalPaid}`,
+            method: 'Visa ending 4242',
+            status: 'Paid'
+          });
+          saveStoredReceipts(receipts);
+
+          // Re-render UI
+          renderOverviewBookings();
+          renderMyBookingsTable('all');
+          renderBookingHistoryTable('all', 'all');
+          renderReceiptsTable();
 
           showToast(`Court Reserved! #${newId} confirmed for ${selectedCourtName}.`);
           switchToTab('bookings');
         });
       }
 
-      // 8. Cancellation Execution
+      // 9. Cancellation Execution
       const btnConfirmCancel = document.getElementById('btnConfirmCancellation');
       if (btnConfirmCancel) {
         btnConfirmCancel.addEventListener('click', () => {
@@ -1698,22 +2434,21 @@
           if (modal) modal.hide();
 
           if (cancelTargetId) {
-            const targetRow = document.getElementById(`booking-item-${cancelTargetId}`) || document.getElementById(`row-bk-${cancelTargetId.toLowerCase()}`);
-            if (targetRow) {
-              targetRow.className = 'booking-row status-filter-cancelled';
-              const badge = targetRow.querySelector('.status-badge');
-              if (badge) {
-                badge.className = 'status-badge status-cancelled';
-                badge.textContent = 'Cancelled';
-              }
+            const bookings = getStoredBookings();
+            const target = bookings.find(b => b.id.toLowerCase() === cancelTargetId.toLowerCase());
+            if (target) {
+              target.status = 'cancelled';
+              saveStoredBookings(bookings);
             }
+            renderOverviewBookings();
+            renderMyBookingsTable('all');
+            renderBookingHistoryTable('all', 'all');
           }
 
-          // If Next Scheduled match was cancelled
           const nextMatchBadge = document.getElementById('nextMatchStatus');
           if (nextMatchBadge) {
             nextMatchBadge.className = 'status-badge status-cancelled';
-            nextMatchBadge.textContent = 'Slot Cancelled';
+            nextMatchBadge.textContent = 'Cancelled';
           }
           const btnCancelNext = document.getElementById('btnCancelNextSlot');
           if (btnCancelNext) {
@@ -1725,84 +2460,83 @@
         });
       }
 
-      // 9. Bookings Filter Tabs
-      const bookingFilterPills = document.querySelectorAll('.filter-tab-pill[data-booking-filter]');
-      bookingFilterPills.forEach(pill => {
+      // 10. Filter Tabs in My Bookings
+      document.querySelectorAll('.filter-tab-pill[data-booking-filter]').forEach(pill => {
         pill.addEventListener('click', function() {
-          bookingFilterPills.forEach(p => p.classList.remove('active'));
+          document.querySelectorAll('.filter-tab-pill[data-booking-filter]').forEach(p => p.classList.remove('active'));
           this.classList.add('active');
-
           const filter = this.getAttribute('data-booking-filter');
-          const rows = document.querySelectorAll('.booking-row');
-          rows.forEach(row => {
-            if (filter === 'all' || row.classList.contains(`status-filter-${filter}`)) {
-              row.classList.remove('d-none');
-            } else {
-              row.classList.add('d-none');
-            }
-          });
+          renderMyBookingsTable(filter);
         });
       });
 
-      // 10. Sync Authenticated Player Profile & Wire Profile Form
+      // 11. History Filters
+      const histSport = document.getElementById('historySportFilter');
+      const histStatus = document.getElementById('historyStatusFilter');
+      function applyHistoryFilters() {
+        renderBookingHistoryTable(histSport?.value || 'all', histStatus?.value || 'all');
+      }
+      if (histSport) histSport.addEventListener('change', applyHistoryFilters);
+      if (histStatus) histStatus.addEventListener('change', applyHistoryFilters);
+
+      // 12. Sync Authenticated Player/Customer Profile
       if (typeof Auth !== 'undefined') {
         const currentUser = Auth.getCurrentUser();
         if (currentUser) {
           const pName = currentUser.name || 'Alex Morgan';
-          const pEmail = currentUser.email || 'player@example.com';
-          const pPhone = currentUser.phone || '+1 (555) 000-0000';
+          const pEmail = currentUser.email || 'alex.morgan@example.com';
+          const pPhone = currentUser.phone || '+1 (555) 392-8492';
           const pId = currentUser.playerId || ('#SSP-' + currentUser.id);
 
-          const hName = document.getElementById('headerUserName');
-          const dName = document.getElementById('dropdownUserLabel');
           const sName = document.getElementById('sidebarUserName');
           const sId = document.getElementById('sidebarPlayerId');
           const wName = document.getElementById('welcomeUserName');
+          const cName = document.getElementById('customerWelcomeName');
           const inName = document.getElementById('inputProfileName');
           const inEmail = document.getElementById('inputProfileEmail');
           const inPhone = document.getElementById('inputProfilePhone');
 
-          if (hName) hName.textContent = pName;
-          if (dName) dName.textContent = pName;
           if (sName) sName.textContent = pName;
           if (sId) sId.textContent = `Player ID: ${pId}`;
           if (wName) wName.textContent = pName.split(' ')[0];
+          if (cName) cName.textContent = pName;
           if (inName) inName.value = pName;
           if (inEmail) inEmail.value = pEmail;
           if (inPhone) inPhone.value = pPhone;
         }
       }
 
+      // 13. Profile Save Changes
       const profileForm = document.getElementById('dashProfileForm');
       if (profileForm) {
         profileForm.addEventListener('submit', (e) => {
           e.preventDefault();
           const inName = document.getElementById('inputProfileName');
+          const inEmail = document.getElementById('inputProfileEmail');
           const inPhone = document.getElementById('inputProfilePhone');
           const newName = inName ? inName.value.trim() : 'Player';
+          const newEmail = inEmail ? inEmail.value.trim() : 'player@example.com';
           const newPhone = inPhone ? inPhone.value.trim() : '';
 
           if (typeof Auth !== 'undefined') {
-            Auth.updateProfile({ name: newName, phone: newPhone });
+            Auth.updateProfile({ name: newName, email: newEmail, phone: newPhone });
           }
 
-          const hName = document.getElementById('headerUserName');
-          const dName = document.getElementById('dropdownUserLabel');
           const sName = document.getElementById('sidebarUserName');
           const wName = document.getElementById('welcomeUserName');
-
-          if (hName) hName.textContent = newName;
-          if (dName) dName.textContent = newName;
+          const cName = document.getElementById('customerWelcomeName');
           if (sName) sName.textContent = newName;
           if (wName) wName.textContent = newName.split(' ')[0];
+          if (cName) cName.textContent = newName;
 
           showToast('Profile details updated and saved successfully!');
         });
       }
 
-      // 11. Wire Secure Logout triggers
-      document.querySelectorAll('.logout, a[href="login.html"], .dropdown-item.text-danger').forEach(link => {
-        link.addEventListener('click', (e) => {
+      // 14. Logout Action
+      const btnLogout = document.getElementById('btnLogoutTrigger');
+      if (btnLogout) {
+        btnLogout.addEventListener('click', (e) => {
           e.preventDefault();
           if (typeof Auth !== 'undefined') {
             Auth.logout();
@@ -1810,7 +2544,7 @@
             window.location.href = 'login.html?logged_out=1';
           }
         });
-      });
+      }
     });
   </script>
 </body>

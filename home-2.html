@@ -66,9 +66,18 @@
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact Us</a>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle nav-dashboard-btn" href="dashboard.html" id="dashboardDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dashboard
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dashboardDropdown">
+                <li><a class="dropdown-item py-2" href="dashboard.html#user-dashboard"><i class="bi bi-person-fill me-2 text-primary"></i>User Dashboard</a></li>
+                <li><a class="dropdown-item py-2" href="dashboard.html#customer-dashboard"><i class="bi bi-person-badge-fill me-2 text-success"></i>Customer Dashboard</a></li>
+              </ul>
+            </li>
           </ul>
 
-          <!-- Right Controls in EXACT order: LTR/RTL Toggle -> Dark/Light Mode -> Login -> Sign Up -->
+          <!-- Right Controls: LTR/RTL Toggle -> Dark/Light Mode -> Book a Court Primary CTA -->
           <div class="nav-controls">
             <!-- 1. LTR / RTL Toggle -->
             <button type="button" class="control-btn dir-toggle-btn" title="Toggle LTR / RTL" aria-label="Toggle LTR / RTL">
@@ -80,14 +89,9 @@
               <i class="bi bi-moon-stars-fill"></i>
             </button>
 
-            <!-- 3. Login Button -->
-            <a href="login.html" class="btn btn-outline-dark btn-sm nav-auth-btn">
-              <span>Login</span> <i class="bi bi-box-arrow-in-right"></i>
-            </a>
-
-            <!-- 4. Sign Up Button -->
-            <a href="register.html" class="btn btn-primary btn-sm nav-auth-btn">
-              <span>Sign Up</span> <i class="bi bi-person-plus-fill"></i>
+            <!-- 3. Primary CTA Button -->
+            <a href="courts.html" class="btn btn-primary btn-sm nav-cta-btn">
+              <i class="bi bi-calendar-check-fill me-1"></i><span>Book a Court</span>
             </a>
           </div>
         </div>
@@ -250,61 +254,61 @@
 
       <div class="row g-4">
         <!-- Category 1: Badminton -->
-        <div class="col-lg-3 col-md-6">
-          <div class="court-card text-center">
+        <div class="col-lg-3 col-md-6 d-flex">
+          <div class="court-card text-center w-100 d-flex flex-column">
             <div class="court-image-wrapper" style="height: 180px;">
               <img src="assets/images/court-grand-arena.jpg" alt="Badminton Arena" loading="lazy">
               <span class="court-badge-sport badge-badminton">Badminton</span>
             </div>
-            <div class="court-body">
+            <div class="court-body d-flex flex-column flex-grow-1">
               <h4 class="fw-bold mb-2">Badminton Arenas</h4>
-              <p class="small text-muted mb-3">8 BWF shock-absorbing courts, tournament nets, and LED anti-glare illumination.</p>
-              <a href="courts.html?sport=Badminton" class="btn btn-outline-primary btn-sm w-100">Explore Courts</a>
+              <p class="small text-muted mb-3 flex-grow-1">8 BWF shock-absorbing courts, tournament nets, and LED anti-glare illumination.</p>
+              <a href="courts.html?sport=Badminton" class="btn btn-outline-primary btn-sm w-100 mt-auto">Explore Courts</a>
             </div>
           </div>
         </div>
 
         <!-- Category 2: Table Tennis -->
-        <div class="col-lg-3 col-md-6">
-          <div class="court-card text-center">
+        <div class="col-lg-3 col-md-6 d-flex">
+          <div class="court-card text-center w-100 d-flex flex-column">
             <div class="court-image-wrapper" style="height: 180px;">
               <img src="assets/images/table-olympic-spin.jpg" alt="Table Tennis Arena" loading="lazy">
               <span class="court-badge-sport badge-tt">Table Tennis</span>
             </div>
-            <div class="court-body">
+            <div class="court-body d-flex flex-column flex-grow-1">
               <h4 class="fw-bold mb-2">Table Tennis Hall</h4>
-              <p class="small text-muted mb-3">6 ITTF 25mm tournament tables with automatic spin ball feed robots.</p>
-              <a href="courts.html?sport=Table%20Tennis" class="btn btn-outline-primary btn-sm w-100">Explore Tables</a>
+              <p class="small text-muted mb-3 flex-grow-1">6 ITTF 25mm tournament tables with automatic spin ball feed robots.</p>
+              <a href="courts.html?sport=Table%20Tennis" class="btn btn-outline-primary btn-sm w-100 mt-auto">Explore Tables</a>
             </div>
           </div>
         </div>
 
         <!-- Category 3: Coaching -->
-        <div class="col-lg-3 col-md-6">
-          <div class="court-card text-center">
+        <div class="col-lg-3 col-md-6 d-flex">
+          <div class="court-card text-center w-100 d-flex flex-column">
             <div class="court-image-wrapper" style="height: 180px;">
               <img src="assets/images/table-loop-drive.jpg" alt="Pro Coaching" loading="lazy">
               <span class="court-badge-sport badge-coaching">Coaching</span>
             </div>
-            <div class="court-body">
+            <div class="court-body d-flex flex-column flex-grow-1">
               <h4 class="fw-bold mb-2">Pro Coaching</h4>
-              <p class="small text-muted mb-3">Private 1-on-1 sessions, junior development academies, and video analytics.</p>
-              <a href="about.html" class="btn btn-outline-primary btn-sm w-100">Meet Coaches</a>
+              <p class="small text-muted mb-3 flex-grow-1">Private 1-on-1 sessions, junior development academies, and video analytics.</p>
+              <a href="about.html" class="btn btn-outline-primary btn-sm w-100 mt-auto">Meet Coaches</a>
             </div>
           </div>
         </div>
 
         <!-- Category 4: Tournaments -->
-        <div class="col-lg-3 col-md-6">
-          <div class="court-card text-center">
+        <div class="col-lg-3 col-md-6 d-flex">
+          <div class="court-card text-center w-100 d-flex flex-column">
             <div class="court-image-wrapper" style="height: 180px;">
               <img src="assets/images/court-champions-vip.jpg" alt="Tournament Events" loading="lazy">
               <span class="court-badge-sport badge-events">Events</span>
             </div>
-            <div class="court-body">
+            <div class="court-body d-flex flex-column flex-grow-1">
               <h4 class="fw-bold mb-2">Tournament Events</h4>
-              <p class="small text-muted mb-3">Monthly ranked tournaments, corporate leagues, and cash prize open cups.</p>
-              <a href="tournaments.html" class="btn btn-outline-primary btn-sm w-100">View Events</a>
+              <p class="small text-muted mb-3 flex-grow-1">Monthly ranked tournaments, corporate leagues, and cash prize open cups.</p>
+              <a href="tournaments.html" class="btn btn-outline-primary btn-sm w-100 mt-auto">View Events</a>
             </div>
           </div>
         </div>

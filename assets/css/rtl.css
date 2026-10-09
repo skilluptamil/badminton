@@ -125,7 +125,9 @@
 }
 
 [dir="rtl"] .btn,
-[dir="rtl"] .nav-auth-btn {
+[dir="rtl"] .nav-auth-btn,
+[dir="rtl"] .nav-cta-btn,
+[dir="rtl"] .btn-social-auth {
   flex-direction: row;
 }
 
@@ -256,3 +258,11 @@
   border-right: 0 !important;
   border-left: 1px solid var(--border-color) !important;
 }
+
+/* Quick Booking Search Form RTL */
+[dir="rtl"] .booking-search-card .form-select {
+  background-position: left 0.85rem center;
+  padding-left: 2.25rem;
+  padding-right: 0.95rem;
+}
+

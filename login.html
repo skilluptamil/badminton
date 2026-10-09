@@ -101,6 +101,27 @@
                 <span>Sign In to Dashboard</span> <i class="bi bi-box-arrow-in-right"></i>
               </button>
 
+              <!-- Social Login Divider -->
+              <div class="auth-divider">
+                <span>Or continue with</span>
+              </div>
+
+              <!-- Social Login Buttons (UI elements without fake login) -->
+              <div class="social-auth-grid">
+                <button type="button" class="btn-social-auth" aria-label="Sign in with Google" onclick="showToast('Social authentication is currently in preview mode. Please sign in with your email.');">
+                  <i class="bi bi-google"></i>
+                  <span>Google</span>
+                </button>
+                <button type="button" class="btn-social-auth" aria-label="Sign in with Facebook" onclick="showToast('Social authentication is currently in preview mode. Please sign in with your email.');">
+                  <i class="bi bi-facebook"></i>
+                  <span>Facebook</span>
+                </button>
+                <button type="button" class="btn-social-auth" aria-label="Sign in with Apple" onclick="showToast('Social authentication is currently in preview mode. Please sign in with your email.');">
+                  <i class="bi bi-apple"></i>
+                  <span>Apple</span>
+                </button>
+              </div>
+
               <div class="text-center small text-muted">
                 Don't have an account yet? <a href="register.html" class="fw-bold text-primary">Sign Up</a>
               </div>

@@ -186,6 +186,23 @@
   background-color: rgba(0, 230, 118, 0.12) !important;
 }
 
+[data-theme="dark"] .navbar-nav .nav-link.nav-dashboard-btn {
+  background: linear-gradient(135deg, #00875A 0%, #00B377 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 14px rgba(0, 179, 119, 0.4) !important;
+}
+
+[data-theme="dark"] .navbar-nav .nav-link.nav-dashboard-btn:hover,
+[data-theme="dark"] .navbar-nav .nav-link.nav-dashboard-btn:focus,
+[data-theme="dark"] .navbar-nav .nav-link.nav-dashboard-btn.show,
+[data-theme="dark"] .navbar-nav .nav-link.nav-dashboard-btn.active {
+  background: linear-gradient(135deg, #006644 0%, #00875A 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 6px 20px rgba(0, 208, 132, 0.5) !important;
+}
+
 /* On Desktop (min-width: 992px): NO box around navbar-collapse */
 @media (min-width: 992px) {
   [data-theme="dark"] .navbar-collapse {
@@ -197,13 +214,14 @@
   }
 }
 
-/* On Mobile/Tablet (max-width: 991.98px): Sleek card background when collapsed */
+/* On Mobile/Tablet (max-width: 991.98px): Sleek floating overlay when collapsed */
 @media (max-width: 991.98px) {
-  [data-theme="dark"] .navbar-collapse {
+  [data-theme="dark"] .site-header .navbar-collapse {
     background-color: #131B2E !important;
     border: 1px solid #1E293B !important;
-    border-radius: var(--radius-md) !important;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5) !important;
+    border-top: none !important;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7) !important;
   }
   
   [data-theme="dark"] .nav-controls {
@@ -355,9 +373,47 @@
   color: #F8FAFC !important;
 }
 
+[data-theme="dark"] .pricing-switcher-wrapper {
+  background-color: var(--bg-surface);
+  border-color: var(--border-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
 [data-theme="dark"] .pricing-features li {
   color: #E2E8F0;
   border-bottom-color: var(--border-color);
+}
+
+/* Social Login Buttons in Dark Mode */
+[data-theme="dark"] .auth-divider {
+  color: var(--text-muted);
+}
+
+[data-theme="dark"] .auth-divider::before,
+[data-theme="dark"] .auth-divider::after {
+  border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .btn-social-auth {
+  background-color: #17223B;
+  border-color: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme="dark"] .btn-social-auth .bi-apple {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .btn-social-auth:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--primary);
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .contact-map-wrapper {
+  border-color: var(--border-color);
+  background-color: var(--bg-surface);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
 [data-theme="dark"] .booking-search-card {
@@ -368,6 +424,43 @@
 
 [data-theme="dark"] .booking-field-label {
   color: #F8FAFC;
+}
+
+[data-theme="dark"] .booking-search-card .form-select,
+[data-theme="dark"] .booking-search-card .form-control,
+[data-theme="dark"] .booking-search-card input[type="date"],
+[data-theme="dark"] .booking-search-card input[type="time"] {
+  background-color: #131B2E !important;
+  border-color: #334155 !important;
+  color: #FFFFFF !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  box-sizing: border-box !important;
+}
+
+[data-theme="dark"] .booking-search-card .form-select:focus,
+[data-theme="dark"] .booking-search-card .form-control:focus,
+[data-theme="dark"] .booking-search-card input[type="date"]:focus {
+  background-color: #17223B !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 4px var(--primary-light) !important;
+}
+
+[data-theme="dark"] .booking-search-btn {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  background-color: var(--primary) !important;
+  color: #0B0F19 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 14px rgba(0, 230, 118, 0.35) !important;
+}
+
+[data-theme="dark"] .booking-search-btn:hover {
+  background-color: var(--primary-hover) !important;
+  box-shadow: 0 6px 20px rgba(0, 230, 118, 0.5) !important;
+  color: #0B0F19 !important;
 }
 
 [data-theme="dark"] .court-title,

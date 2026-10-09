@@ -60,6 +60,15 @@
             <li class="nav-item">
               <a class="nav-link active" href="contact.html">Contact Us</a>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle nav-dashboard-btn" href="dashboard.html" id="dashboardDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dashboard
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dashboardDropdown">
+                <li><a class="dropdown-item py-2" href="dashboard.html#user-dashboard"><i class="bi bi-person-fill me-2 text-primary"></i>User Dashboard</a></li>
+                <li><a class="dropdown-item py-2" href="dashboard.html#customer-dashboard"><i class="bi bi-person-badge-fill me-2 text-success"></i>Customer Dashboard</a></li>
+              </ul>
+            </li>
           </ul>
 
           <div class="nav-controls">
@@ -69,11 +78,8 @@
             <button type="button" class="control-btn theme-toggle-btn" title="Toggle Dark / Light Mode" aria-label="Toggle Dark / Light Mode">
               <i class="bi bi-moon-stars-fill"></i>
             </button>
-            <a href="login.html" class="btn btn-outline-dark btn-sm nav-auth-btn">
-              <span>Login</span> <i class="bi bi-box-arrow-in-right"></i>
-            </a>
-            <a href="register.html" class="btn btn-primary btn-sm nav-auth-btn">
-              <span>Sign Up</span> <i class="bi bi-person-plus-fill"></i>
+            <a href="courts.html" class="btn btn-primary btn-sm nav-cta-btn">
+              <i class="bi bi-calendar-check-fill me-1"></i><span>Book a Court</span>
             </a>
           </div>
         </div>
@@ -229,8 +235,8 @@
        ========================================================================= -->
   <section class="section-py-sm bg-light">
     <div class="container">
-      <div class="rounded-4 overflow-hidden border shadow-sm" style="height: 380px;">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.733248043701!2d-118.40245662366874!3d34.05069901781293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bbdf44a9e5db%3A0xe54dcf9c45c99d21!2sOlympic%20Blvd%2C%20Los%20Angeles%2C%20CA!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="contact-map-wrapper">
+        <iframe src="https://maps.google.com/maps?q=104%20Olympic%20Way%2C%20Los%20Angeles%2C%20CA%2090210&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Smash & Spin Sports Arena Location"></iframe>
       </div>
     </div>
   </section>
@@ -291,11 +297,16 @@
           <div class="col-lg-8">
             <h2 class="cta-title">Have Questions About Court Booking?</h2>
             <p class="cta-desc">
-              Call our reception desk at +1 (800) 555-SMASH or visit our complex today.
+              Call our reception desk at +1 (800) 555-SMASH or reserve your court slot directly online.
             </p>
-            <a href="courts.html" class="btn btn-secondary btn-lg">
-              <i class="bi bi-calendar-check-fill"></i> View Court Availability
-            </a>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="courts.html" class="btn btn-primary btn-lg">
+                <i class="bi bi-calendar-check-fill me-1"></i> Book a Court
+              </a>
+              <a href="#contactForm" class="btn btn-outline-light btn-lg">
+                <i class="bi bi-envelope-fill me-1"></i> Send a Message
+              </a>
+            </div>
           </div>
           <div class="col-lg-4 d-none d-lg-block text-end">
             <i class="bi bi-telephone-outbound-fill display-1 text-white opacity-25"></i>

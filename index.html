@@ -66,9 +66,18 @@
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact Us</a>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle nav-dashboard-btn" href="dashboard.html" id="dashboardDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dashboard
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dashboardDropdown">
+                <li><a class="dropdown-item py-2" href="dashboard.html#user-dashboard"><i class="bi bi-person-fill me-2 text-primary"></i>User Dashboard</a></li>
+                <li><a class="dropdown-item py-2" href="dashboard.html#customer-dashboard"><i class="bi bi-person-badge-fill me-2 text-success"></i>Customer Dashboard</a></li>
+              </ul>
+            </li>
           </ul>
 
-          <!-- Right Controls in EXACT order: LTR/RTL Toggle -> Dark/Light Mode -> Login -> Sign Up -->
+          <!-- Right Controls: LTR/RTL Toggle -> Dark/Light Mode -> Book a Court Primary CTA -->
           <div class="nav-controls">
             <!-- 1. LTR / RTL Toggle -->
             <button type="button" class="control-btn dir-toggle-btn" title="Toggle LTR / RTL" aria-label="Toggle LTR / RTL">
@@ -80,14 +89,9 @@
               <i class="bi bi-moon-stars-fill"></i>
             </button>
 
-            <!-- 3. Login Button -->
-            <a href="login.html" class="btn btn-outline-dark btn-sm nav-auth-btn">
-              <span>Login</span> <i class="bi bi-box-arrow-in-right"></i>
-            </a>
-
-            <!-- 4. Sign Up Button -->
-            <a href="register.html" class="btn btn-primary btn-sm nav-auth-btn">
-              <span>Sign Up</span> <i class="bi bi-person-plus-fill"></i>
+            <!-- 3. Primary CTA Button -->
+            <a href="courts.html" class="btn btn-primary btn-sm nav-cta-btn">
+              <i class="bi bi-calendar-check-fill me-1"></i><span>Book a Court</span>
             </a>
           </div>
         </div>
@@ -235,30 +239,30 @@
   <section class="section-py-sm" id="quickBookingings">
     <div class="container">
       <div class="booking-search-card">
-        <form id="quickBookingSearchForm" class="row g-3 align-items-end">
-          <div class="col-lg-3 col-md-6">
+        <form id="quickBookingSearchForm" class="booking-search-form">
+          <div class="booking-search-col booking-col-sport">
             <label class="booking-field-label" for="searchSport">
               <i class="bi bi-dribbble text-primary"></i> Select Sport
             </label>
-            <select class="form-select" id="searchSport" required>
+            <select class="form-select booking-input-control" id="searchSport" required>
               <option value="All">All Sports (Badminton & TT)</option>
               <option value="Badminton">Badminton</option>
               <option value="Table Tennis">Table Tennis</option>
             </select>
           </div>
 
-          <div class="col-lg-3 col-md-6">
+          <div class="booking-search-col booking-col-date">
             <label class="booking-field-label" for="searchDate">
               <i class="bi bi-calendar3 text-primary"></i> Select Date
             </label>
-            <input type="date" class="form-control" id="searchDate" value="2026-09-16" required>
+            <input type="date" class="form-control booking-input-control" id="searchDate" value="2026-09-16" required>
           </div>
 
-          <div class="col-lg-3 col-md-6">
+          <div class="booking-search-col booking-col-time">
             <label class="booking-field-label" for="searchTime">
               <i class="bi bi-clock text-primary"></i> Select Time Slot
             </label>
-            <select class="form-select" id="searchTime" required>
+            <select class="form-select booking-input-control" id="searchTime" required>
               <option value="06:00 AM - 08:00 AM">Morning (06:00 AM - 08:00 AM)</option>
               <option value="08:00 AM - 12:00 PM">Midday (08:00 AM - 12:00 PM)</option>
               <option value="04:00 PM - 07:00 PM" selected>Evening (04:00 PM - 07:00 PM)</option>
@@ -266,8 +270,8 @@
             </select>
           </div>
 
-          <div class="col-lg-3 col-md-6">
-            <button type="submit" class="btn btn-primary w-100 py-2">
+          <div class="booking-search-col booking-col-btn">
+            <button type="submit" class="btn btn-primary booking-search-btn">
               <i class="bi bi-search"></i> Search Availability
             </button>
           </div>
@@ -496,9 +500,9 @@
         </p>
         
         <!-- Billing Duration Switcher -->
-        <div class="d-inline-flex p-1 bg-light rounded-3 border mt-3">
-          <button type="button" id="btnBillingMonthly" class="btn btn-primary btn-sm px-4">Monthly</button>
-          <button type="button" id="btnBillingAnnual" class="btn btn-outline-dark btn-sm px-4">Annual (Save 20%)</button>
+        <div class="pricing-switcher-wrapper">
+          <button type="button" id="btnBillingMonthly" class="btn btn-primary btn-sm">Monthly</button>
+          <button type="button" id="btnBillingAnnual" class="btn btn-outline-dark btn-sm">Annual (Save 20%)</button>
         </div>
       </div>
 

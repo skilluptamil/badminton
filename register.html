@@ -122,7 +122,32 @@
                   </button>
                 </div>
 
-                <div class="col-12 text-center small text-muted mt-3">
+                <!-- Social Registration Divider -->
+                <div class="col-12">
+                  <div class="auth-divider my-2">
+                    <span>Or register with</span>
+                  </div>
+                </div>
+
+                <!-- Social Registration Buttons (UI elements without fake login) -->
+                <div class="col-12">
+                  <div class="social-auth-grid mb-2">
+                    <button type="button" class="btn-social-auth" aria-label="Sign up with Google" onclick="showToast('Social registration is currently in preview mode. Please register with your email.');">
+                      <i class="bi bi-google"></i>
+                      <span>Google</span>
+                    </button>
+                    <button type="button" class="btn-social-auth" aria-label="Sign up with Facebook" onclick="showToast('Social registration is currently in preview mode. Please register with your email.');">
+                      <i class="bi bi-facebook"></i>
+                      <span>Facebook</span>
+                    </button>
+                    <button type="button" class="btn-social-auth" aria-label="Sign up with Apple" onclick="showToast('Social registration is currently in preview mode. Please register with your email.');">
+                      <i class="bi bi-apple"></i>
+                      <span>Apple</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="col-12 text-center small text-muted mt-2">
                   Already registered? <a href="login.html" class="fw-bold text-primary">Sign In</a>
                 </div>
               </div>
