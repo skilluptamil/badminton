@@ -207,14 +207,7 @@
   color: #ffffff !important;
   border-color: transparent !important;
   box-shadow: 0 4px 14px rgba(0, 179, 119, 0.4) !important;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
   white-space: nowrap !important;
->>>>>>> 38ac0b6 (hfh)
-=======
-  white-space: nowrap !important;
->>>>>>> 38ac0b6 (hfh)
 }
 
 [data-theme="dark"] .navbar-nav .nav-link.nav-dashboard-btn:hover,
@@ -227,15 +220,7 @@
   box-shadow: 0 6px 20px rgba(0, 208, 132, 0.5) !important;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/* On Desktop (min-width: 992px): NO box around navbar-collapse */
-=======
 /* On Desktop (min-width: 992px): NO box around navbar-collapse, maintain 3-zone grid */
->>>>>>> 38ac0b6 (hfh)
-=======
-/* On Desktop (min-width: 992px): NO box around navbar-collapse, maintain 3-zone grid */
->>>>>>> 38ac0b6 (hfh)
 @media (min-width: 992px) {
   [data-theme="dark"] .site-header .navbar-collapse,
   [data-theme="dark"] .navbar-collapse {
@@ -248,14 +233,13 @@
   }
 }
 
-/* On Mobile/Tablet (max-width: 991.98px): Sleek floating overlay when collapsed */
+/* On Mobile/Tablet (max-width: 991.98px): Sleek card background when collapsed */
 @media (max-width: 991.98px) {
-  [data-theme="dark"] .site-header .navbar-collapse {
+  [data-theme="dark"] .navbar-collapse {
     background-color: #131B2E !important;
     border: 1px solid #1E293B !important;
-    border-top: none !important;
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg) !important;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5) !important;
   }
   
   [data-theme="dark"] .nav-controls {
@@ -407,47 +391,9 @@
   color: #F8FAFC !important;
 }
 
-[data-theme="dark"] .pricing-switcher-wrapper {
-  background-color: var(--bg-surface);
-  border-color: var(--border-color);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
 [data-theme="dark"] .pricing-features li {
   color: #E2E8F0;
   border-bottom-color: var(--border-color);
-}
-
-/* Social Login Buttons in Dark Mode */
-[data-theme="dark"] .auth-divider {
-  color: var(--text-muted);
-}
-
-[data-theme="dark"] .auth-divider::before,
-[data-theme="dark"] .auth-divider::after {
-  border-bottom-color: var(--border-color);
-}
-
-[data-theme="dark"] .btn-social-auth {
-  background-color: #17223B;
-  border-color: #1E293B;
-  color: #F8FAFC;
-}
-
-[data-theme="dark"] .btn-social-auth .bi-apple {
-  color: #FFFFFF;
-}
-
-[data-theme="dark"] .btn-social-auth:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: var(--primary);
-  color: #FFFFFF;
-}
-
-[data-theme="dark"] .contact-map-wrapper {
-  border-color: var(--border-color);
-  background-color: var(--bg-surface);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
 [data-theme="dark"] .booking-search-card {
@@ -1069,10 +1015,6 @@
 }
 
 [data-theme="dark"] .stat-card-label {
-  color: var(--text-muted) !important;
-}
-
-[data-theme="dark"] .stat-card-desc {
   color: var(--text-muted) !important;
 }
 
