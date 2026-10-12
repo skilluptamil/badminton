@@ -230,8 +230,9 @@
             <h4 class="fw-bold mb-3">Reserve This Court</h4>
             
             <div class="mb-3">
-              <label class="form-label small fw-bold">Select Date</label>
-              <input type="date" class="form-control" id="courtDetailsDate" value="2026-09-16">
+              <label class="form-label small fw-bold" for="courtDetailsDate">Select Date</label>
+              <input type="date" class="form-control" id="courtDetailsDate" required>
+              <div class="invalid-feedback small" id="courtDetailsDateFeedback">Past dates are not allowed. Please choose today or a future date.</div>
             </div>
 
             <div class="mb-3">
@@ -403,8 +404,9 @@
             </div>
 
             <div class="col-md-6">
-              <label class="form-label fw-bold small">Booking Date</label>
-              <input type="date" class="form-control" id="modalBookingDate" value="2026-09-16">
+              <label class="form-label fw-bold small" for="modalBookingDate">Booking Date</label>
+              <input type="date" class="form-control" id="modalBookingDate" required>
+              <div class="invalid-feedback small" id="modalBookingDateFeedback">Past dates are not allowed. Please choose today or a future date.</div>
             </div>
 
             <div class="col-md-6">

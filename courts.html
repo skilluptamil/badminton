@@ -143,7 +143,8 @@
 
           <div class="col-lg-3 col-md-6">
             <label class="form-label small fw-bold" for="filterDate">Date</label>
-            <input type="date" class="form-control form-control-sm" id="filterDate" value="2026-09-16">
+            <input type="date" class="form-control form-control-sm" id="filterDate" required>
+            <div class="invalid-feedback small" id="filterDateFeedback">Past dates are not allowed. Please choose today or a future date.</div>
           </div>
 
           <div class="col-lg-3 col-md-6">
@@ -652,8 +653,9 @@
             </div>
 
             <div class="col-md-6">
-              <label class="form-label fw-bold small">Booking Date</label>
-              <input type="date" class="form-control" id="modalBookingDate" value="2026-09-16">
+              <label class="form-label fw-bold small" for="modalBookingDate">Booking Date</label>
+              <input type="date" class="form-control" id="modalBookingDate" required>
+              <div class="invalid-feedback small" id="modalBookingDateFeedback">Past dates are not allowed. Please choose today or a future date.</div>
             </div>
 
             <div class="col-md-6">

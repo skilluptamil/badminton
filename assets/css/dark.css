@@ -160,11 +160,26 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
 }
 
+[data-theme="dark"] .dashboard-header,
 [data-theme="dark"] .dashboard-top-navbar {
-  background-color: rgba(19, 27, 46, 0.96) !important;
+  background-color: rgba(19, 27, 46, 0.98) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
+}
+
+[data-theme="dark"] .dashboard-role-switcher {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .btn-dash-mode {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .btn-dash-mode.active {
+  background-color: var(--primary) !important;
+  color: #070C18 !important;
 }
 
 [data-theme="dark"] .brand-logo {
@@ -178,6 +193,7 @@
 [data-theme="dark"] .navbar-nav .nav-link {
   color: #E2E8F0 !important;
   background-color: transparent !important;
+  white-space: nowrap !important;
 }
 
 [data-theme="dark"] .navbar-nav .nav-link:hover,
@@ -191,6 +207,10 @@
   color: #ffffff !important;
   border-color: transparent !important;
   box-shadow: 0 4px 14px rgba(0, 179, 119, 0.4) !important;
+<<<<<<< HEAD
+=======
+  white-space: nowrap !important;
+>>>>>>> 38ac0b6 (hfh)
 }
 
 [data-theme="dark"] .navbar-nav .nav-link.nav-dashboard-btn:hover,
@@ -203,9 +223,15 @@
   box-shadow: 0 6px 20px rgba(0, 208, 132, 0.5) !important;
 }
 
+<<<<<<< HEAD
 /* On Desktop (min-width: 992px): NO box around navbar-collapse */
+=======
+/* On Desktop (min-width: 992px): NO box around navbar-collapse, maintain 3-zone grid */
+>>>>>>> 38ac0b6 (hfh)
 @media (min-width: 992px) {
+  [data-theme="dark"] .site-header .navbar-collapse,
   [data-theme="dark"] .navbar-collapse {
+    display: contents !important;
     background-color: transparent !important;
     border: none !important;
     box-shadow: none !important;

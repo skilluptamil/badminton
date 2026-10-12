@@ -116,12 +116,12 @@
           <p class="hero-subtitle">
             Join the most competitive badminton and table tennis academy. Master professional footwork, spin techniques, and compete in sanctioned club leagues with certified head coaches.
           </p>
-          <div class="d-flex flex-wrap gap-3">
-            <button type="button" class="btn btn-secondary btn-lg btn-book-court" data-court-name="Academy Court Alpha" data-sport="Badminton" data-price="28">
-              <i class="bi bi-calendar-check-fill"></i> Book Court
+          <div class="hero-cta-group">
+            <button type="button" class="btn btn-secondary btn-lg btn-book-court hero-cta-btn" data-court-name="Academy Court Alpha" data-sport="Badminton" data-price="28">
+              <i class="bi bi-calendar-check-fill"></i> <span>Book Court</span>
             </button>
-            <a href="membership.html" class="btn btn-outline-dark btn-lg">
-              <i class="bi bi-people-fill"></i> Join Membership
+            <a href="membership.html" class="btn btn-outline-dark btn-lg hero-cta-btn">
+              <i class="bi bi-people-fill"></i> <span>Join Membership</span>
             </a>
           </div>
 
@@ -622,12 +622,12 @@
             <p class="cta-desc">
               Connect with over 4,500 local players. Find singles sparring partners, doubles teammates, and unlock exclusive academy benefits.
             </p>
-            <div class="d-flex flex-wrap gap-3">
-              <a href="register.html" class="btn btn-primary btn-lg">
-                <i class="bi bi-person-plus-fill"></i> Become a Member
+            <div class="cta-banner-actions">
+              <a href="register.html" class="btn btn-primary btn-lg cta-banner-btn">
+                <i class="bi bi-person-plus-fill"></i> <span>Become a Member</span>
               </a>
-              <button type="button" class="btn btn-outline-light btn-lg btn-book-court" data-court-name="Academy Court Alpha" data-sport="Badminton" data-price="28">
-                <i class="bi bi-calendar-check-fill"></i> Book a Court
+              <button type="button" class="btn btn-outline-light btn-lg btn-book-court cta-banner-btn" data-court-name="Academy Court Alpha" data-sport="Badminton" data-price="28">
+                <i class="bi bi-calendar-check-fill"></i> <span>Book a Court</span>
               </button>
             </div>
           </div>
@@ -739,8 +739,9 @@
             </div>
 
             <div class="col-md-6">
-              <label class="form-label fw-bold small">Booking Date</label>
-              <input type="date" class="form-control" id="modalBookingDate" value="2026-09-16">
+              <label class="form-label fw-bold small" for="modalBookingDate">Booking Date</label>
+              <input type="date" class="form-control" id="modalBookingDate" required>
+              <div class="invalid-feedback small" id="modalBookingDateFeedback">Past dates are not allowed. Please choose today or a future date.</div>
             </div>
 
             <div class="col-md-6">

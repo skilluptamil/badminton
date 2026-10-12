@@ -116,12 +116,12 @@
           <p class="hero-subtitle">
             Experience Olympic-grade BWF synthetic badminton courts and ITTF championship table tennis arenas. Instant online slot booking, real-time availability, and professional racket rentals.
           </p>
-          <div class="d-flex flex-wrap gap-3">
-            <a href="#quickBookingings" class="btn btn-primary btn-lg">
-              <i class="bi bi-calendar-check-fill"></i> Book a Court
+          <div class="hero-cta-group">
+            <a href="#quickBookingings" class="btn btn-primary btn-lg hero-cta-btn">
+              <i class="bi bi-calendar-check-fill"></i> <span>Book a Court</span>
             </a>
-            <a href="courts.html" class="btn btn-outline-dark btn-lg">
-              <i class="bi bi-compass"></i> Explore Courts
+            <a href="courts.html" class="btn btn-outline-dark btn-lg hero-cta-btn">
+              <i class="bi bi-compass"></i> <span>Explore Courts</span>
             </a>
           </div>
 
@@ -255,7 +255,12 @@
             <label class="booking-field-label" for="searchDate">
               <i class="bi bi-calendar3 text-primary"></i> Select Date
             </label>
+<<<<<<< HEAD
             <input type="date" class="form-control booking-input-control" id="searchDate" value="2026-09-16" required>
+=======
+            <input type="date" class="form-control booking-input-control" id="searchDate" required>
+            <div class="invalid-feedback small" id="searchDateFeedback">Past dates are not allowed. Please choose today or a future date.</div>
+>>>>>>> 38ac0b6 (hfh)
           </div>
 
           <div class="booking-search-col booking-col-time">
@@ -653,12 +658,12 @@
             <p class="cta-desc">
               Grab your racket, book your preferred court in seconds, and elevate your game today.
             </p>
-            <div class="d-flex flex-wrap gap-3">
-              <button type="button" class="btn btn-secondary btn-lg btn-book-court" data-court-name="Grand Arena – Court 1" data-sport="Badminton" data-price="25">
-                <i class="bi bi-calendar-check-fill"></i> Book Your Court
+            <div class="cta-banner-actions">
+              <button type="button" class="btn btn-secondary btn-lg btn-book-court cta-banner-btn" data-court-name="Grand Arena – Court 1" data-sport="Badminton" data-price="25">
+                <i class="bi bi-calendar-check-fill"></i> <span>Book Your Court</span>
               </button>
-              <a href="membership.html" class="btn btn-outline-light btn-lg">
-                <i class="bi bi-gem"></i> View Membership Plans
+              <a href="membership.html" class="btn btn-outline-light btn-lg cta-banner-btn">
+                <i class="bi bi-gem"></i> <span>View Membership Plans</span>
               </a>
             </div>
           </div>
@@ -774,8 +779,9 @@
 
             <!-- Date Picker -->
             <div class="col-md-6">
-              <label class="form-label fw-bold small">Booking Date</label>
-              <input type="date" class="form-control" id="modalBookingDate" value="2026-09-16">
+              <label class="form-label fw-bold small" for="modalBookingDate">Booking Date</label>
+              <input type="date" class="form-control" id="modalBookingDate" required>
+              <div class="invalid-feedback small" id="modalBookingDateFeedback">Past dates are not allowed. Please choose today or a future date.</div>
             </div>
 
             <!-- Duration -->

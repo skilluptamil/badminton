@@ -114,14 +114,30 @@ ul {
   right: 0;
   width: 100%;
   z-index: 1040;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-color);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Fluid generous header container - prevents artificial squishing at 992px - 1280px */
+.site-header .container,
+.site-header .container-fluid {
+  max-width: 1440px !important;
+  width: 100% !important;
+  padding-left: clamp(0.75rem, 2vw, 1.5rem) !important;
+  padding-right: clamp(0.75rem, 2vw, 1.5rem) !important;
+}
+
 .site-header .navbar {
+  padding-top: 0.55rem !important;
+  padding-bottom: 0.55rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 0;
   transition: padding 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -132,19 +148,21 @@ ul {
 }
 
 .site-header.scrolled .navbar {
-  padding-top: 0.55rem !important;
-  padding-bottom: 0.55rem !important;
+  padding-top: 0.42rem !important;
+  padding-bottom: 0.42rem !important;
 }
 
 .brand-logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: clamp(6px, 0.8vw, 10px);
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 1.35vw, 1.5rem);
   color: var(--dark);
   text-decoration: none;
+  white-space: nowrap !important;
+  flex-shrink: 0;
 }
 
 .brand-logo:hover {
@@ -152,17 +170,18 @@ ul {
 }
 
 .brand-icon {
-  width: 42px;
-  height: 42px;
+  width: clamp(34px, 2.5vw, 42px);
+  height: clamp(34px, 2.5vw, 42px);
   background: linear-gradient(135deg, var(--primary) 0%, #00B377 100%);
   color: #fff;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 1.15vw, 1.3rem);
   box-shadow: 0 4px 12px var(--primary-glow);
   transition: var(--transition-smooth);
+  flex-shrink: 0;
 }
 
 .brand-logo:hover .brand-icon {
@@ -173,26 +192,213 @@ ul {
   color: var(--secondary);
 }
 
-/* Main Nav Links */
-.navbar-nav .nav-link {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--text-main);
-  padding: 0.6rem 1.1rem !important;
-  border-radius: var(--radius-sm);
-  transition: var(--transition-fast);
-  display: flex;
-  align-items: center;
-  gap: 4px;
+/* Ensure nav links and buttons NEVER wrap their text on ANY screen size or browser */
+.navbar-nav .nav-link,
+.site-header .navbar-nav .nav-link,
+.site-header .nav-link,
+.nav-dashboard-btn,
+.nav-auth-btn,
+.control-btn,
+.brand-logo {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
 }
 
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-  color: var(--primary);
-  background-color: var(--primary-light);
+/* ==========================================================================
+   DESKTOP 3-ZONE NAVBAR (>= 992px): Logo Left | Nav Dead Center | Controls Right
+   ========================================================================== */
+@media (min-width: 992px) {
+  .site-header .navbar {
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-height: 74px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    gap: 0 !important;
+  }
+
+  /* Flatten collapse wrapper so Logo (Zone 1), Nav (Zone 2), and Controls (Zone 3) participate in the grid */
+  .site-header .navbar-collapse {
+    display: contents !important;
+  }
+
+  /* Zone 1: Logo anchored to the left */
+  .site-header .brand-logo {
+    grid-column: 1 !important;
+    justify-self: start !important;
+    margin: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  /* Zone 2: Navigation Links 100% mathematically centered in the navbar */
+  .site-header .navbar-nav {
+    grid-column: 2 !important;
+    justify-self: center !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: clamp(4px, 0.6vw, 10px) !important;
+    list-style: none !important;
+  }
+
+  .site-header .navbar-nav .nav-item {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    margin: 0 !important;
+  }
+
+  .site-header .navbar-nav .nav-link {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.92rem !important;
+    color: var(--text-main);
+    padding: 0.5rem 0.85rem !important;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    line-height: 1 !important;
+    text-decoration: none;
+    height: 38px !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+  }
+
+  .site-header .navbar-nav .nav-link:hover,
+  .site-header .navbar-nav .nav-link.active {
+    color: var(--primary);
+    background-color: var(--primary-light);
+  }
+
+  /* Caret vertical centering */
+  .site-header .navbar-nav .dropdown-toggle::after {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin-left: 6px !important;
+    margin-top: 1px !important;
+    border-top: 0.32em solid !important;
+    border-right: 0.32em solid transparent !important;
+    border-bottom: 0 !important;
+    border-left: 0.32em solid transparent !important;
+  }
+
+  /* Dashboard Green Action Button inside Nav */
+  .site-header .navbar-nav .nav-link.nav-dashboard-btn {
+    background: linear-gradient(135deg, var(--primary) 0%, #00B377 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    padding: 0.5rem 1rem !important;
+    font-size: 0.88rem !important;
+    border: 1px solid transparent;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    box-shadow: 0 4px 12px var(--primary-glow);
+    height: 38px !important;
+    white-space: nowrap !important;
+  }
+
+  .site-header .navbar-nav .nav-link.nav-dashboard-btn:hover,
+  .site-header .navbar-nav .nav-link.nav-dashboard-btn:focus,
+  .site-header .navbar-nav .nav-link.nav-dashboard-btn.show,
+  .site-header .navbar-nav .nav-link.nav-dashboard-btn.active {
+    background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary) 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 18px var(--primary-glow);
+    transform: translateY(-1px);
+  }
+
+  /* Zone 3: Right Controls in Single Horizontal Row */
+  .site-header .nav-controls {
+    grid-column: 3 !important;
+    justify-self: end !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  .site-header .nav-controls .control-btn {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    border-radius: var(--radius-md);
+    font-size: 1rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
+    vertical-align: middle !important;
+  }
+
+  .site-header .nav-controls .nav-auth-btn {
+    height: 38px !important;
+    padding: 0 0.95rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+  }
+
+  /* Dropdowns */
+  .site-header .navbar-nav .dropdown {
+    position: relative !important;
+  }
+
+  .site-header .navbar-nav .dropdown:hover > .dropdown-menu {
+    display: block;
+    margin-top: 0.35rem;
+  }
+
+  .site-header .navbar-nav .dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: auto !important;
+    margin-top: 0.35rem !important;
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
+    z-index: 1050 !important;
+  }
+
+  .site-header .navbar-nav .dropdown-menu-end {
+    left: auto !important;
+    right: 0 !important;
+  }
 }
 
+<<<<<<< HEAD
 /* Navbar Dashboard Button Method - Dark Green Style like Sign Up Button */
 .navbar-nav .nav-link.nav-dashboard-btn {
   background: linear-gradient(135deg, var(--primary) 0%, #00B377 100%);
@@ -229,6 +435,62 @@ ul {
   margin-top: 0.5rem;
   min-width: 200px;
   animation: fadeInDown 0.2s ease-out;
+=======
+/* ==========================================================================
+   MEDIUM DESKTOP / 1024px LAPTOPS (992px to 1199.98px): Proportional scaling
+   ========================================================================== */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .site-header .container,
+  .site-header .container-fluid {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  .site-header .brand-logo {
+    font-size: 1.2rem !important;
+    gap: 7px !important;
+  }
+
+  .site-header .brand-icon {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 1rem !important;
+  }
+
+  .site-header .navbar-nav {
+    gap: 4px !important;
+  }
+
+  .site-header .navbar-nav .nav-link {
+    font-size: 0.84rem !important;
+    padding: 0.4rem 0.55rem !important;
+    height: 34px !important;
+  }
+
+  .site-header .navbar-nav .nav-link.nav-dashboard-btn {
+    font-size: 0.82rem !important;
+    padding: 0.4rem 0.75rem !important;
+    height: 34px !important;
+  }
+
+  .site-header .nav-controls {
+    gap: 5px !important;
+  }
+
+  .site-header .nav-controls .control-btn {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .site-header .nav-controls .nav-auth-btn {
+    height: 34px !important;
+    padding: 0 0.68rem !important;
+    font-size: 0.8rem !important;
+    gap: 4px !important;
+  }
+>>>>>>> 38ac0b6 (hfh)
 }
 
 @media (min-width: 992px) {
@@ -273,7 +535,9 @@ ul {
 .nav-controls {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  flex-shrink: 0;
+  white-space: nowrap !important;
 }
 
 .nav-controls .btn,
@@ -283,15 +547,20 @@ ul {
   align-items: center;
   justify-content: center;
   height: 38px;
+<<<<<<< HEAD
   padding: 0 1.2rem;
+=======
+  padding: 0 0.95rem;
+>>>>>>> 38ac0b6 (hfh)
   font-size: 0.875rem;
   font-weight: 700;
   border-radius: var(--radius-md);
-  gap: 8px;
+  gap: 6px;
   line-height: 1;
-  white-space: nowrap;
+  white-space: nowrap !important;
   vertical-align: middle;
   text-decoration: none;
+<<<<<<< HEAD
   font-family: var(--font-heading);
   transition: var(--transition-smooth);
 }
@@ -308,6 +577,9 @@ ul {
   color: #ffffff !important;
   transform: translateY(-2px);
   box-shadow: 0 6px 18px var(--primary-glow);
+=======
+  flex-shrink: 0;
+>>>>>>> 38ac0b6 (hfh)
 }
 
 .nav-controls .btn i,
@@ -519,6 +791,103 @@ ul {
   color: var(--text-muted);
   margin-bottom: 2rem;
   max-width: 540px;
+}
+
+/* Hero CTA & Call-to-Action Action Buttons */
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.hero-cta-group .btn,
+.hero-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 52px;
+  height: 52px;
+  padding: 0 1.75rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: var(--transition-fast);
+}
+
+.hero-cta-group .btn i,
+.hero-cta-btn i {
+  font-size: 1.15rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.cta-banner-actions .btn,
+.cta-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 52px;
+  height: 52px;
+  padding: 0 1.75rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: var(--transition-fast);
+}
+
+.cta-banner-actions .btn i,
+.cta-banner-btn i {
+  font-size: 1.15rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Date validation feedback */
+.form-control.is-invalid,
+input[type="date"].is-invalid {
+  border-color: #dc3545 !important;
+  background-color: rgba(220, 53, 69, 0.04) !important;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15) !important;
+}
+
+.invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  color: #dc3545;
+  font-weight: 500;
+}
+
+.is-invalid ~ .invalid-feedback {
+  display: block;
 }
 
 .hero-image-box {
@@ -1797,11 +2166,59 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 /* ==========================================================================
-   DASHBOARD
+   DASHBOARD APPLICATION
    ========================================================================== */
+.dashboard-header {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1030;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.dashboard-header .brand-logo {
+  font-size: 1.35rem;
+  gap: 8px;
+}
+
+.dashboard-header .brand-icon {
+  width: 38px;
+  height: 38px;
+  font-size: 1.15rem;
+}
+
 .dashboard-wrapper {
-  padding: 40px 0 80px 0;
+  padding: 24px 0 60px 0;
   background-color: var(--bg-body);
+  min-height: calc(100vh - 65px);
+}
+
+/* Dashboard Mode Visual Differentiation */
+.mode-user .btn-dash-mode#btnModeUser {
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+
+.mode-customer .btn-dash-mode#btnModeCustomer {
+  background-color: #0284c7 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+}
+
+.mode-user .dashboard-sidebar {
+  border-top: 4px solid var(--primary);
+}
+
+.mode-customer .dashboard-sidebar {
+  border-top: 4px solid #0284c7;
+}
+
+.mode-user .user-avatar-lg {
+  border-color: var(--primary);
+}
+
+.mode-customer .user-avatar-lg {
+  border-color: #0284c7;
 }
 
 .dashboard-sidebar {
@@ -1815,8 +2232,8 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 @media (min-width: 992px) {
   .dashboard-sidebar {
     position: sticky;
-    top: 95px; /* Sits below the sticky navbar with consistent spacing */
-    max-height: calc(100vh - 115px);
+    top: 76px; /* Sits cleanly below sticky dashboard-header */
+    max-height: calc(100vh - 95px);
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 1000;
@@ -1920,6 +2337,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .stat-card-widget {
   background: var(--bg-surface);
   border-radius: var(--radius-lg);
+<<<<<<< HEAD
   padding: 1.15rem 1.2rem;
   border: 1px solid var(--border-color);
   display: flex;
@@ -1930,6 +2348,22 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   transition: var(--transition-fast);
   height: 100%;
   min-height: 102px;
+=======
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--border-color);
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition-fast);
+  height: 100%;
+  min-height: 124px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+>>>>>>> 38ac0b6 (hfh)
 }
 
 .stat-card-widget:hover {
@@ -1938,6 +2372,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 .stat-info-wrap {
+<<<<<<< HEAD
   flex: 1 1 auto;
   min-width: 0;
   display: flex;
@@ -1961,6 +2396,60 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   color: var(--text-dark);
   margin-bottom: 2px;
   white-space: nowrap;
+=======
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  text-align: left !important;
+  overflow: hidden !important;
+}
+
+.stat-card-label {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  color: var(--text-muted) !important;
+  line-height: 1.25 !important;
+  height: 2.2rem !important;
+  min-height: 2.2rem !important;
+  max-height: 2.2rem !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  margin-bottom: 6px !important;
+  word-break: normal !important;
+  overflow: hidden !important;
+}
+
+.stat-card-value {
+  font-size: clamp(1.15rem, 1.2vw, 1.35rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--dark) !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  margin-bottom: 4px !important;
+  display: block !important;
+}
+
+.stat-card-desc,
+.stat-info-wrap .small,
+.stat-info-wrap .text-muted {
+  font-size: 0.78rem !important;
+  line-height: 1.25 !important;
+  color: var(--text-muted) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: block !important;
+>>>>>>> 38ac0b6 (hfh)
 }
 
 .stat-card-desc {
@@ -1971,6 +2460,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 .stat-widget-icon {
+<<<<<<< HEAD
   width: 44px;
   height: 44px;
   min-width: 44px;
@@ -1980,6 +2470,20 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   justify-content: center;
   font-size: 1.3rem;
   flex-shrink: 0;
+=======
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  border-radius: var(--radius-md) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.2rem !important;
+  flex-shrink: 0 !important;
+  align-self: center !important;
+  margin-left: auto !important;
+>>>>>>> 38ac0b6 (hfh)
 }
 
 .stat-icon-green {
@@ -2007,17 +2511,108 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   color: #0D9488;
 }
 
+<<<<<<< HEAD
 .btn-dash-mode {
   transition: var(--transition-fast);
   font-size: 0.88rem;
   border: none;
   font-family: var(--font-heading);
+=======
+/* Dedicated Dashboard Header (Replaces marketing navbar on dashboard.html) */
+.dashboard-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1040;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.dashboard-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+  gap: 1rem;
+}
+
+.dashboard-portal-pill {
+  background-color: var(--primary-light);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 0.35rem 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.02em;
+}
+
+.dashboard-role-switcher {
+  background: var(--bg-alt);
+  padding: 4px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-dash-mode {
+  transition: var(--transition-fast);
+  font-size: 0.84rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  border: none;
+  padding: 0.38rem 0.95rem;
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.btn-dash-mode:hover:not(.active) {
+  color: var(--primary);
+>>>>>>> 38ac0b6 (hfh)
 }
 
 .btn-dash-mode.active {
   background-color: var(--primary) !important;
   color: #ffffff !important;
+<<<<<<< HEAD
   box-shadow: 0 4px 12px var(--primary-glow);
+=======
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+
+/* Sidebar Role-specific Navigation Groups */
+.nav-item-customer {
+  display: none !important;
+}
+
+.mode-customer .nav-item-user {
+  display: none !important;
+}
+
+.mode-customer .nav-item-customer {
+  display: flex !important;
+}
+
+.customer-quick-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: var(--transition-fast);
+>>>>>>> 38ac0b6 (hfh)
 }
 
 .loyalty-progress-card {
@@ -2646,23 +3241,138 @@ img, svg, video, iframe {
     right: 8px;
     bottom: 8px;
   }
-  .navbar-nav .nav-link {
-    padding: 0.65rem 0.9rem !important;
+<<<<<<< HEAD
+=======
+  .site-header .navbar {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-height: 64px !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    gap: 0 !important;
   }
+  .site-header .brand-logo {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: clamp(1.15rem, 3.8vw, 1.35rem) !important;
+    flex-shrink: 0 !important;
+    order: 1 !important;
+    margin: 0 !important;
+  }
+  .site-header .brand-icon {
+    width: clamp(32px, 7.5vw, 38px) !important;
+    height: clamp(32px, 7.5vw, 38px) !important;
+    font-size: clamp(0.95rem, 2.5vw, 1.15rem) !important;
+  }
+  .site-header .navbar-toggler {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 42px !important;
+    height: 42px !important;
+    padding: 0 !important;
+    border-radius: var(--radius-sm) !important;
+    border: 1px solid var(--border-color) !important;
+    background-color: var(--bg-surface) !important;
+    color: var(--dark) !important;
+    cursor: pointer !important;
+    order: 2 !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+  }
+  .site-header .navbar-toggler i {
+    font-size: 1.5rem !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .site-header .navbar-collapse,
+  .navbar-collapse {
+    order: 3 !important;
+    background-color: var(--bg-surface);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1rem;
+    margin-top: 0.75rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    max-height: calc(100vh - 85px);
+    overflow-y: auto;
+    width: 100% !important;
+    flex-basis: 100% !important;
+  }
+  .site-header .navbar-nav,
+  .navbar-nav {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 4px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .site-header .navbar-nav .nav-item,
+  .navbar-nav .nav-item {
+    width: 100% !important;
+  }
+  .site-header .navbar-nav .nav-link,
+>>>>>>> 38ac0b6 (hfh)
+  .navbar-nav .nav-link {
+    width: 100% !important;
+    padding: 0.7rem 1rem !important;
+    border-radius: var(--radius-sm) !important;
+    font-size: 0.95rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    white-space: nowrap !important;
+  }
+  .site-header .navbar-nav .nav-link.nav-dashboard-btn {
+    margin-top: 0.35rem !important;
+    padding: 0.65rem 1rem !important;
+    justify-content: center !important;
+  }
+  .site-header .nav-controls,
   .nav-controls {
-    margin-top: 1rem;
-    padding-top: 1rem;
+    margin-top: 1.1rem;
+    padding-top: 1.1rem;
     border-top: 1px solid var(--border-color);
-    display: flex;
-    flex-wrap: wrap;
+    display: grid !important;
+    grid-template-columns: 44px 44px 1fr 1fr;
     align-items: center;
     gap: 10px;
     width: 100%;
   }
+<<<<<<< HEAD
   .nav-controls .nav-cta-btn {
     flex: 1 1 auto;
     width: auto;
     text-align: center;
+=======
+  .site-header .nav-controls .control-btn,
+  .nav-controls .control-btn {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 1.05rem !important;
+    border-radius: var(--radius-sm) !important;
+    flex-shrink: 0;
+  }
+  .site-header .nav-controls .nav-auth-btn,
+  .nav-controls .nav-auth-btn {
+    height: 44px !important;
+    width: 100% !important;
+    padding: 0 0.85rem !important;
+    font-size: 0.88rem !important;
+    justify-content: center;
+    text-align: center;
+    border-radius: var(--radius-sm) !important;
+    white-space: nowrap !important;
+    flex-shrink: 0;
+>>>>>>> 38ac0b6 (hfh)
   }
   .booking-search-card {
     margin-top: 1.5rem;
@@ -2684,6 +3394,7 @@ img, svg, video, iframe {
   }
 }
 
+<<<<<<< HEAD
 /* Medium Desktop Screens (992px - 1199.98px including 1024px & 1068px) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .site-header .navbar {
@@ -2728,6 +3439,10 @@ img, svg, video, iframe {
     font-size: 0.84rem;
     gap: 5px;
   }
+=======
+/* Medium Desktop Screens (992px - 1199.98px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+>>>>>>> 38ac0b6 (hfh)
   .booking-search-card {
     padding: 1.5rem;
   }
@@ -2775,6 +3490,7 @@ img, svg, video, iframe {
     height: 65px;
   }
   .stat-card-widget {
+<<<<<<< HEAD
     padding: 1rem 1.1rem;
     min-height: 92px;
     gap: 10px;
@@ -2794,10 +3510,61 @@ img, svg, video, iframe {
     height: 42px;
     min-width: 42px;
     font-size: 1.2rem;
+=======
+    padding: 1rem 1rem;
+    min-height: 104px;
+    gap: 10px;
+  }
+  .stat-card-label {
+    font-size: 0.76rem;
+    min-height: 1.9rem;
+  }
+  .stat-card-value {
+    font-size: 1.25rem;
+  }
+  .stat-widget-icon {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    font-size: 1.2rem !important;
+>>>>>>> 38ac0b6 (hfh)
   }
   .time-slot-pill {
     padding: 0.5rem 0.6rem;
     font-size: 0.82rem;
+  }
+
+  /* 720px Tablet & Mobile CTA Button Alignment */
+  .hero-cta-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.85rem;
+    margin-top: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+  .hero-cta-group .btn,
+  .hero-cta-btn {
+    min-height: 50px;
+    height: 50px;
+    padding: 0 1.4rem;
+    font-size: 0.98rem;
+    white-space: nowrap;
+  }
+  .cta-banner-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.85rem;
+  }
+  .cta-banner-actions .btn,
+  .cta-banner-btn {
+    min-height: 50px;
+    height: 50px;
+    padding: 0 1.4rem;
+    font-size: 0.98rem;
   }
 }
 
@@ -2824,6 +3591,51 @@ img, svg, video, iframe {
   .cta-title {
     font-size: 1.6rem;
   }
+
+  /* Stacking CTA Buttons Vertically for Mobile Viewports */
+  .hero-cta-group {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.75rem !important;
+    width: 100% !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .hero-cta-group .btn,
+  .hero-cta-btn {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    min-height: 48px !important;
+    height: 48px !important;
+    padding: 0 1rem !important;
+    font-size: 0.95rem !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+  .cta-banner-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.75rem !important;
+    width: 100% !important;
+  }
+  .cta-banner-actions .btn,
+  .cta-banner-btn {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    min-height: 48px !important;
+    height: 48px !important;
+    padding: 0 1rem !important;
+    font-size: 0.95rem !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
   .auth-card {
     padding: 1.6rem 1rem;
   }
@@ -2848,9 +3660,35 @@ img, svg, video, iframe {
     height: 120px !important;
     border-radius: var(--radius-sm);
   }
-  .nav-controls .btn {
-    flex: 1 1 auto;
-    text-align: center;
+  .site-header .nav-controls,
+  .nav-controls {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+  .site-header .nav-controls .control-btn,
+  .nav-controls .control-btn {
+    width: 100% !important;
+    height: 40px !important;
+  }
+  .site-header .nav-controls .nav-auth-btn,
+  .nav-controls .nav-auth-btn {
+    width: 100% !important;
+    height: 40px !important;
+    font-size: 0.85rem !important;
+  }
+  .booking-search-card {
+    padding: 1.15rem 0.9rem;
+  }
+  .booking-search-form {
+    gap: 0.85rem;
+  }
+  .booking-search-card .form-select,
+  .booking-search-card input[type="date"],
+  .booking-search-btn {
+    height: 46px;
+    min-height: 46px;
+    max-height: 46px;
+    font-size: 0.88rem;
   }
   .booking-search-card {
     padding: 1.15rem 0.9rem;
@@ -2870,6 +3708,24 @@ img, svg, video, iframe {
 
 /* Extra Small Screens (< 380px) */
 @media (max-width: 380px) {
+<<<<<<< HEAD
+=======
+  .site-header .brand-logo {
+    font-size: 1.15rem !important;
+    gap: 6px !important;
+  }
+  .site-header .brand-icon {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.95rem !important;
+  }
+  .site-header .nav-controls .nav-auth-btn,
+  .nav-controls .nav-auth-btn {
+    font-size: 0.8rem !important;
+    padding: 0 0.4rem !important;
+    gap: 4px !important;
+  }
+>>>>>>> 38ac0b6 (hfh)
   .booking-search-card {
     padding: 1rem 0.75rem;
   }
@@ -2904,6 +3760,27 @@ img, svg, video, iframe {
   }
   .dashboard-top-navbar .brand-text span {
     display: inline;
+  }
+
+  /* 320px Ultra-Compact Mobile Viewports */
+  .hero-cta-group {
+    gap: 0.55rem !important;
+  }
+  .hero-cta-group .btn,
+  .hero-cta-btn,
+  .cta-banner-actions .btn,
+  .cta-banner-btn {
+    min-height: 46px !important;
+    height: 46px !important;
+    font-size: 0.88rem !important;
+    padding: 0 0.75rem !important;
+    gap: 0.45rem !important;
+  }
+  .hero-cta-group .btn i,
+  .hero-cta-btn i,
+  .cta-banner-actions .btn i,
+  .cta-banner-btn i {
+    font-size: 1rem !important;
   }
 }
 

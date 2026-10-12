@@ -46,6 +46,28 @@
   left: auto !important;
 }
 
+[dir="rtl"] .site-header .brand-logo {
+  justify-self: start !important;
+}
+
+[dir="rtl"] .site-header .navbar-nav {
+  justify-self: center !important;
+}
+
+[dir="rtl"] .site-header .nav-controls {
+  justify-self: end !important;
+}
+
+[dir="rtl"] .site-header .navbar-nav .dropdown-menu {
+  right: 0 !important;
+  left: auto !important;
+}
+
+[dir="rtl"] .site-header .navbar-nav .dropdown-menu-end {
+  right: auto !important;
+  left: 0 !important;
+}
+
 [dir="rtl"] .navbar-nav .dropdown-item:hover,
 [dir="rtl"] .navbar-nav .dropdown-item.active {
   transform: translateX(-4px);

@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Sticky Navbar shadow & dynamic scrolled state
-  const headers = document.querySelectorAll('.site-header, .dashboard-top-navbar');
+  const headers = document.querySelectorAll('.site-header, .dashboard-header, .dashboard-top-navbar');
   const updateHeaderSticky = () => {
     const isScrolled = window.scrollY > 15;
     headers.forEach(h => {
