@@ -244,6 +244,16 @@
     <div class="container">
       <div class="booking-search-card">
         <form id="quickBookingSearchForm" class="booking-search-form">
+          <!-- 1. Select Date -->
+          <div class="booking-search-col booking-col-date">
+            <label class="booking-field-label" for="searchDate">
+              <i class="bi bi-calendar3 text-primary"></i> Select Date
+            </label>
+            <input type="date" class="form-control booking-input-control" id="searchDate" required>
+            <div class="invalid-feedback small" id="searchDateFeedback">Past dates are not allowed. Please choose today or a future date.</div>
+          </div>
+
+          <!-- 2. Select Sport -->
           <div class="booking-search-col booking-col-sport">
             <label class="booking-field-label" for="searchSport">
               <i class="bi bi-dribbble text-primary"></i> Select Sport
@@ -255,14 +265,7 @@
             </select>
           </div>
 
-          <div class="booking-search-col booking-col-date">
-            <label class="booking-field-label" for="searchDate">
-              <i class="bi bi-calendar3 text-primary"></i> Select Date
-            </label>
-            <input type="date" class="form-control booking-input-control" id="searchDate" required>
-            <div class="invalid-feedback small" id="searchDateFeedback">Past dates are not allowed. Please choose today or a future date.</div>
-          </div>
-
+          <!-- 3. Select Time Slot -->
           <div class="booking-search-col booking-col-time">
             <label class="booking-field-label" for="searchTime">
               <i class="bi bi-clock text-primary"></i> Select Time Slot
@@ -275,6 +278,7 @@
             </select>
           </div>
 
+          <!-- 4. Search Availability Button -->
           <div class="booking-search-col booking-col-btn">
             <button type="submit" class="btn btn-primary booking-search-btn">
               <i class="bi bi-search"></i> Search Availability
