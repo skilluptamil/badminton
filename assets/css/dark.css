@@ -1147,3 +1147,37 @@
   background: var(--primary);
   color: #0B0F19 !important;
 }
+
+/* Dark Mode Enhancements for Dynamic Animations */
+[data-theme="dark"] .hero-title span.text-highlight {
+  background: linear-gradient(135deg, #00E676 0%, #4ADE80 25%, #6EE7B7 50%, #00E676 75%, #4ADE80 100%) !important;
+  background-size: 250% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+[data-theme="dark"] .hero-title span.text-highlight-orange {
+  background: linear-gradient(135deg, #FF7043 0%, #FFA726 25%, #FFD54F 50%, #FF7043 75%, #FFA726 100%) !important;
+  background-size: 250% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+[data-theme="dark"] .hero-ambient-orb-1 {
+  background: radial-gradient(circle, rgba(0, 230, 118, 0.22) 0%, rgba(0, 230, 118, 0) 70%) !important;
+  opacity: 0.65;
+}
+
+[data-theme="dark"] .hero-ambient-orb-2 {
+  background: radial-gradient(circle, rgba(255, 90, 31, 0.16) 0%, rgba(255, 90, 31, 0) 70%) !important;
+  opacity: 0.55;
+}
+
+[data-theme="dark"] .control-btn:hover {
+  box-shadow: 0 4px 15px rgba(0, 230, 118, 0.25) !important;
+}
+
+[data-theme="dark"] .court-card:hover {
+  box-shadow: 0 22px 42px -10px rgba(0, 230, 118, 0.22), 0 10px 18px -6px rgba(0, 0, 0, 0.4) !important;
+}
+

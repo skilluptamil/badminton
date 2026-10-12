@@ -26,16 +26,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const priceValues = document.querySelectorAll('.dynamic-price');
 
   if (billingMonthlyBtn && billingAnnualBtn) {
+    const animatePriceChange = (isAnnual) => {
+      priceValues.forEach(el => {
+        const val = isAnnual ? el.getAttribute('data-annual') : el.getAttribute('data-monthly');
+        if (!val) return;
+        el.style.transition = 'transform 0.15s ease, opacity 0.15s ease';
+        el.style.transform = 'scale(0.85)';
+        el.style.opacity = '0.4';
+        setTimeout(() => {
+          el.textContent = `$${val}`;
+          el.style.transform = 'scale(1.1)';
+          el.style.opacity = '1';
+          setTimeout(() => {
+            el.style.transform = 'scale(1)';
+          }, 150);
+        }, 120);
+      });
+    };
+
     billingMonthlyBtn.addEventListener('click', () => {
       billingMonthlyBtn.classList.add('btn-primary');
       billingMonthlyBtn.classList.remove('btn-outline-dark');
       billingAnnualBtn.classList.remove('btn-primary');
       billingAnnualBtn.classList.add('btn-outline-dark');
-
-      priceValues.forEach(el => {
-        const monthly = el.getAttribute('data-monthly');
-        if (monthly) el.textContent = `$${monthly}`;
-      });
+      animatePriceChange(false);
     });
 
     billingAnnualBtn.addEventListener('click', () => {
@@ -43,11 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       billingAnnualBtn.classList.remove('btn-outline-dark');
       billingMonthlyBtn.classList.remove('btn-primary');
       billingMonthlyBtn.classList.add('btn-outline-dark');
-
-      priceValues.forEach(el => {
-        const annual = el.getAttribute('data-annual');
-        if (annual) el.textContent = `$${annual}`;
-      });
+      animatePriceChange(true);
     });
   }
 
@@ -530,5 +540,149 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start slideshow
     resetSlideTimer();
   });
+
+  // =========================================================================
+  // 7. Top Scroll Progress Indicator
+  // =========================================================================
+  function initScrollProgressBar() {
+    let bar = document.getElementById('scrollProgressBar');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.id = 'scrollProgressBar';
+      bar.className = 'scroll-progress-bar';
+      document.body.prepend(bar);
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+          bar.style.width = `${Math.min(progress, 100)}%`;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+  initScrollProgressBar();
+
+  // =========================================================================
+  // 8. Scroll-Triggered Reveal Animations (IntersectionObserver)
+  // =========================================================================
+  function initScrollRevealAnimations() {
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const targets = document.querySelectorAll(
+      '.section-title-wrap, .court-card, .pricing-card, .blog-card, .review-card, ' +
+      '.booking-search-card, .step-item, .stat-card-widget, .hero-image-box'
+    );
+
+    if (!targets.length) return;
+
+    targets.forEach((el) => {
+      el.classList.add('reveal-on-scroll');
+
+      // Auto-stagger delay if element is in a grid or row
+      const parentCol = el.closest('[class*="col-"]');
+      if (parentCol && parentCol.parentElement) {
+        const siblings = Array.from(parentCol.parentElement.children);
+        const index = siblings.indexOf(parentCol);
+        if (index > 0) {
+          el.style.transitionDelay = `${(index % 4) * 90}ms`;
+        }
+      }
+    });
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    targets.forEach((el) => observer.observe(el));
+  }
+  initScrollRevealAnimations();
+
+  // =========================================================================
+  // 9. Animated Number Counters (Count-Up Animation)
+  // =========================================================================
+  function initCounterAnimations() {
+    if (!('IntersectionObserver' in window)) return;
+
+    const counters = document.querySelectorAll('.stat-counter, [data-count]');
+    if (!counters.length) return;
+
+    const counterObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const targetVal = parseFloat(el.getAttribute('data-count') || el.textContent.replace(/[^0-9.]/g, ''));
+          if (isNaN(targetVal)) return;
+
+          const prefix = el.getAttribute('data-prefix') || '';
+          const suffix = el.getAttribute('data-suffix') || '';
+          const isDecimal = String(targetVal).includes('.');
+          const duration = 1500;
+          const startTime = performance.now();
+
+          function updateCount(now) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            // Ease out expo
+            const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            const current = targetVal * easeOut;
+
+            el.textContent = `${prefix}${isDecimal ? current.toFixed(1) : Math.floor(current)}${suffix}`;
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCount);
+            } else {
+              el.textContent = `${prefix}${isDecimal ? targetVal.toFixed(1) : targetVal}${suffix}`;
+            }
+          }
+
+          requestAnimationFrame(updateCount);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    counters.forEach((c) => counterObserver.observe(c));
+  }
+  initCounterAnimations();
+
+  // =========================================================================
+  // 10. Subtle Click Ripple Wave on Buttons
+  // =========================================================================
+  function initButtonRipple() {
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn, .btn-primary, .hero-cta-btn, .booking-search-btn');
+      if (!btn) return;
+
+      const rect = btn.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      ripple.className = 'btn-ripple-wave';
+      const size = Math.max(rect.width, rect.height) * 2;
+      ripple.style.width = `${size}px`;
+      ripple.style.height = `${size}px`;
+      ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+      ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+
+      btn.appendChild(ripple);
+      setTimeout(() => {
+        ripple.remove();
+      }, 650);
+    });
+  }
+  initButtonRipple();
 });
 

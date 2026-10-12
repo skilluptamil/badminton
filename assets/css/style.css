@@ -3946,3 +3946,329 @@ html {
   color: var(--dark) !important;
 }
 
+/* ==========================================================================
+   DYNAMIC MODERN ANIMATIONS & MICRO-INTERACTIONS
+   Smooth 60fps GPU-Accelerated Animations
+   ========================================================================== */
+
+/* 1. Scroll Progress Bar */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary) 0%, #00D287 50%, var(--secondary) 100%);
+  z-index: 1060;
+  pointer-events: none;
+  transition: width 0.1s ease-out;
+  box-shadow: 0 1px 8px rgba(0, 135, 90, 0.45);
+}
+
+/* 2. Hero Background Ambient Glow Orbs */
+.hero-ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(75px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  transition: opacity 0.5s ease;
+}
+
+.hero-ambient-orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 135, 90, 0.24) 0%, rgba(0, 135, 90, 0) 70%);
+  top: -90px;
+  right: 10%;
+  animation: orbFloat1 18s ease-in-out infinite alternate;
+}
+
+.hero-ambient-orb-2 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(255, 90, 31, 0.18) 0%, rgba(255, 90, 31, 0) 70%);
+  bottom: -50px;
+  left: 3%;
+  animation: orbFloat2 22s ease-in-out infinite alternate;
+}
+
+@keyframes orbFloat1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-35px, 30px) scale(1.08);
+  }
+  100% {
+    transform: translate(25px, -20px) scale(0.95);
+  }
+}
+
+@keyframes orbFloat2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, -25px) scale(1.1);
+  }
+  100% {
+    transform: translate(-25px, 20px) scale(0.92);
+  }
+}
+
+/* 3. Hero Text Highlight Dynamic Shimmer */
+.hero-title span.text-highlight {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, #00875A 0%, #00B377 25%, #22C55E 50%, #00875A 75%, #00B377 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShineGreen 7s linear infinite;
+}
+
+.hero-title span.text-highlight-orange {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, #FF5A1F 0%, #FF8533 25%, #FFB020 50%, #FF5A1F 75%, #FF8533 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShineOrange 7s linear infinite;
+}
+
+@keyframes textShineGreen {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 250% 50%; }
+}
+
+@keyframes textShineOrange {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 250% 50%; }
+}
+
+/* 4. Hero Content Staggered Entrance */
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-entrance-1 {
+  animation: heroFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+.hero-entrance-2 {
+  animation: heroFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+.hero-entrance-3 {
+  animation: heroFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+.hero-entrance-4 {
+  animation: heroFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+}
+.hero-stats-row {
+  animation: heroFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+}
+
+/* 5. Luxury Button Light Sheen Sweep */
+.btn-shimmer,
+.hero-cta-group .btn-primary,
+.cta-banner-actions .btn-primary,
+.booking-search-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after,
+.hero-cta-group .btn-primary::after,
+.cta-banner-actions .btn-primary::after,
+.booking-search-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -120%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent);
+  transform: rotate(25deg);
+  pointer-events: none;
+  transition: none;
+}
+
+.btn-shimmer:hover::after,
+.hero-cta-group .btn-primary:hover::after,
+.cta-banner-actions .btn-primary:hover::after,
+.booking-search-btn:hover::after {
+  left: 150%;
+  transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 6. Brand Trophy Spring Micro-Bounce */
+.brand-logo {
+  transition: transform 0.25s ease;
+}
+.brand-logo .brand-icon {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+}
+.brand-logo:hover .brand-icon {
+  transform: scale(1.1) rotate(-8deg);
+  box-shadow: 0 6px 18px var(--primary-glow);
+}
+
+/* 7. Nav Control Buttons Tactile Hover */
+.control-btn {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.25s ease;
+}
+.control-btn:hover {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 8. Badge Hover Micro-Bounce */
+.section-badge {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, box-shadow 0.25s ease;
+}
+.section-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 135, 90, 0.15);
+}
+.section-badge:hover i {
+  animation: badgeIconWiggle 0.6s ease;
+}
+@keyframes badgeIconWiggle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(-12deg); }
+  75% { transform: translateY(-2px) rotate(12deg); }
+}
+
+/* 9. Scroll Reveal Fade-and-Slide Up */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 10. Card Interactive Elevate & Glow */
+.court-card,
+.pricing-card,
+.blog-card,
+.review-card,
+.stat-card-widget {
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.38s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.court-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 42px -10px rgba(0, 135, 90, 0.18), 0 10px 18px -6px rgba(15, 23, 42, 0.08);
+}
+
+.court-card .court-image-wrapper img {
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.court-card:hover .court-image-wrapper img {
+  transform: scale(1.08);
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 45px -10px rgba(15, 23, 42, 0.12);
+}
+
+.pricing-card.popular:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px -10px rgba(0, 135, 90, 0.24);
+}
+
+.blog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 38px -8px rgba(15, 23, 42, 0.1);
+}
+
+.blog-card .blog-img-box img {
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blog-card:hover .blog-img-box img {
+  transform: scale(1.08);
+}
+
+/* 11. Subtle Click Ripple Wave */
+.btn-ripple-wave {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.38);
+  transform: scale(0);
+  animation: rippleSpread 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes rippleSpread {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* 12. Enhanced Live Radar Pulse */
+.hero-shuttlecock-badge .pulse-ring {
+  position: relative;
+}
+
+.hero-shuttlecock-badge .pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(34, 197, 94, 0.85);
+  animation: liveRadarPing 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+@keyframes liveRadarPing {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+/* 13. Animated Counter Value Styling */
+.stat-counter {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  transition: transform 0.2s ease;
+}
+
+/* 14. Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-ambient-orb {
+    display: none !important;
+  }
+}
+
+
