@@ -396,6 +396,7 @@ ul {
     left: auto !important;
     right: 0 !important;
   }
+<<<<<<< HEAD
 }
 
 <<<<<<< HEAD
@@ -436,6 +437,10 @@ ul {
   min-width: 200px;
   animation: fadeInDown 0.2s ease-out;
 =======
+=======
+}
+
+>>>>>>> 38ac0b6 (hfh)
 /* ==========================================================================
    MEDIUM DESKTOP / 1024px LAPTOPS (992px to 1199.98px): Proportional scaling
    ========================================================================== */
@@ -490,6 +495,7 @@ ul {
     font-size: 0.8rem !important;
     gap: 4px !important;
   }
+<<<<<<< HEAD
 >>>>>>> 38ac0b6 (hfh)
 }
 
@@ -498,6 +504,8 @@ ul {
     display: block;
     margin-top: 0.25rem;
   }
+=======
+>>>>>>> 38ac0b6 (hfh)
 }
 
 @keyframes fadeInDown {
@@ -548,7 +556,11 @@ ul {
   justify-content: center;
   height: 38px;
 <<<<<<< HEAD
+<<<<<<< HEAD
   padding: 0 1.2rem;
+=======
+  padding: 0 0.95rem;
+>>>>>>> 38ac0b6 (hfh)
 =======
   padding: 0 0.95rem;
 >>>>>>> 38ac0b6 (hfh)
@@ -560,6 +572,7 @@ ul {
   white-space: nowrap !important;
   vertical-align: middle;
   text-decoration: none;
+<<<<<<< HEAD
 <<<<<<< HEAD
   font-family: var(--font-heading);
   transition: var(--transition-smooth);
@@ -577,6 +590,9 @@ ul {
   color: #ffffff !important;
   transform: translateY(-2px);
   box-shadow: 0 6px 18px var(--primary-glow);
+=======
+  flex-shrink: 0;
+>>>>>>> 38ac0b6 (hfh)
 =======
   flex-shrink: 0;
 >>>>>>> 38ac0b6 (hfh)
@@ -2338,6 +2354,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   background: var(--bg-surface);
   border-radius: var(--radius-lg);
 <<<<<<< HEAD
+<<<<<<< HEAD
   padding: 1.15rem 1.2rem;
   border: 1px solid var(--border-color);
   display: flex;
@@ -2359,10 +2376,25 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   box-shadow: var(--card-shadow);
   transition: var(--transition-fast);
   height: 100%;
+=======
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--border-color);
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition-fast);
+  height: 100%;
+>>>>>>> 38ac0b6 (hfh)
   min-height: 124px;
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
 }
 
@@ -2372,6 +2404,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 .stat-info-wrap {
+<<<<<<< HEAD
 <<<<<<< HEAD
   flex: 1 1 auto;
   min-width: 0;
@@ -2424,6 +2457,35 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 .stat-card-value {
+=======
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  text-align: left !important;
+  overflow: hidden !important;
+}
+
+.stat-card-label {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  color: var(--text-muted) !important;
+  line-height: 1.25 !important;
+  height: 2.2rem !important;
+  min-height: 2.2rem !important;
+  max-height: 2.2rem !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  margin-bottom: 6px !important;
+  word-break: normal !important;
+  overflow: hidden !important;
+}
+
+.stat-card-value {
+>>>>>>> 38ac0b6 (hfh)
   font-size: clamp(1.15rem, 1.2vw, 1.35rem) !important;
   font-weight: 800 !important;
   line-height: 1.15 !important;
@@ -2449,6 +2511,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   display: block !important;
+<<<<<<< HEAD
 >>>>>>> 38ac0b6 (hfh)
 }
 
@@ -2471,6 +2534,11 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   font-size: 1.3rem;
   flex-shrink: 0;
 =======
+=======
+}
+
+.stat-widget-icon {
+>>>>>>> 38ac0b6 (hfh)
   width: 40px !important;
   height: 40px !important;
   min-width: 40px !important;
@@ -2483,6 +2551,9 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   flex-shrink: 0 !important;
   align-self: center !important;
   margin-left: auto !important;
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
 }
 
@@ -2512,12 +2583,15 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .btn-dash-mode {
   transition: var(--transition-fast);
   font-size: 0.88rem;
   border: none;
   font-family: var(--font-heading);
 =======
+=======
+>>>>>>> 38ac0b6 (hfh)
 /* Dedicated Dashboard Header (Replaces marketing navbar on dashboard.html) */
 .dashboard-header {
   position: sticky;
@@ -2578,6 +2652,9 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 .btn-dash-mode:hover:not(.active) {
   color: var(--primary);
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
 }
 
@@ -2585,8 +2662,11 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   background-color: var(--primary) !important;
   color: #ffffff !important;
 <<<<<<< HEAD
+<<<<<<< HEAD
   box-shadow: 0 4px 12px var(--primary-glow);
 =======
+=======
+>>>>>>> 38ac0b6 (hfh)
   box-shadow: 0 2px 8px var(--primary-glow);
 }
 
@@ -2612,6 +2692,9 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   font-weight: 600;
   border-radius: var(--radius-md);
   transition: var(--transition-fast);
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
 }
 
@@ -3242,7 +3325,10 @@ img, svg, video, iframe {
     bottom: 8px;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 38ac0b6 (hfh)
   .site-header .navbar {
     display: flex !important;
     flex-direction: row !important;
@@ -3320,6 +3406,9 @@ img, svg, video, iframe {
     width: 100% !important;
   }
   .site-header .navbar-nav .nav-link,
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
   .navbar-nav .nav-link {
     width: 100% !important;
@@ -3348,11 +3437,14 @@ img, svg, video, iframe {
     width: 100%;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   .nav-controls .nav-cta-btn {
     flex: 1 1 auto;
     width: auto;
     text-align: center;
 =======
+=======
+>>>>>>> 38ac0b6 (hfh)
   .site-header .nav-controls .control-btn,
   .nav-controls .control-btn {
     width: 44px !important;
@@ -3372,6 +3464,9 @@ img, svg, video, iframe {
     border-radius: var(--radius-sm) !important;
     white-space: nowrap !important;
     flex-shrink: 0;
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
   }
   .booking-search-card {
@@ -3394,6 +3489,7 @@ img, svg, video, iframe {
   }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Medium Desktop Screens (992px - 1199.98px including 1024px & 1068px) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
@@ -3439,6 +3535,10 @@ img, svg, video, iframe {
     font-size: 0.84rem;
     gap: 5px;
   }
+=======
+/* Medium Desktop Screens (992px - 1199.98px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+>>>>>>> 38ac0b6 (hfh)
 =======
 /* Medium Desktop Screens (992px - 1199.98px) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
@@ -3491,6 +3591,7 @@ img, svg, video, iframe {
   }
   .stat-card-widget {
 <<<<<<< HEAD
+<<<<<<< HEAD
     padding: 1rem 1.1rem;
     min-height: 92px;
     gap: 10px;
@@ -3523,10 +3624,27 @@ img, svg, video, iframe {
     font-size: 1.25rem;
   }
   .stat-widget-icon {
+=======
+    padding: 1rem 1rem;
+    min-height: 104px;
+    gap: 10px;
+  }
+  .stat-card-label {
+    font-size: 0.76rem;
+    min-height: 1.9rem;
+  }
+  .stat-card-value {
+    font-size: 1.25rem;
+  }
+  .stat-widget-icon {
+>>>>>>> 38ac0b6 (hfh)
     width: 40px !important;
     height: 40px !important;
     min-width: 40px !important;
     font-size: 1.2rem !important;
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
   }
   .time-slot-pill {
@@ -3689,6 +3807,7 @@ img, svg, video, iframe {
     min-height: 46px;
     max-height: 46px;
     font-size: 0.88rem;
+<<<<<<< HEAD
   }
   .booking-search-card {
     padding: 1.15rem 0.9rem;
@@ -3703,13 +3822,18 @@ img, svg, video, iframe {
     min-height: 46px;
     max-height: 46px;
     font-size: 0.88rem;
+=======
+>>>>>>> 38ac0b6 (hfh)
   }
 }
 
 /* Extra Small Screens (< 380px) */
 @media (max-width: 380px) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 38ac0b6 (hfh)
   .site-header .brand-logo {
     font-size: 1.15rem !important;
     gap: 6px !important;
@@ -3725,6 +3849,9 @@ img, svg, video, iframe {
     padding: 0 0.4rem !important;
     gap: 4px !important;
   }
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
   .booking-search-card {
     padding: 1rem 0.75rem;

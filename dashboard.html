@@ -24,6 +24,7 @@
 
   <!-- =========================================================================
 <<<<<<< HEAD
+<<<<<<< HEAD
        1. MAIN SITE NAVBAR (Standardized Across All Pages)
        Order: Home -> About Us -> Courts -> Blog -> Contact Us -> Dashboard (Dropdown Button) -> Controls
        ========================================================================= -->
@@ -101,6 +102,13 @@
        ========================================================================= -->
   <header class="dashboard-header">
     <div class="container">
+=======
+       1. DEDICATED DASHBOARD HEADER (No Marketing Website Navbar on Dashboard)
+       Role Switcher | Quick Actions | Theme/Direction Controls
+       ========================================================================= -->
+  <header class="dashboard-header">
+    <div class="container">
+>>>>>>> 38ac0b6 (hfh)
       <div class="dashboard-header-inner">
         <!-- Brand Logo & Dynamic Role Badge -->
         <div class="d-flex align-items-center gap-3">
@@ -152,6 +160,9 @@
           <button class="btn btn-primary btn-sm rounded-pill d-lg-none d-inline-flex align-items-center gap-1" type="button" data-bs-toggle="collapse" data-bs-target="#dashboardSidebarCollapse" aria-expanded="false" aria-controls="dashboardSidebarCollapse" aria-label="Toggle Dashboard Menu">
             <i class="bi bi-layout-sidebar-inset"></i> <span class="d-none d-sm-inline">Menu</span>
           </button>
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
         </div>
       </nav>
@@ -159,6 +170,7 @@
   </header>
 
   <!-- =========================================================================
+<<<<<<< HEAD
 <<<<<<< HEAD
        2. DASHBOARD SUB-BAR & ROLE MODE SWITCHER (User Dashboard <-> Customer Dashboard)
        ========================================================================= -->
@@ -264,6 +276,26 @@
                 <a href="login.html" class="dashboard-menu-link logout" id="btnLogoutTrigger">
                   <i class="bi bi-box-arrow-right"></i> Logout
 =======
+=======
+       2. DASHBOARD MAIN CONTAINER
+       ========================================================================= -->
+  <main class="dashboard-wrapper" id="dashboardApp">
+    <div class="container">
+      <div class="row g-4 align-items-start">
+        
+        <!-- Sidebar Navigation (Collapsible on mobile, sticky on desktop) -->
+        <aside class="col-lg-3">
+          <div class="collapse d-lg-block" id="dashboardSidebarCollapse">
+            <div class="dashboard-sidebar">
+              <!-- Profile Card (Adapts dynamically between Player and Customer account) -->
+              <div class="dashboard-user-box">
+                <img id="sidebarUserAvatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="user-avatar-lg">
+                <h5 class="fw-bold mb-0 text-dark" id="sidebarUserName">Alex Morgan</h5>
+                <div class="badge badge-badminton text-white mt-1" id="sidebarUserTier">Premium Member</div>
+                <div class="small text-muted mt-1" id="sidebarPlayerId">Player ID: #SSP-84920</div>
+              </div>
+
+>>>>>>> 38ac0b6 (hfh)
               <!-- Sidebar Navigation Links: Differentiated by Role -->
               <nav class="dashboard-menu" id="dashboardSidebarMenu">
                 <!-- USER DASHBOARD ROLE LINKS -->
@@ -322,6 +354,9 @@
                 <hr class="my-2 text-muted opacity-25">
                 <a href="login.html" class="dashboard-menu-link logout" id="btnLogoutTrigger">
                   <i class="bi bi-box-arrow-right"></i> <span>Logout</span>
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
                 </a>
               </nav>
@@ -361,7 +396,11 @@
                     <div class="stat-card-label">Upcoming Bookings</div>
                     <div class="stat-card-value text-dark" id="metricUpcomingSlots">2 Slots</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <div class="stat-card-desc">Active reservations</div>
+=======
+                    <div class="stat-card-desc text-muted">Active reservations</div>
+>>>>>>> 38ac0b6 (hfh)
 =======
                     <div class="stat-card-desc text-muted">Active reservations</div>
 >>>>>>> 38ac0b6 (hfh)
@@ -379,7 +418,11 @@
                     <div class="stat-card-label">Total Bookings</div>
                     <div class="stat-card-value text-dark" id="metricTotalBookings">5 Bookings</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <div class="stat-card-desc">Lifetime court sessions</div>
+=======
+                    <div class="stat-card-desc text-muted">Lifetime court sessions</div>
+>>>>>>> 38ac0b6 (hfh)
 =======
                     <div class="stat-card-desc text-muted">Lifetime court sessions</div>
 >>>>>>> 38ac0b6 (hfh)
@@ -397,7 +440,11 @@
                     <div class="stat-card-label">Active Membership</div>
                     <div class="stat-card-value text-primary" id="metricMembershipPlan">Premium</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <div class="stat-card-desc">Renews Oct 01, 2026</div>
+=======
+                    <div class="stat-card-desc text-muted">Renews Oct 01, 2026</div>
+>>>>>>> 38ac0b6 (hfh)
 =======
                     <div class="stat-card-desc text-muted">Renews Oct 01, 2026</div>
 >>>>>>> 38ac0b6 (hfh)
@@ -415,7 +462,11 @@
                     <div class="stat-card-label">Tournament Registrations</div>
                     <div class="stat-card-value text-secondary" id="metricTourneyCount">1 Active</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <div class="stat-card-desc">Autumn Smash Open (Seed #4)</div>
+=======
+                    <div class="stat-card-desc text-muted">Autumn Smash Open (Seed #4)</div>
+>>>>>>> 38ac0b6 (hfh)
 =======
                     <div class="stat-card-desc text-muted">Autumn Smash Open (Seed #4)</div>
 >>>>>>> 38ac0b6 (hfh)
@@ -433,7 +484,11 @@
                     <div class="stat-card-label">Total Payments</div>
                     <div class="stat-card-value text-dark" id="metricTotalPayments">$315.00</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <div class="stat-card-desc">All invoices verified & settled</div>
+=======
+                    <div class="stat-card-desc text-muted">All invoices verified & settled</div>
+>>>>>>> 38ac0b6 (hfh)
 =======
                     <div class="stat-card-desc text-muted">All invoices verified & settled</div>
 >>>>>>> 38ac0b6 (hfh)
@@ -577,6 +632,7 @@
                 <div class="badge bg-success text-white mb-2"><i class="bi bi-shield-check me-1"></i> Verified VIP Customer</div>
                 <h3 class="fw-bold text-dark mb-1">Customer Portal: <span id="customerWelcomeName">Alex Morgan</span></h3>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <div class="text-muted">Customer ID: <strong>#CUST-84920</strong> • Priority Booking & Dedicated Arena Concierge</div>
               </div>
               <div class="d-flex gap-2">
@@ -586,6 +642,8 @@
                 <button type="button" class="btn btn-primary" onclick="switchToTab('book-court')">
                   <i class="bi bi-calendar-plus-fill me-1"></i> Instant Booking
 =======
+=======
+>>>>>>> 38ac0b6 (hfh)
                 <div class="text-muted">Customer ID: <strong>#CUST-84920</strong> • Priority Booking &amp; Dedicated Arena Concierge</div>
               </div>
               <div class="d-flex gap-2 flex-wrap">
@@ -594,11 +652,15 @@
                 </button>
                 <button type="button" class="btn btn-primary" onclick="switchToTab('book-court')">
                   <i class="bi bi-calendar-plus-fill me-1"></i> Instant Reservation
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
                 </button>
               </div>
             </div>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
             <!-- Customer Cards Grid -->
             <div class="row g-3 mb-4">
@@ -609,6 +671,8 @@
                     <div class="stat-card-value text-primary">1,250 Pts</div>
                     <div class="stat-card-desc">Gold Tier Status</div>
 =======
+=======
+>>>>>>> 38ac0b6 (hfh)
             <!-- Customer Summary Metric Cards (4 cards with identical label heights and baseline alignment) -->
             <div class="row g-3 mb-4">
               <!-- 1. Active Reservations -->
@@ -632,6 +696,9 @@
                     <div class="stat-card-label">Loyalty SmashPoints</div>
                     <div class="stat-card-value text-primary">1,250 Pts</div>
                     <div class="stat-card-desc text-muted">Gold Tier Status</div>
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
                   </div>
                   <div class="stat-widget-icon stat-icon-orange">
@@ -641,6 +708,10 @@
               </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+              <!-- 3. Active Guest Passes -->
+>>>>>>> 38ac0b6 (hfh)
 =======
               <!-- 3. Active Guest Passes -->
 >>>>>>> 38ac0b6 (hfh)
@@ -650,9 +721,15 @@
                     <div class="stat-card-label">Active Guest Passes</div>
                     <div class="stat-card-value text-dark">2 Passes</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <div class="stat-card-desc">Ready for check-in</div>
                   </div>
                   <div class="stat-widget-icon stat-icon-green">
+=======
+                    <div class="stat-card-desc text-muted">Ready for check-in</div>
+                  </div>
+                  <div class="stat-widget-icon stat-icon-blue">
+>>>>>>> 38ac0b6 (hfh)
 =======
                     <div class="stat-card-desc text-muted">Ready for check-in</div>
                   </div>
@@ -663,6 +740,7 @@
                 </div>
               </div>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
               <div class="col-xl-3 col-md-6 col-12">
                 <div class="stat-card-widget">
@@ -680,13 +758,21 @@
 =======
               <!-- 4. Customer Lifetime Spend -->
 >>>>>>> 38ac0b6 (hfh)
+=======
+              <!-- 4. Customer Lifetime Spend -->
+>>>>>>> 38ac0b6 (hfh)
               <div class="col-xl-3 col-md-6 col-12">
                 <div class="stat-card-widget">
                   <div class="stat-info-wrap">
                     <div class="stat-card-label">Customer Lifetime Spend</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <div class="stat-card-value text-dark">$315.00</div>
                     <div class="stat-card-desc">Verified Invoices</div>
+=======
+                    <div class="stat-card-value text-dark" id="custMetricLifetimeSpend">$315.00</div>
+                    <div class="stat-card-desc text-muted">5 Verified Invoices</div>
+>>>>>>> 38ac0b6 (hfh)
 =======
                     <div class="stat-card-value text-dark" id="custMetricLifetimeSpend">$315.00</div>
                     <div class="stat-card-desc text-muted">5 Verified Invoices</div>
@@ -700,7 +786,10 @@
             </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 38ac0b6 (hfh)
             <!-- Court Reservation Management Section -->
             <div class="card p-4 rounded-4 border shadow-sm mb-4" id="custReservationSection">
               <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
@@ -804,6 +893,9 @@
               </div>
             </div>
 
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
             <!-- Customer Loyalty & Rewards Feature Card -->
             <div class="loyalty-progress-card mb-4 shadow-sm">
@@ -826,7 +918,11 @@
             </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             <!-- Customer Active Passes & Locker Access -->
+=======
+            <!-- Customer Active Passes & Concierge Support Desk -->
+>>>>>>> 38ac0b6 (hfh)
 =======
             <!-- Customer Active Passes & Concierge Support Desk -->
 >>>>>>> 38ac0b6 (hfh)
@@ -835,8 +931,13 @@
                 <div class="card p-4 rounded-4 border shadow-sm h-100">
                   <div class="d-flex justify-content-between align-items-center mb-3">
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <h5 class="fw-bold mb-0 text-dark">Digital Customer Passes</h5>
                     <span class="badge bg-success-subtle text-success">Active</span>
+=======
+                    <h5 class="fw-bold mb-0 text-dark">Digital FastPass &amp; Lockers</h5>
+                    <span class="badge bg-success-subtle text-success">Active Access</span>
+>>>>>>> 38ac0b6 (hfh)
 =======
                     <h5 class="fw-bold mb-0 text-dark">Digital FastPass &amp; Lockers</h5>
                     <span class="badge bg-success-subtle text-success">Active Access</span>
@@ -851,9 +952,15 @@
                   </div>
                   <div class="p-3 bg-light rounded-3 border">
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <div class="fw-bold text-dark mb-1">Equipment Rental Allowance</div>
                     <div class="small text-muted mb-2">2x Yonex Astroxx Rackets + Stiga TT Paddles included on all visits.</div>
                     <span class="badge bg-primary text-white">Included with Premium</span>
+=======
+                    <div class="fw-bold text-dark mb-1">Assigned VIP Locker: #L-18</div>
+                    <div class="small text-muted mb-2">VIP Changing Lounge • Combination Keyless Access #4920.</div>
+                    <span class="badge bg-primary text-white">Included with VIP Account</span>
+>>>>>>> 38ac0b6 (hfh)
 =======
                     <div class="fw-bold text-dark mb-1">Assigned VIP Locker: #L-18</div>
                     <div class="small text-muted mb-2">VIP Changing Lounge • Combination Keyless Access #4920.</div>
@@ -867,15 +974,21 @@
                 <div class="card p-4 rounded-4 border shadow-sm h-100">
                   <div class="d-flex justify-content-between align-items-center mb-3">
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <h5 class="fw-bold mb-0 text-dark">Customer Support Desk</h5>
                     <span class="badge bg-primary-subtle text-primary">24/7 Concierge</span>
                   </div>
                   <p class="text-muted small mb-3">Need court rescheduling, racket stringing, or coaching support? Submit an instant ticket.</p>
 =======
+=======
+>>>>>>> 38ac0b6 (hfh)
                     <h5 class="fw-bold mb-0 text-dark">Dedicated Arena Concierge</h5>
                     <span class="badge bg-primary-subtle text-primary">24/7 Priority</span>
                   </div>
                   <p class="text-muted small mb-3">Need arena reservation rescheduling, pro racket restringing, or coaching bookings? Request assistance instantly.</p>
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
                   <div class="d-flex flex-column gap-2 mb-3">
                     <button class="btn btn-outline-dark btn-sm text-start" onclick="switchToTab('customer-support')">
@@ -886,17 +999,23 @@
                     </button>
                     <button class="btn btn-outline-dark btn-sm text-start" onclick="switchToTab('customer-support')">
 <<<<<<< HEAD
+<<<<<<< HEAD
                       <i class="bi bi-chat-dots text-info me-2"></i> General Customer Inquiry
                     </button>
                   </div>
                   <button class="btn btn-primary btn-sm w-100 mt-auto" onclick="switchToTab('customer-support')">
                     Open Support Helpdesk <i class="bi bi-arrow-right"></i>
 =======
+=======
+>>>>>>> 38ac0b6 (hfh)
                       <i class="bi bi-chat-dots text-info me-2"></i> Contact Dedicated Concierge Desk
                     </button>
                   </div>
                   <button class="btn btn-primary btn-sm w-100 mt-auto" onclick="switchToTab('customer-support')">
                     Open Concierge Support <i class="bi bi-arrow-right"></i>
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
                   </button>
                 </div>
@@ -1020,8 +1139,14 @@
               <div class="row g-3 mb-4">
                 <div class="col-md-6">
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <label class="form-label fw-bold small text-dark" for="dashBookDate">2. Select Date</label>
                   <input type="date" id="dashBookDate" class="form-control" value="2026-09-25">
+=======
+                  <label class="form-label fw-bold small text-dark" for="dashBookDate">2. Select Date <span class="text-danger">*</span></label>
+                  <input type="date" id="dashBookDate" class="form-control" required>
+                  <div class="invalid-feedback">Please select today or a future date. Past dates cannot be booked.</div>
+>>>>>>> 38ac0b6 (hfh)
 =======
                   <label class="form-label fw-bold small text-dark" for="dashBookDate">2. Select Date <span class="text-danger">*</span></label>
                   <input type="date" id="dashBookDate" class="form-control" required>
@@ -1931,6 +2056,10 @@
     function switchDashboardMode(mode) {
       currentDashboardMode = mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      const appEl = document.getElementById('dashboardApp');
+>>>>>>> 38ac0b6 (hfh)
 =======
       const appEl = document.getElementById('dashboardApp');
 >>>>>>> 38ac0b6 (hfh)
@@ -1938,6 +2067,7 @@
       const btnCust = document.getElementById('btnModeCustomer');
       const portalBadge = document.getElementById('dashboardPortalBadge');
       const btnQuick = document.getElementById('btnSwitchModeQuick');
+<<<<<<< HEAD
 <<<<<<< HEAD
       const rewardsNav = document.getElementById('navLinkCustomerRewards');
       const supportNav = document.getElementById('navLinkCustomerSupport');
@@ -1965,6 +2095,8 @@
         switchToTab('overview');
         showToast('Switched to User Dashboard mode.');
 =======
+=======
+>>>>>>> 38ac0b6 (hfh)
       const sidebarTier = document.getElementById('sidebarUserTier');
       const sidebarId = document.getElementById('sidebarPlayerId');
 
@@ -2000,6 +2132,9 @@
         renderOverviewBookings();
         switchToTab('overview');
         showToast('Switched to Player Dashboard.');
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
       }
     }
@@ -2027,7 +2162,11 @@
       navLinks.forEach(link => {
         const target = link.getAttribute('data-dash-target');
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (target === tabId || (tabId === 'customer-overview' && target === 'overview')) {
+=======
+        if (target === tabId || (tabId === 'customer-overview' && target === 'customer-overview') || (tabId === 'overview' && target === 'overview')) {
+>>>>>>> 38ac0b6 (hfh)
 =======
         if (target === tabId || (tabId === 'customer-overview' && target === 'customer-overview') || (tabId === 'overview' && target === 'overview')) {
 >>>>>>> 38ac0b6 (hfh)
@@ -2053,6 +2192,7 @@
       if (indicator) {
         const titles = {
 <<<<<<< HEAD
+<<<<<<< HEAD
           'overview': '/ User Overview',
           'customer-overview': '/ Customer Overview',
           'book-court': '/ Book a Court',
@@ -2063,6 +2203,8 @@
           'customer-support': '/ Support Helpdesk',
           'booking-history': '/ Booking History',
 =======
+=======
+>>>>>>> 38ac0b6 (hfh)
           'overview': '/ Player Hub',
           'customer-overview': '/ Customer Portal',
           'book-court': '/ Court Reservations',
@@ -2072,6 +2214,9 @@
           'customer-rewards': '/ SmashPoints Rewards',
           'customer-support': '/ Concierge Helpdesk',
           'booking-history': '/ Play History',
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
           'receipts': '/ Payment Receipts',
           'profile': '/ Profile / Settings'
@@ -2093,7 +2238,10 @@
 
     // =========================================================================
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 38ac0b6 (hfh)
     // CUSTOMER RESERVATIONS RENDERER
     // =========================================================================
     function renderCustomerReservations(filter = 'all') {
@@ -2151,6 +2299,9 @@
     window.renderCustomerReservations = renderCustomerReservations;
 
     // =========================================================================
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
     // RENDER FUNCTIONS
     // =========================================================================
@@ -2748,8 +2899,14 @@
     // =========================================================================
     document.addEventListener('DOMContentLoaded', () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
       // 1. Initial Render
       renderOverviewBookings();
+=======
+      // 1. Initial Render across both Player & Customer portals
+      renderOverviewBookings();
+      renderCustomerReservations('all');
+>>>>>>> 38ac0b6 (hfh)
 =======
       // 1. Initial Render across both Player & Customer portals
       renderOverviewBookings();
@@ -2858,6 +3015,7 @@
       if (shuttleAddon) shuttleAddon.addEventListener('change', updateDashPrice);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       // Set min date for datepicker to today
       const dateInput = document.getElementById('dashBookDate');
       if (dateInput) {
@@ -2918,6 +3076,54 @@
       const btnConfirmBooking = document.getElementById('btnConfirmDashBooking');
       if (btnConfirmBooking) {
         btnConfirmBooking.addEventListener('click', () => {
+=======
+      // Helper functions for local date and past date detection
+      function getLocalDateString(d = new Date()) {
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${y}-${m}-${day}`;
+      }
+
+      function isDateInPast(dateStr) {
+        if (!dateStr) return false;
+        const parts = dateStr.split('-');
+        if (parts.length !== 3) return false;
+        const selected = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+        const today = new Date();
+        const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        return selected < todayStart;
+      }
+
+      // Set min date for datepicker to today and attach real-time past-date validation
+      const dateInput = document.getElementById('dashBookDate');
+      if (dateInput) {
+        const todayStr = getLocalDateString();
+        dateInput.min = todayStr;
+        if (!dateInput.value || isDateInPast(dateInput.value)) {
+          dateInput.value = todayStr;
+        }
+
+        const handleDateValidation = () => {
+          if (isDateInPast(dateInput.value)) {
+            dateInput.classList.add('is-invalid');
+            showToast('Past dates cannot be selected. Please choose today or a future date.');
+            return false;
+          } else {
+            dateInput.classList.remove('is-invalid');
+            return true;
+          }
+        };
+
+        dateInput.addEventListener('change', handleDateValidation);
+        dateInput.addEventListener('input', handleDateValidation);
+      }
+
+      // 8. In-Dashboard Booking Confirmation Execution with Past-Date Rejection
+      const btnConfirmBooking = document.getElementById('btnConfirmDashBooking');
+      if (btnConfirmBooking) {
+        btnConfirmBooking.addEventListener('click', () => {
+>>>>>>> 38ac0b6 (hfh)
           const dateVal = document.getElementById('dashBookDate')?.value;
           if (!dateVal || isDateInPast(dateVal)) {
             const di = document.getElementById('dashBookDate');
@@ -2929,6 +3135,9 @@
             return;
           }
 
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
           const newId = 'BK-' + Math.floor(10000 + Math.random() * 90000);
           const dur = parseInt(durationSelect.value) || 1;
@@ -2965,8 +3174,14 @@
           saveStoredReceipts(receipts);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
           // Re-render UI
           renderOverviewBookings();
+=======
+          // Re-render UI across both dashboards
+          renderOverviewBookings();
+          renderCustomerReservations('all');
+>>>>>>> 38ac0b6 (hfh)
 =======
           // Re-render UI across both dashboards
           renderOverviewBookings();
@@ -2982,7 +3197,11 @@
       }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       // 9. Cancellation Execution
+=======
+      // 9. Cancellation Execution with sync to both dashboards
+>>>>>>> 38ac0b6 (hfh)
 =======
       // 9. Cancellation Execution with sync to both dashboards
 >>>>>>> 38ac0b6 (hfh)
@@ -3002,6 +3221,10 @@
             }
             renderOverviewBookings();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            renderCustomerReservations('all');
+>>>>>>> 38ac0b6 (hfh)
 =======
             renderCustomerReservations('all');
 >>>>>>> 38ac0b6 (hfh)
@@ -3025,6 +3248,7 @@
       }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       // 10. Filter Tabs in My Bookings
       document.querySelectorAll('.filter-tab-pill[data-booking-filter]').forEach(pill => {
         pill.addEventListener('click', function() {
@@ -3046,6 +3270,18 @@
         });
       });
 
+=======
+      // Customer Reservation Filter Tabs
+      document.querySelectorAll('#custReservationFilterGroup [data-cust-filter]').forEach(pill => {
+        pill.addEventListener('click', function() {
+          document.querySelectorAll('#custReservationFilterGroup [data-cust-filter]').forEach(p => p.classList.remove('active'));
+          this.classList.add('active');
+          const filter = this.getAttribute('data-cust-filter');
+          renderCustomerReservations(filter);
+        });
+      });
+
+>>>>>>> 38ac0b6 (hfh)
       // 10. Filter Tabs in My Bookings
       document.querySelectorAll('.filter-tab-pill[data-booking-filter]').forEach(pill => {
         pill.addEventListener('click', function() {
@@ -3056,6 +3292,9 @@
         });
       });
 
+<<<<<<< HEAD
+>>>>>>> 38ac0b6 (hfh)
+=======
 >>>>>>> 38ac0b6 (hfh)
       // 11. History Filters
       const histSport = document.getElementById('historySportFilter');

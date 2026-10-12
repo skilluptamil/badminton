@@ -208,6 +208,10 @@
   border-color: transparent !important;
   box-shadow: 0 4px 14px rgba(0, 179, 119, 0.4) !important;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  white-space: nowrap !important;
+>>>>>>> 38ac0b6 (hfh)
 =======
   white-space: nowrap !important;
 >>>>>>> 38ac0b6 (hfh)
@@ -224,7 +228,11 @@
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* On Desktop (min-width: 992px): NO box around navbar-collapse */
+=======
+/* On Desktop (min-width: 992px): NO box around navbar-collapse, maintain 3-zone grid */
+>>>>>>> 38ac0b6 (hfh)
 =======
 /* On Desktop (min-width: 992px): NO box around navbar-collapse, maintain 3-zone grid */
 >>>>>>> 38ac0b6 (hfh)
