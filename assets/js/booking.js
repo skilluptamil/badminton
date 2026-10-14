@@ -249,8 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Persist to localStorage so both dashboards display this new booking
       try {
-        const stored = JSON.parse(localStorage.getItem('smash_spin_bookings') || '[]');
-        stored.unshift({
+        const newBookingRecord = {
           id: bookingId,
           court: bookingState.courtName,
           sport: bookingState.sport,
@@ -259,8 +258,40 @@ document.addEventListener('DOMContentLoaded', () => {
           price: `$${bookingState.totalPrice.toFixed(2)}`,
           status: 'confirmed',
           paymentStatus: 'Paid'
-        });
+        };
+
+        // Legacy global key
+        const stored = JSON.parse(localStorage.getItem('smash_spin_bookings') || '[]');
+        stored.unshift(newBookingRecord);
         localStorage.setItem('smash_spin_bookings', JSON.stringify(stored));
+
+        // Player dashboard key
+        const playerStored = JSON.parse(localStorage.getItem('smash_spin_player_bookings') || '[]');
+        playerStored.unshift(newBookingRecord);
+        localStorage.setItem('smash_spin_player_bookings', JSON.stringify(playerStored));
+
+        // User-scoped keys if authenticated
+        if (typeof Auth !== 'undefined') {
+          const user = Auth.getCurrentUser();
+          if (user && user.id) {
+            const userBookings = JSON.parse(localStorage.getItem('smash_spin_bookings_' + user.id) || '[]');
+            userBookings.unshift(newBookingRecord);
+            localStorage.setItem('smash_spin_bookings_' + user.id, JSON.stringify(userBookings));
+
+            const userReceipts = JSON.parse(localStorage.getItem('smash_spin_receipts_' + user.id) || '[]');
+            userReceipts.unshift({
+              receiptId: 'INV-2026-' + Math.floor(100 + Math.random() * 900),
+              bookingId: bookingId,
+              description: bookingState.courtName,
+              sport: bookingState.sport,
+              date: bookingState.selectedDate,
+              amount: `$${bookingState.totalPrice.toFixed(2)}`,
+              method: 'Visa ending 4242',
+              status: 'Paid'
+            });
+            localStorage.setItem('smash_spin_receipts_' + user.id, JSON.stringify(userReceipts));
+          }
+        }
       } catch (err) {}
 
       const modalBody = document.querySelector('#courtBookingModal .modal-body');

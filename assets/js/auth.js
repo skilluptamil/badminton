@@ -16,12 +16,17 @@
   const REGEX_PHONE = /^[0-9+\-\s()]{7,18}$/;
 
   /**
-   * Cryptographically secure salt generator using Web Crypto API
+   * Cryptographically secure salt generator
    */
   async function generateSalt() {
-    const array = new Uint8Array(16);
-    window.crypto.getRandomValues(array);
-    return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+    try {
+      if (window.crypto && window.crypto.getRandomValues) {
+        const array = new Uint8Array(16);
+        window.crypto.getRandomValues(array);
+        return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+      }
+    } catch (e) {}
+    return Math.random().toString(36).substring(2) + Date.now().toString(36);
   }
 
   /**
@@ -29,12 +34,45 @@
    * Plain text passwords are NEVER stored in localStorage or exposed anywhere.
    */
   async function hashPassword(password, salt) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password + '::' + salt);
-    const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    try {
+      if (window.crypto && window.crypto.subtle) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password + '::' + salt);
+        const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      }
+    } catch (e) {
+      console.warn('SubtleCrypto unavailable, utilizing fallback hash:', e);
+    }
+
+    // Pure JS fallback hash for restricted environments
+    let hash = 0;
+    const str = password + '::' + salt;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+    }
+    return 'fallback_' + Math.abs(hash).toString(16);
   }
+
+  /**
+   * Pre-seeded verified default demo accounts (alex.morgan@example.com / password123)
+   */
+  const DEFAULT_SEEDED_USERS = [
+    {
+      id: 'SSP-84920',
+      playerId: '#SSP-84920',
+      name: 'Alex Morgan',
+      email: 'alex.morgan@example.com',
+      phone: '+1 (555) 392-8492',
+      salt: '7a8b9c0d1e2f3456',
+      passwordHash: '235e41d994934b795fed302d167afca56e62d522343bcef39cf8ff33b3129542',
+      tier: 'Premium Member',
+      createdAt: '2026-01-01T00:00:00.000Z'
+    }
+  ];
 
   /**
    * Safe storage retriever for registered users
@@ -42,10 +80,19 @@
   function getUsers() {
     try {
       const raw = localStorage.getItem(STORAGE_USERS_KEY);
-      return raw ? JSON.parse(raw) : [];
+      if (!raw) {
+        localStorage.setItem(STORAGE_USERS_KEY, JSON.stringify(DEFAULT_SEEDED_USERS));
+        return DEFAULT_SEEDED_USERS.slice();
+      }
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed) || parsed.length === 0) {
+        localStorage.setItem(STORAGE_USERS_KEY, JSON.stringify(DEFAULT_SEEDED_USERS));
+        return DEFAULT_SEEDED_USERS.slice();
+      }
+      return parsed;
     } catch (err) {
       console.error('Error retrieving users from storage:', err);
-      return [];
+      return DEFAULT_SEEDED_USERS.slice();
     }
   }
 
@@ -69,7 +116,7 @@
 
   const Auth = {
     /**
-     * Check if a valid session exists in sessionStorage or localStorage
+     * Check if a valid unexpired session exists in sessionStorage or localStorage
      */
     getSession() {
       try {
@@ -80,7 +127,7 @@
         if (!raw) return null;
 
         const session = JSON.parse(raw);
-        if (session && session.expiresAt && Date.now() < session.expiresAt) {
+        if (session && session.userId && session.expiresAt && Date.now() < session.expiresAt) {
           return session;
         }
 
@@ -94,55 +141,48 @@
     },
 
     /**
-     * Check if user is currently authenticated
+     * Check if user is currently authenticated with a valid session
      */
     isAuthenticated() {
-      return true; // Always allow seamless demonstration access to player dashboard
+      const session = this.getSession();
+      return session !== null && Boolean(session.userId);
     },
 
     /**
      * Get the currently authenticated player profile (safe copy without secrets)
+     * Returns null if unauthenticated
      */
     getCurrentUser() {
       const session = this.getSession();
-      if (session) {
-        const users = getUsers();
-        const user = users.find(u => u.id === session.userId || u.email.toLowerCase() === session.email.toLowerCase());
-        if (user) {
-          return {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            phone: user.phone || '+1 (555) 392-8492',
-            tier: user.tier || 'Premium Member',
-            playerId: user.playerId || '#' + user.id,
-            createdAt: user.createdAt
-          };
-        }
+      if (!session) return null;
+
+      const users = getUsers();
+      const user = users.find(u => u.id === session.userId || (u.email && u.email.toLowerCase() === session.email.toLowerCase()));
+      if (user) {
         return {
-          id: session.userId,
-          name: session.name || 'Alex Morgan',
-          email: session.email || 'alex.morgan@example.com',
-          phone: '+1 (555) 392-8492',
-          tier: 'Premium Member',
-          playerId: '#' + session.userId
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          phone: user.phone || '+1 (555) 000-0000',
+          tier: user.tier || 'Premium Member',
+          playerId: user.playerId || ('#SSP-' + user.id),
+          createdAt: user.createdAt || new Date().toISOString()
         };
       }
 
-      // Default mock player profile for instant demo viewing
       return {
-        id: 'SSP-84920',
-        name: 'Alex Morgan',
-        email: 'alex.morgan@example.com',
-        phone: '+1 (555) 392-8492',
-        tier: 'Premium Member',
-        playerId: '#SSP-84920',
-        createdAt: '2026-01-01T00:00:00.000Z'
+        id: session.userId,
+        name: session.name || 'Player',
+        email: session.email,
+        phone: session.phone || '+1 (555) 000-0000',
+        tier: session.tier || 'Premium Member',
+        playerId: session.playerId || ('#SSP-' + session.userId),
+        createdAt: session.createdAt || new Date().toISOString()
       };
     },
 
     /**
-     * Register a new player account with frontend validation
+     * Register a new player account with full validation and salted SHA-256 hash
      */
     async register({ name, email, phone, password, confirmPassword, termsAgreed }) {
       const trimmedName = (name || '').trim();
@@ -161,7 +201,7 @@
         return {
           success: false,
           field: 'phone',
-          error: 'Please enter a valid phone number.'
+          error: 'Please enter a valid phone number (min 7 digits).'
         };
       }
 
@@ -197,45 +237,50 @@
         };
       }
 
-      const pid = generatePlayerId();
       const users = getUsers();
+      const existingUser = users.find(u => u.email.toLowerCase() === trimmedEmail);
+      if (existingUser) {
+        return {
+          success: false,
+          field: 'email',
+          error: 'An account with this email address already exists. Please log in or use another email.'
+        };
+      }
+
+      const salt = await generateSalt();
+      const passwordHash = await hashPassword(password, salt);
+      const pid = generatePlayerId();
+
       const newUser = {
         id: pid,
+        playerId: '#' + pid,
         name: trimmedName,
         email: trimmedEmail,
         phone: trimmedPhone,
+        salt: salt,
+        passwordHash: passwordHash,
         tier: 'Premium Member',
-        playerId: '#' + pid,
         createdAt: new Date().toISOString()
       };
 
-      const existingIndex = users.findIndex(u => u.email.toLowerCase() === trimmedEmail);
-      if (existingIndex >= 0) {
-        users[existingIndex] = newUser;
-      } else {
-        users.push(newUser);
-      }
+      users.push(newUser);
       saveUsers(users);
-
-      // Create session so dashboard immediately reflects registered player
-      const session = {
-        token: 'ssp_demo_' + Date.now(),
-        userId: pid,
-        email: trimmedEmail,
-        name: trimmedName,
-        expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
-        rememberMe: true
-      };
-      localStorage.setItem(STORAGE_SESSION_KEY, JSON.stringify(session));
 
       return {
         success: true,
-        user: newUser
+        user: {
+          id: newUser.id,
+          playerId: newUser.playerId,
+          name: newUser.name,
+          email: newUser.email,
+          phone: newUser.phone,
+          tier: newUser.tier
+        }
       };
     },
 
     /**
-     * Authenticate player with dummy frontend login
+     * Authenticate player with email and password verification
      */
     async login({ email, password, rememberMe = true }) {
       const trimmedEmail = (email || '').trim().toLowerCase();
@@ -256,31 +301,42 @@
       }
 
       const users = getUsers();
-      let user = users.find(u => u.email.toLowerCase() === trimmedEmail);
+      const user = users.find(u => u.email.toLowerCase() === trimmedEmail);
 
       if (!user) {
-        // Create demo profile based on entered email
-        const generatedName = trimmedEmail.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Player';
-        const pid = generatePlayerId();
-        user = {
-          id: pid,
-          name: generatedName,
-          email: trimmedEmail,
-          phone: '+1 (555) 392-8492',
-          tier: 'Premium Member',
-          playerId: '#' + pid,
-          createdAt: new Date().toISOString()
+        return {
+          success: false,
+          field: 'email',
+          error: 'No account found with this email address. Please sign up first.'
         };
-        users.push(user);
-        saveUsers(users);
       }
 
-      // Create dummy authenticated session
+      // Verify password using salted SHA-256 hash
+      let isPasswordValid = false;
+      if (user.salt && user.passwordHash) {
+        const computedHash = await hashPassword(password, user.salt);
+        isPasswordValid = (computedHash === user.passwordHash);
+      } else {
+        isPasswordValid = false;
+      }
+
+      if (!isPasswordValid) {
+        return {
+          success: false,
+          field: 'password',
+          error: 'Incorrect password. Please verify and try again.'
+        };
+      }
+
+      // Create authenticated session
       const session = {
-        token: 'ssp_demo_' + Date.now(),
+        token: 'ssp_' + Math.random().toString(36).substring(2) + Date.now().toString(36),
         userId: user.id,
+        playerId: user.playerId || ('#SSP-' + user.id),
         email: user.email,
         name: user.name,
+        phone: user.phone || '+1 (555) 000-0000',
+        tier: user.tier || 'Premium Member',
         expiresAt: Date.now() + (rememberMe ? 30 : 1) * 24 * 60 * 60 * 1000,
         rememberMe: Boolean(rememberMe)
       };
@@ -294,7 +350,14 @@
 
       return {
         success: true,
-        user: user
+        user: {
+          id: user.id,
+          playerId: user.playerId || ('#SSP-' + user.id),
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+          tier: user.tier || 'Premium Member'
+        }
       };
     },
 
@@ -322,29 +385,13 @@
      * Update current authenticated user profile
      */
     updateProfile(updates) {
-      const session = this.getSession() || {
-        token: 'ssp_demo_' + Date.now(),
-        userId: 'SSP-84920',
-        email: 'alex.morgan@example.com',
-        name: 'Alex Morgan',
-        expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
-        rememberMe: true
-      };
+      const session = this.getSession();
+      if (!session) return false;
 
       const users = getUsers();
       let index = users.findIndex(u => u.id === session.userId || u.email.toLowerCase() === session.email.toLowerCase());
 
-      if (index === -1) {
-        users.push({
-          id: session.userId,
-          name: session.name,
-          email: session.email,
-          phone: '+1 (555) 392-8492',
-          tier: 'Premium Member',
-          playerId: '#' + session.userId
-        });
-        index = users.length - 1;
-      }
+      if (index === -1) return false;
 
       if (updates.name && updates.name.trim()) {
         users[index].name = updates.name.trim();
@@ -356,31 +403,102 @@
       }
       if (updates.phone && updates.phone.trim()) {
         users[index].phone = updates.phone.trim();
+        session.phone = updates.phone.trim();
       }
       if (updates.tier) {
         users[index].tier = updates.tier;
+        session.tier = updates.tier;
       }
 
       saveUsers(users);
-      localStorage.setItem(STORAGE_SESSION_KEY, JSON.stringify(session));
+      if (session.rememberMe) {
+        localStorage.setItem(STORAGE_SESSION_KEY, JSON.stringify(session));
+      } else {
+        sessionStorage.setItem(STORAGE_SESSION_KEY, JSON.stringify(session));
+      }
       return true;
     },
 
     /**
-     * Guard protected routes (non-blocking for demo purposes)
+     * Guard protected routes (non-blocking for dashboard options)
      */
-    requireAuth() {
+    requireAuth(redirectHash = '') {
       return true;
     },
 
     /**
-     * Keep navbar state clean without mutating separate controls
+     * Sync navbar state across all pages:
+     * Shows Login / Sign Up buttons if logged out, or Dashboard / Logout buttons if logged in.
      */
     syncNavbarState() {
-      // Navbar controls strictly maintain the ordered design: LTR/RTL -> Dark/Light -> Login -> Sign Up
+      const isAuth = this.isAuthenticated();
+      const currentUser = isAuth ? this.getCurrentUser() : null;
+
+      // Adjust right nav controls in site-header
+      const navControls = document.querySelector('.site-header .nav-controls');
+      if (navControls) {
+        // Remove existing dynamic auth buttons to prevent duplicate rendering
+        navControls.querySelectorAll('.nav-auth-btn').forEach(btn => btn.remove());
+        const ctaBtn = navControls.querySelector('.nav-cta-btn');
+
+        if (isAuth && currentUser) {
+          const firstName = (currentUser.name || 'Player').split(' ')[0];
+          
+          // User Profile / Dashboard button
+          const dashBtn = document.createElement('a');
+          dashBtn.href = 'dashboard.html';
+          dashBtn.className = 'btn btn-sm nav-auth-btn nav-user-btn';
+          dashBtn.innerHTML = `<i class="bi bi-person-fill"></i><span>${firstName}</span>`;
+          dashBtn.title = 'Go to Player Dashboard';
+          navControls.appendChild(dashBtn);
+
+          // Logout button
+          const logoutBtn = document.createElement('button');
+          logoutBtn.type = 'button';
+          logoutBtn.className = 'btn btn-sm nav-auth-btn nav-logout-btn';
+          logoutBtn.id = 'navLogoutTrigger';
+          logoutBtn.innerHTML = `<i class="bi bi-box-arrow-right"></i><span>Logout</span>`;
+          logoutBtn.title = 'Sign Out';
+          logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            Auth.logout();
+          });
+          navControls.appendChild(logoutBtn);
+        } else {
+          // Login button
+          const loginBtn = document.createElement('a');
+          loginBtn.href = 'login.html';
+          loginBtn.className = 'btn btn-sm nav-auth-btn nav-login-btn';
+          loginBtn.innerHTML = `<span>Login</span> <i class="bi bi-box-arrow-in-right"></i>`;
+          loginBtn.title = 'Sign In';
+
+          // Sign Up button
+          const signupBtn = document.createElement('a');
+          signupBtn.href = 'register.html';
+          signupBtn.className = 'btn btn-sm nav-auth-btn nav-signup-btn';
+          signupBtn.innerHTML = `<span>Sign Up</span> <i class="bi bi-person-plus-fill"></i>`;
+          signupBtn.title = 'Create Player Account';
+
+          // Insert Login and Sign Up BEFORE the primary Book a Court CTA button
+          if (ctaBtn) {
+            navControls.insertBefore(loginBtn, ctaBtn);
+            navControls.insertBefore(signupBtn, ctaBtn);
+          } else {
+            navControls.appendChild(loginBtn);
+            navControls.appendChild(signupBtn);
+          }
+        }
+      }
     }
   };
 
   // Expose Auth globally
   window.Auth = Auth;
+
+  // Auto-sync navbar on document ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => Auth.syncNavbarState());
+  } else {
+    Auth.syncNavbarState();
+  }
 })(window);

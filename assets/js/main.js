@@ -20,6 +20,24 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', updateHeaderSticky, { passive: true });
   updateHeaderSticky();
 
+  // Mobile navbar auto-close when a non-dropdown link is clicked
+  const mobileNavLinks = document.querySelectorAll('.navbar-collapse .nav-link:not(.dropdown-toggle), .navbar-collapse .dropdown-item');
+  const mainNavbarCollapse = document.getElementById('navbarMainContent');
+  if (mainNavbarCollapse) {
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 992 && mainNavbarCollapse.classList.contains('show')) {
+          if (window.bootstrap && bootstrap.Collapse) {
+            const bsCollapse = bootstrap.Collapse.getInstance(mainNavbarCollapse) || new bootstrap.Collapse(mainNavbarCollapse, { toggle: false });
+            bsCollapse.hide();
+          } else {
+            mainNavbarCollapse.classList.remove('show');
+          }
+        }
+      });
+    });
+  }
+
   // 2. Pricing Plan Switcher (Monthly / Annual)
   const billingMonthlyBtn = document.getElementById('btnBillingMonthly');
   const billingAnnualBtn = document.getElementById('btnBillingAnnual');

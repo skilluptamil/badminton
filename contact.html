@@ -152,7 +152,7 @@
               </div>
               <div>
                 <div class="small text-muted">Complex Address</div>
-                <div class="fw-bold text-dark fs-6">104 Olympic Way, Sports City, CA 90210</div>
+                <div class="fw-bold text-dark fs-6">10410 Valley Blvd, Sports City, CA 91731</div>
               </div>
             </div>
 
@@ -231,12 +231,44 @@
   </section>
 
   <!-- =========================================================================
-       SECTION 4: INTERACTIVE MAP
+       SECTION 4: REAL INTERACTIVE GOOGLE MAP
        ========================================================================= -->
-  <section class="section-py-sm bg-light">
+  <section class="section-py-sm bg-light" id="mapSection">
     <div class="container">
+      <div class="card border-0 bg-transparent mb-3">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+          <div>
+            <div class="section-badge mb-2">
+              <i class="bi bi-geo-alt-fill text-primary"></i> Real Badminton Center Location
+            </div>
+            <h3 class="fw-bold mb-1">Visit Smash &amp; Spin Sports Arena</h3>
+            <p class="text-muted small mb-0">
+              10410 Valley Blvd, Sports City, CA 91731 • Olympic-Certified Badminton Courts &amp; ITTF Table Tennis Studios
+            </p>
+          </div>
+          <div class="d-flex gap-2 align-items-center">
+            <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill small">
+              <i class="bi bi-clock-fill me-1"></i> Open Daily: 6:00 AM – 11:00 PM
+            </span>
+            <a href="https://maps.google.com/?q=Los+Angeles+Badminton+Club,+10410+Valley+Blvd,+El+Monte,+CA+91731" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark btn-sm rounded-pill">
+              <i class="bi bi-arrow-up-right-square me-1"></i> Directions <i class="bi bi-box-arrow-up-right ms-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div class="contact-map-wrapper">
-        <iframe src="https://maps.google.com/maps?q=104%20Olympic%20Way%2C%20Los%20Angeles%2C%20CA%2090210&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Smash & Spin Sports Arena Location"></iframe>
+        <iframe 
+          id="badmintonInteractiveMap"
+          src="https://maps.google.com/maps?q=Los+Angeles+Badminton+Club,+10410+Valley+Blvd,+El+Monte,+CA+91731&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+          width="100%" 
+          height="100%" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade" 
+          title="Smash &amp; Spin Badminton Sports Arena Official Interactive Map">
+        </iframe>
       </div>
     </div>
   </section>
@@ -370,7 +402,7 @@
             </div>
           </form>
           <div class="small text-muted mt-3">
-            <i class="bi bi-geo-alt-fill text-primary me-1"></i> 104 Olympic Way, Sports City<br>
+            <i class="bi bi-geo-alt-fill text-primary me-1"></i> 10410 Valley Blvd, Sports City<br>
             <i class="bi bi-telephone-fill text-primary me-1"></i> +1 (800) 555-SMASH
           </div>
         </div>

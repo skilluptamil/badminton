@@ -361,7 +361,10 @@ document.addEventListener('DOMContentLoaded', () => {
         registerForm.reset();
 
         setTimeout(() => {
-          window.location.href = `login.html?registered=1&email=${encodeURIComponent(email)}`;
+          const urlParams = new URLSearchParams(window.location.search);
+          const redirectParam = urlParams.get('redirect');
+          const redirectQuery = redirectParam ? `&redirect=${encodeURIComponent(redirectParam)}` : '';
+          window.location.href = `login.html?registered=1&email=${encodeURIComponent(email)}${redirectQuery}`;
         }, 1200);
       }
     });

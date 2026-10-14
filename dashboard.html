@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/dark.css">
   <link rel="stylesheet" href="assets/css/rtl.css">
+
 </head>
 <body>
 
@@ -1623,10 +1624,33 @@
       { receiptId: 'INV-2026-05', bookingId: 'BK-78902', description: 'Champions VIP Court', sport: 'Badminton', date: 'Sep 05, 2026', amount: '$35.00', method: 'Visa ending 4242', status: 'Paid' }
     ];
 
+    function getCurrentUserSafe() {
+      if (typeof Auth !== 'undefined') {
+        const u = Auth.getCurrentUser();
+        if (u) return u;
+      }
+      return {
+        id: 'SSP-84920',
+        playerId: '#SSP-84920',
+        name: 'Alex Morgan',
+        email: 'alex.morgan@example.com',
+        phone: '+1 (555) 392-8492',
+        tier: 'Premium Member'
+      };
+    }
+
     function getStoredBookings() {
       try {
-        const raw = localStorage.getItem(STORAGE_BOOKINGS_KEY);
-        return raw ? JSON.parse(raw) : defaultBookings;
+        const u = getCurrentUserSafe();
+        const userKey = 'smash_spin_bookings_' + u.id;
+        const raw = localStorage.getItem(userKey);
+        if (!raw) {
+          const legacy = localStorage.getItem(STORAGE_BOOKINGS_KEY);
+          const initial = legacy ? JSON.parse(legacy) : defaultBookings;
+          localStorage.setItem(userKey, JSON.stringify(initial));
+          return initial;
+        }
+        return JSON.parse(raw);
       } catch (e) {
         return defaultBookings;
       }
@@ -1634,14 +1658,24 @@
 
     function saveStoredBookings(bookings) {
       try {
+        const u = getCurrentUserSafe();
+        localStorage.setItem('smash_spin_bookings_' + u.id, JSON.stringify(bookings));
         localStorage.setItem(STORAGE_BOOKINGS_KEY, JSON.stringify(bookings));
       } catch (e) {}
     }
 
     function getStoredReceipts() {
       try {
-        const raw = localStorage.getItem(STORAGE_RECEIPTS_KEY);
-        return raw ? JSON.parse(raw) : defaultReceipts;
+        const u = getCurrentUserSafe();
+        const userKey = 'smash_spin_receipts_' + u.id;
+        const raw = localStorage.getItem(userKey);
+        if (!raw) {
+          const legacy = localStorage.getItem(STORAGE_RECEIPTS_KEY);
+          const initial = legacy ? JSON.parse(legacy) : defaultReceipts;
+          localStorage.setItem(userKey, JSON.stringify(initial));
+          return initial;
+        }
+        return JSON.parse(raw);
       } catch (e) {
         return defaultReceipts;
       }
@@ -1649,6 +1683,8 @@
 
     function saveStoredReceipts(receipts) {
       try {
+        const u = getCurrentUserSafe();
+        localStorage.setItem('smash_spin_receipts_' + u.id, JSON.stringify(receipts));
         localStorage.setItem(STORAGE_RECEIPTS_KEY, JSON.stringify(receipts));
       } catch (e) {}
     }
@@ -1656,7 +1692,7 @@
     // =========================================================================
     // DUAL DASHBOARD MODE SWITCHER (User Dashboard <-> Customer Dashboard)
     // =========================================================================
-    function switchDashboardMode(mode) {
+    function switchDashboardMode(mode, silent = false) {
       currentDashboardMode = mode;
       const appEl = document.getElementById('dashboardApp');
       const btnUser = document.getElementById('btnModeUser');
@@ -1665,6 +1701,7 @@
       const btnQuick = document.getElementById('btnSwitchModeQuick');
       const sidebarTier = document.getElementById('sidebarUserTier');
       const sidebarId = document.getElementById('sidebarPlayerId');
+      const u = getCurrentUserSafe();
 
       if (appEl) {
         if (mode === 'customer') {
@@ -1681,23 +1718,28 @@
         if (btnCust) { btnCust.classList.add('active'); }
         if (portalBadge) portalBadge.innerHTML = '<i class="bi bi-person-badge-fill me-1"></i> Customer Portal';
         if (btnQuick) btnQuick.textContent = 'Player View';
-        if (sidebarTier) sidebarTier.textContent = 'Verified VIP Customer';
-        if (sidebarId) sidebarId.textContent = 'Customer ID: #CUST-84920';
+        if (sidebarTier) sidebarTier.textContent = 'Verified ' + (u.tier || 'VIP Customer');
+        if (sidebarId) sidebarId.textContent = 'Customer ID: #CUST-' + u.id;
 
         renderCustomerReservations('all');
         switchToTab('customer-overview');
-        showToast('Switched to Customer Dashboard.');
+        if (!silent && typeof showToast === 'function') showToast('Switched to Customer Dashboard.');
       } else {
         if (btnUser) { btnUser.classList.add('active'); }
         if (btnCust) { btnCust.classList.remove('active'); }
         if (portalBadge) portalBadge.innerHTML = '<i class="bi bi-person-fill me-1"></i> Player Dashboard';
         if (btnQuick) btnQuick.textContent = 'Customer View';
-        if (sidebarTier) sidebarTier.textContent = 'Premium Member';
-        if (sidebarId) sidebarId.textContent = 'Player ID: #SSP-84920';
+        if (sidebarTier) sidebarTier.textContent = u.tier || 'Premium Member';
+        if (sidebarId) sidebarId.textContent = 'Player ID: ' + (u.playerId || ('#SSP-' + u.id));
 
         renderOverviewBookings();
         switchToTab('overview');
-        showToast('Switched to Player Dashboard.');
+        if (!silent && typeof showToast === 'function') showToast('Switched to Player Dashboard.');
+      }
+
+      // Update URL hash smoothly
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', '#' + (mode === 'customer' ? 'customer-dashboard' : 'user-dashboard'));
       }
     }
     window.switchDashboardMode = switchDashboardMode;
@@ -2436,15 +2478,17 @@
       function handleHashRouting() {
         const hash = window.location.hash.replace('#', '');
         if (hash === 'customer-dashboard' || hash === 'customer-overview' || hash === 'customer') {
-          switchDashboardMode('customer');
+          switchDashboardMode('customer', true);
         } else if (hash === 'user-dashboard' || hash === 'overview') {
-          switchDashboardMode('user');
+          switchDashboardMode('user', true);
         } else if (hash) {
           if (hash === 'my-bookings' || hash === 'bookings') {
             switchToTab('bookings');
           } else if (document.getElementById(`dash-tab-${hash}`)) {
             switchToTab(hash);
           }
+        } else {
+          switchDashboardMode('user', true);
         }
       }
       handleHashRouting();
@@ -2702,26 +2746,31 @@
       if (typeof Auth !== 'undefined') {
         const currentUser = Auth.getCurrentUser();
         if (currentUser) {
-          const pName = currentUser.name || 'Alex Morgan';
-          const pEmail = currentUser.email || 'alex.morgan@example.com';
-          const pPhone = currentUser.phone || '+1 (555) 392-8492';
+          const pName = currentUser.name || 'Player';
+          const pEmail = currentUser.email || 'player@example.com';
+          const pPhone = currentUser.phone || '+1 (555) 000-0000';
           const pId = currentUser.playerId || ('#SSP-' + currentUser.id);
+          const pTier = currentUser.tier || 'Premium Member';
 
           const sName = document.getElementById('sidebarUserName');
           const sId = document.getElementById('sidebarPlayerId');
+          const sTier = document.getElementById('sidebarUserTier');
           const wName = document.getElementById('welcomeUserName');
           const cName = document.getElementById('customerWelcomeName');
           const inName = document.getElementById('inputProfileName');
           const inEmail = document.getElementById('inputProfileEmail');
           const inPhone = document.getElementById('inputProfilePhone');
+          const cPlan = document.getElementById('currentPlanBadge');
 
           if (sName) sName.textContent = pName;
           if (sId) sId.textContent = `Player ID: ${pId}`;
+          if (sTier) sTier.textContent = pTier;
           if (wName) wName.textContent = pName.split(' ')[0];
           if (cName) cName.textContent = pName;
           if (inName) inName.value = pName;
           if (inEmail) inEmail.value = pEmail;
           if (inPhone) inPhone.value = pPhone;
+          if (cPlan) cPlan.textContent = pTier + ' Athlete Plan';
         }
       }
 
@@ -2752,10 +2801,9 @@
         });
       }
 
-      // 14. Logout Action
-      const btnLogout = document.getElementById('btnLogoutTrigger');
-      if (btnLogout) {
-        btnLogout.addEventListener('click', (e) => {
+      // 14. Universal Logout Action (Header & Sidebar triggers)
+      document.querySelectorAll('#topLogoutBtn, #btnLogoutTrigger, .logout-trigger-btn, a[href="login.html"].logout').forEach(btn => {
+        btn.addEventListener('click', (e) => {
           e.preventDefault();
           if (typeof Auth !== 'undefined') {
             Auth.logout();
@@ -2763,7 +2811,7 @@
             window.location.href = 'login.html?logged_out=1';
           }
         });
-      }
+      });
     });
   </script>
 </body>
