@@ -428,7 +428,7 @@
 
     /**
      * Sync navbar state across all pages:
-     * Shows Login / Sign Up buttons if logged out, or Dashboard / Logout buttons if logged in.
+     * Shows Login button if logged out, or Dashboard / Logout buttons if logged in.
      */
     syncNavbarState() {
       const isAuth = this.isAuthenticated();
@@ -472,20 +472,11 @@
           loginBtn.innerHTML = `<span>Login</span> <i class="bi bi-box-arrow-in-right"></i>`;
           loginBtn.title = 'Sign In';
 
-          // Sign Up button
-          const signupBtn = document.createElement('a');
-          signupBtn.href = 'register.html';
-          signupBtn.className = 'btn btn-sm nav-auth-btn nav-signup-btn';
-          signupBtn.innerHTML = `<span>Sign Up</span> <i class="bi bi-person-plus-fill"></i>`;
-          signupBtn.title = 'Create Player Account';
-
-          // Insert Login and Sign Up BEFORE the primary Book a Court CTA button
+          // Insert Login BEFORE the primary Book a Court CTA button
           if (ctaBtn) {
             navControls.insertBefore(loginBtn, ctaBtn);
-            navControls.insertBefore(signupBtn, ctaBtn);
           } else {
             navControls.appendChild(loginBtn);
-            navControls.appendChild(signupBtn);
           }
         }
       }
